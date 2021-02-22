@@ -5,7 +5,7 @@ export default function App() {
     
     return (
         <div className = "zone-controller">
-      <Player skin = "m1" />
+      <Player skin = "f1" />
         </div>
     );
 }
