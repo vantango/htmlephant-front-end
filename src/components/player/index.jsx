@@ -9,6 +9,6 @@ export default function Player({ skin }) {
 
     };
     
-    return <Actor sprite ={`/sprite/skins/${skin}.png`} data= {data} />
+    return <Actor sprite ={`./sprite/skins/${skin}.png`} data= {data} />
 
 }
