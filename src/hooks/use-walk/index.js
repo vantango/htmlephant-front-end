@@ -14,7 +14,7 @@ export default function useWalk(maxSteps){
  
     };
 
-    const stepSize = 16
+    const stepSize = 8
 
     const modifier = {
         down: {x:0, y: stepSize},
@@ -34,11 +34,27 @@ export default function useWalk(maxSteps){
     }
     function move(dir){
         setPosition((prev) => ({
-            x: prev.x + modifier [dir].x,
-            y: prev.y + modifier [dir].y
-
+            x: prev.x + modifier[dir].x,
+            y: prev.y + modifier[dir].y
         }))
     }
+
+    // function observeBoundaries(oldPos, newPos) {
+    //     return (newPos[0] >= 0 && newPos[0] <= MAP_WIDTH - SPRITE_SIZE) &&
+    //     (newPos[1] >= 0 && newPos[1] <= MAP_HEIGHT - SPRITE_SIZE)
+        
+    // }  
+
+    // function attemptMove(direction) {
+    //     const oldPos = store.getState().player.position
+    //     const newPos = getNewPosition(oldPos, direction)
+    //     if(observeBoundaries(oldPos, newPos) && observeImpassable(oldPos, newPos)) {
+    //         if(!observeAction(oldPos, newPos)) {
+    //             dispatchMove(direction, newPos)
+    //         }
+    //     }
+    // }
+
     return {
         walk, 
         dir, 
