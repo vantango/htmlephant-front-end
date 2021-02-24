@@ -1,5 +1,7 @@
 import store from '../../config/store'
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants'
+import Whiteboard from '../../components/Whiteboard'
+
 
 import { tiles2 } from '../../data/maps/2'
 
@@ -58,8 +60,14 @@ export default function handleMovement(player) {
         const nextTile = tiles[y][x]
         switch (nextTile) {
             case 4:
-                showModal()
-                return true
+                return <div><h1>DUCK SEASON</h1></div>
+                // Whiteboard.showModal()
+                // return (
+               
+                //    <Whiteboard/>
+                
+                // )
+                // return true
             case 3:
                 alert ("Leaving Room")
                 changeRoom()
@@ -69,31 +77,6 @@ export default function handleMovement(player) {
                 return false;
         }
     }
-
-    function showModal() {
-        // alert ("You found the chest")
-        const interactBtn = document.querySelector('#modalBtn')
-        interactBtn.classList.remove("disabled")
-
-        // const modal = document.querySelector('#chestModal')
-        // modal.setAttribute("style", "display: block;")
-
-        // interactBtn.setAttribute("display", "none")
-        // delete interactBtn.disabled
-        // delete interactBtn['aria-disabled']
-    }
-
-    function hideModal() {
-        // alert ("You found the chest")
-        const interactBtn = document.querySelector('#modalBtn')
-        interactBtn.classList.add("disabled")
-
-        // const modal = document.querySelector('#chestModal')
-        // modal.setAttribute("style", "display: none;")
-        // interactBtn.setAttribute("display", "block")
-
-    }
-
 
 
     function changeRoom() {
@@ -124,7 +107,6 @@ export default function handleMovement(player) {
         const newPos = getNewPosition(oldPos, direction)
         if(observeBoundaries(oldPos, newPos) && observeImpassable(oldPos, newPos)) {
             if(!observeAction(oldPos, newPos)) {
-                hideModal()
                 dispatchMove(direction, newPos)
             }
         }

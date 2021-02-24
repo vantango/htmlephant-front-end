@@ -28,14 +28,6 @@ function World(props) {
         >
             <Map />
             <Player />
-            <button id="modalBtn" className="btn btn-primary btn-lg float-right disabled"
-                data-toggle="modal" data-target="#chestModal"
-                style={{
-                    color: "white",
-                    backgroundColor: "blue"
-                }}
-                // onClick={handleInteract}
-            >Interact</button>
         </div>
     )
 }
