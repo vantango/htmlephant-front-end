@@ -58,7 +58,7 @@ export default function handleMovement(player) {
         const nextTile = tiles[y][x]
         switch (nextTile) {
             case 4:
-                alert ("You found the chest")
+                showModal()
                 return true
             case 3:
                 alert ("Leaving Room")
@@ -69,6 +69,32 @@ export default function handleMovement(player) {
                 return false;
         }
     }
+
+    function showModal() {
+        // alert ("You found the chest")
+        const interactBtn = document.querySelector('#modalBtn')
+        interactBtn.classList.remove("disabled")
+
+        // const modal = document.querySelector('#chestModal')
+        // modal.setAttribute("style", "display: block;")
+
+        // interactBtn.setAttribute("display", "none")
+        // delete interactBtn.disabled
+        // delete interactBtn['aria-disabled']
+    }
+
+    function hideModal() {
+        // alert ("You found the chest")
+        const interactBtn = document.querySelector('#modalBtn')
+        interactBtn.classList.add("disabled")
+
+        // const modal = document.querySelector('#chestModal')
+        // modal.setAttribute("style", "display: none;")
+        // interactBtn.setAttribute("display", "block")
+
+    }
+
+
 
     function changeRoom() {
         store.dispatch({
@@ -98,10 +124,13 @@ export default function handleMovement(player) {
         const newPos = getNewPosition(oldPos, direction)
         if(observeBoundaries(oldPos, newPos) && observeImpassable(oldPos, newPos)) {
             if(!observeAction(oldPos, newPos)) {
+                hideModal()
                 dispatchMove(direction, newPos)
             }
         }
     }
+    
+
 
     function handleKeyDown(e) {
         e.preventDefault()

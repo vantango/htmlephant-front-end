@@ -12,17 +12,30 @@ function World(props) {
             tiles: tiles
         }
     })
+
+    // function handleInteract() {
+    //     alert("You found a chest!")
+    // }
+
     return (
         <div
             style={{
                 position: 'relative',
-                width: '800px',
+                width: '650px',
                 height: '400px',
                 margin: '20px auto',
             }}
         >
             <Map />
             <Player />
+            <button id="modalBtn" className="btn btn-primary btn-lg float-right disabled"
+                data-toggle="modal" data-target="#chestModal"
+                style={{
+                    color: "white",
+                    backgroundColor: "blue"
+                }}
+                // onClick={handleInteract}
+            >Interact</button>
         </div>
     )
 }
