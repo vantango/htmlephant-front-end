@@ -60,11 +60,13 @@ export default function handleMovement(player) {
         const nextTile = tiles[y][x]
         switch (nextTile) {
             case 4:
-                return (
-                <div>
-                    <Whiteboard/>
-                </div>
-                )
+                return <div><h1>DUCK SEASON</h1></div>
+                // Whiteboard.showModal()
+                // return (
+               
+                //    <Whiteboard/>
+                
+                // )
                 // return true
             case 3:
                 alert ("Leaving Room")

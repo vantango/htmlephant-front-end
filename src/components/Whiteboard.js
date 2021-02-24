@@ -19,16 +19,16 @@ class Whiteboard extends Component {
     this.setState({ show: false });
   };
   
-  render() {
+  render =() => {
     return (
       <main>
         <h1>React Modal</h1>
-        <Modal show={this.state.show} handleClose={this.hideModal}>
+        <Modal show={true }handleClose={this.hideModal}>
           <p>Modal</p>
         </Modal>
-        <button type="button" onClick={this.showModal}>
+        {/* <button type="button" onClick={this.showModal}>
           Open
-        </button>
+        </button> */}
       </main>
     );
   }
