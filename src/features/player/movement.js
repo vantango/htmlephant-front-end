@@ -1,5 +1,7 @@
 import store from '../../config/store'
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants'
+import Whiteboard from '../../components/Whiteboard'
+
 
 import { tiles2 } from '../../data/maps/2'
 
@@ -58,8 +60,14 @@ export default function handleMovement(player) {
         const nextTile = tiles[y][x]
         switch (nextTile) {
             case 4:
-                alert ("You found the chest")
-                return true
+                return <div><h1>DUCK SEASON</h1></div>
+                // Whiteboard.showModal()
+                // return (
+               
+                //    <Whiteboard/>
+                
+                // )
+                // return true
             case 3:
                 alert ("Leaving Room")
                 changeRoom()
