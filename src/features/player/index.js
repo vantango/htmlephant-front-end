@@ -2,7 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import walkSprite from './m1.png'
 import handleMovement from './movement'
+import store from '../../config/store'
+
+
 function Player(props) {
+
+
     return (
         <div
             style={{
