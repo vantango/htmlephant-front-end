@@ -19,7 +19,7 @@ class Whiteboard extends Component {
     this.setState({ show: false });
   };
   
-  render =() => {
+  render = () => {
     return (
       <main>
         <h1>React Modal</h1>

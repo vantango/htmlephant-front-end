@@ -1,6 +1,6 @@
 import store from '../../config/store'
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants'
-import Whiteboard from '../../components/Whiteboard'
+import Modal from "../../components/Modal/index"
 
 
 import { tiles2 } from '../../data/maps/2'
@@ -53,6 +53,17 @@ export default function handleMovement(player) {
         return nextTile < 5
     }
 
+    function showModal() {
+        Modal.props.setState({
+          show: !Modal.props.show
+        });
+      };
+    //  function askQuestion() {
+    //     document.querySelector(".modal-main").setAttribute("style", "display:block; color:black; background:salmon")
+    //     console.log(document.querySelector(".test"))
+    //   };
+    
+
     function observeAction(oldPos, newPos) {
         const tiles = store.getState().map.tiles
         const y = newPos[1] / SPRITE_SIZE
@@ -60,14 +71,9 @@ export default function handleMovement(player) {
         const nextTile = tiles[y][x]
         switch (nextTile) {
             case 4:
-                return <div><h1>DUCK SEASON</h1></div>
-                // Whiteboard.showModal()
-                // return (
-               
-                //    <Whiteboard/>
-                
-                // )
-                // return true
+               showModal()
+                // askQuestion()
+                return true
             case 3:
                 alert ("Leaving Room")
                 changeRoom()
