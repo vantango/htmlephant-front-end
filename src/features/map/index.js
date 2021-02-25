@@ -11,14 +11,42 @@ import './styles.css'
 function getTileSprite(type) {
     switch (type) {
         case 0:
+            return 'ground'
+        case 1:
             return 'grass'
-        case 4:
-            return chest
-        case 5:
+        case 2:
+            return 'gravel'
+        case 10:
             return rock
-        case 6:
+        case 11:
             return tree
-        case 3:
+        case 12:
+            return chest
+        case 15:
+            return 'denis'
+        case 16:
+            return 'zac'
+        case 17:
+            return 'aslan'
+        case 18:
+            return 'joe'
+        case 21:
+            // east door
+            return door
+        case 22:
+            // north door
+            return door
+        case 23:
+            // west door
+            return door
+        case 24:
+            // main door in west room
+            return door
+        case 25:
+            // main door in north room
+            return door
+        case 26:
+            // main door in east room
             return door
         default:
             break;
@@ -39,10 +67,10 @@ function MapTile(props) {
 }
 
 function MapRow(props) {
-    return <div className="tileRow" 
-    style= {{
-        height: SPRITE_SIZE
-    }}>
+    return <div className="tileRow"
+        style={{
+            height: SPRITE_SIZE
+        }}>
         {
             props.tiles.map(tile => <MapTile tile={tile} />)
         }
