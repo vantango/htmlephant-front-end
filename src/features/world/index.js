@@ -1,14 +1,11 @@
 import React from 'react'
 import Map from '../map'
 import Player from '../player'
-<<<<<<< HEAD
 import Modal, {showModal} from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
-=======
 
 import { tiles1 } from '../../data/maps/1'
 import { tiles2 } from '../../data/maps/2'
->>>>>>> dev
 import store from '../../config/store'
 
 function World(props) {
