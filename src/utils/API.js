@@ -22,6 +22,9 @@ const API = {
     },
     allNPC: () => {
         return axios.get(`${URL_PREFIX}/api/npc`)
+    },
+    signup: userData => {
+        return axios.post(`${URL_PREFIX}/signup`, userData)
     }
 }
 
