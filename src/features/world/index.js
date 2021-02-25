@@ -1,12 +1,13 @@
 import React from 'react'
 import Map from '../map'
 import Player from '../player'
-import Modal, {showModal} from "../../components/Modal/index";
+import Modal, { showModal } from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
 
 import { tiles1 } from '../../data/maps/1'
 import { tiles2 } from '../../data/maps/2'
 import store from '../../config/store'
+import API from "../../utils/API"
 
 function World(props) {
     store.dispatch({
@@ -20,15 +21,22 @@ function World(props) {
     //     alert("You found a chest!")
     // }
 
+    const apiCall = (e) => {
+        e.preventDefault();
+        API.allNPC().then(res => {
+            console.log(res.data)
+        })
+    }
+
     return (
         <div style={{
-                position: 'relative',
-                width: '650px',
-                height: '400px',
-                margin: '20px auto',
-            }}
+            position: 'relative',
+            width: '650px',
+            height: '400px',
+            margin: '20px auto',
+        }}
         >
-            
+
             <Map />
             <Player />
             {/* <Modal /> */}
@@ -38,6 +46,7 @@ function World(props) {
                 fuga omnis a sed impedit explicabo accusantium nihil doloremque
                 consequuntur.
             </Modal>
+            <button onClick={apiCall} style={{ color: "white" }}>API Tester</button>
         </div>
     )
 }
