@@ -54,15 +54,13 @@ export default function handleMovement(player) {
     }
 
     function showModal() {
-        Modal.props.setState({
-          show: !Modal.props.show
-        });
-      };
-    //  function askQuestion() {
-    //     document.querySelector(".modal-main").setAttribute("style", "display:block; color:black; background:salmon")
-    //     console.log(document.querySelector(".test"))
-    //   };
-    
+       store.dispatch({
+           type: 'SHOW_MODAL',
+           payload: {
+               show: true
+           }
+       })
+    };
 
     function observeAction(oldPos, newPos) {
         const tiles = store.getState().map.tiles
@@ -72,7 +70,6 @@ export default function handleMovement(player) {
         switch (nextTile) {
             case 4:
                showModal()
-                // askQuestion()
                 return true
             case 3:
                 alert ("Leaving Room")

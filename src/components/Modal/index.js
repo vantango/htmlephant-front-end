@@ -1,34 +1,40 @@
 import React from "react";
-// import "./modal.css";
+import { connect } from "react-redux";
+import Question from "../Question"
+// import "./style.css"
+
 // import PropTypes from "prop-types";
 
-export default class Modal extends React.Component {
-    state = {
-        show: false
-    };
-    
-    
+function Modal(props) {
+  console.log(props.show);
 
-  onClose = e => {
-    this.props.onClose && this.props.onClose(e);
-  };
-  render() {
-    if (!this.props.show) {
-      return null;
-    }
+  // onClose = e => {
+  //   this.props.onClose && this.props.onClose(e);
+  // };
+  if (!props.show) {
+    return null;
+  } else {
     return (
-      <div class="modal" id="modal">
+      <div className={"modal"} id={"modal"} style={{ color: "Salmon" }}>
         <h2>Modal Window</h2>
-        <div class="content">{this.props.children}</div>
-        <div class="actions">
-          <button class="toggle-button" onClick={this.onClose}>
+        <Question />
+        <div className={"actions"}>
+          {/* <button class="toggle-button" onClick={this.onClose}>
             close
-          </button>
+          </button> */}
         </div>
       </div>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    ...state.modal,
+  };
+}
+
+export default connect(mapStateToProps)(Modal);
+
 // Modal.propTypes = {
 //   onClose: PropTypes.func.isRequired,
 //   show: PropTypes.bool.isRequired
