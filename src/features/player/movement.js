@@ -1,6 +1,6 @@
 import store from '../../config/store'
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants'
-import Whiteboard from '../../components/Whiteboard'
+import Modal from "../../components/Modal/index"
 
 
 import { tiles1 } from '../../data/maps/1'
@@ -56,6 +56,15 @@ export default function handleMovement(player) {
         return nextTile < 10
     }
 
+    function showModal() {
+       store.dispatch({
+           type: 'SHOW_MODAL',
+           payload: {
+               show: true
+           }
+       })
+    };
+
     function observeAction(oldPos, newPos) {
         const tiles = store.getState().map.tiles
         const y = newPos[1] / SPRITE_SIZE
@@ -64,6 +73,12 @@ export default function handleMovement(player) {
         const nextTile = tiles[y][x]
         console.log(tiles[y][x])
         switch (nextTile) {
+            case 4:
+               showModal()
+                return true
+            case 3:
+                alert ("Leaving Room")
+                changeRoom()
             case 21:
                 // alert ("Leaving main Room to WEST")
                 changeRoom(tiles2)
