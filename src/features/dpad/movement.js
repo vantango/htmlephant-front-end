@@ -8,7 +8,10 @@ import { tiles2 } from '../../data/maps/2'
 import { tiles3 } from '../../data/maps/3'
 import { tiles4 } from '../../data/maps/4'
 
-export default function handleMovement(player) {
+export default function handleMovement(direction) {
+
+    let player = store.getState().player
+    attemptMove(direction)
 
     // const stepSize =
     function getNewPosition(oldPos, direction) {
@@ -199,37 +202,6 @@ export default function handleMovement(player) {
             }
         }
     }
-    
-
-
-    function handleKeyDown(e) {
-        e.preventDefault()
-        console.log(e.keyCode)
-        switch(e.keyCode) {
-            case 37:
-            case 65:
-                return attemptMove('WEST')
-
-            case 38:
-            case 87:
-                return attemptMove('NORTH')
-
-            case 39:
-            case 68:
-                return attemptMove('EAST')
-
-            case 40:
-            case 83:
-                return attemptMove('SOUTH')
-
-            default:
-                console.log(e.keyCode)
-        }
-    }
-
-    window.addEventListener('keydown', (e) => {
-        handleKeyDown(e)
-    })
 
     return player
 }

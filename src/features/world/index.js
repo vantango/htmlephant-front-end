@@ -1,6 +1,7 @@
 import React from 'react'
 import Map from '../map'
 import Player from '../player'
+import Dpad from '../dpad'
 import Modal, {showModal} from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
 
@@ -16,10 +17,6 @@ function World(props) {
         }
     })
 
-    // function handleInteract() {
-    //     alert("You found a chest!")
-    // }
-
     return (
         <div style={{
                 position: 'relative',
@@ -32,6 +29,7 @@ function World(props) {
             <Map />
             <Player />
             {/* <Modal /> */}
+            <Dpad />
             <Modal onClose={props.showModal} show="false">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
                 deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus non
