@@ -6,7 +6,6 @@ import { tiles1 } from "../../data/maps/1";
 import { tiles2 } from "../../data/maps/2";
 import { tiles3 } from "../../data/maps/3";
 import { tiles4 } from "../../data/maps/4";
-import { STATES } from "mongoose";
 
 export default function handleMovement(player) {
   // const stepSize =
@@ -42,6 +41,7 @@ export default function handleMovement(player) {
   }
 
   function observeBoundaries(oldPos, newPos) {
+    console.log(newPos)
     return (
       newPos[0] >= 0 &&
       newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SPRITE_SIZE } from '../../config/constants'
-import grass from './tiles/grass.png'
 import rock from './tiles/rock.png'
 import tree from './tiles/tree.png'
 import chest from './tiles/chest.png'
