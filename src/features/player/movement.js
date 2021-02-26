@@ -223,7 +223,7 @@ export default function handleMovement(player) {
 
   function handleKeyDown(e) {
     if (e.target !== "userAns") {
-   
+
 
       switch (e.keyCode) {
         case 37:
@@ -245,19 +245,19 @@ export default function handleMovement(player) {
 
         case 40:
           case 83:
-
+          
             e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-          console.log(e.keyCode );
+          console.log(e.keyCode);
       }
     }
   }
 
-    window.addEventListener("keydown", (e) => {
-      handleKeyDown(e);
-    });
+  window.addEventListener("keydown", (e) => {
+    handleKeyDown(e);
+  });
 
   return player;
 }
