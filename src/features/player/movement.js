@@ -6,7 +6,7 @@ import { tiles1 } from "../../data/maps/1";
 import { tiles2 } from "../../data/maps/2";
 import { tiles3 } from "../../data/maps/3";
 import { tiles4 } from "../../data/maps/4";
-import { STATES } from "mongoose";
+// import { STATES } from "mongoose";
 
 export default function handleMovement(player) {
   // const stepSize =
@@ -223,34 +223,34 @@ export default function handleMovement(player) {
 
   function handleKeyDown(e) {
     if (e.target !== "userAns") {
-   
+
 
       switch (e.keyCode) {
         case 37:
-            e.preventDefault();
+          e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-            e.preventDefault();
+          e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-            e.preventDefault();
+          e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-            e.preventDefault();
+          e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-          console.log(e.keyCode );
+          console.log(e.keyCode);
       }
     }
   }
 
-    window.addEventListener("keydown", (e) => {
-      handleKeyDown(e);
-    });
+  window.addEventListener("keydown", (e) => {
+    handleKeyDown(e);
+  });
 
   return player;
 }
