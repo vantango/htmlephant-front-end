@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Map from '../map'
 import Player from '../player'
-import Modal, { showModal } from "../../components/Modal/index";
+import Dpad from '../dpad'
+import Modal, {showModal} from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
 
 import { tiles1 } from '../../data/maps/1'
@@ -18,7 +19,6 @@ function World(props) {
     })
 
 
-
     return (
         <div style={{
             position: 'relative',
@@ -31,12 +31,8 @@ function World(props) {
             <Map />
             <Player />
             {/* <Modal /> */}
-            <Modal onClose={props.showModal} show="false">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
-                deserunt corrupti, ut fugit magni qui quasi nisi amet repellendus non
-                fuga omnis a sed impedit explicabo accusantium nihil doloremque
-                consequuntur.
-            </Modal>
+            <Dpad />
+            <Modal onClose={props.showModal} show="false" />
         </div>
     )
 }
