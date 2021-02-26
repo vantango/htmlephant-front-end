@@ -4,12 +4,14 @@ import walkSprite from './m1.png'
 import handleMovement from './movement'
 import store from '../../config/store'
 
+import './style.css'
+
 
 function Player(props) {
 
 
     return (
-        <div
+        <div className={'player_animation'}
             style={{
                 position: 'absolute',
                 top: props.position[1],
