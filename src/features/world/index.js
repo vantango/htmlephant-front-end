@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Map from '../map'
 import Player from '../player'
+import Dpad from '../dpad'
 import Modal, {showModal} from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
 
 import { tiles1 } from '../../data/maps/1'
 import { tiles2 } from '../../data/maps/2'
 import store from '../../config/store'
+import API from "../../utils/API"
 
 function World(props) {
     store.dispatch({
@@ -16,22 +18,20 @@ function World(props) {
         }
     })
 
-    // function handleInteract() {
-    //     alert("You found a chest!")
-    // }
 
     return (
         <div style={{
-                position: 'relative',
-                width: '650px',
-                height: '400px',
-                margin: '20px auto',
-            }}
+            position: 'relative',
+            width: '650px',
+            height: '400px',
+            margin: '20px auto',
+        }}
         >
-            
+
             <Map />
             <Player />
             {/* <Modal /> */}
+            <Dpad />
             <Modal onClose={props.showModal} show="false" />
         </div>
     )

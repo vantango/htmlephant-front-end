@@ -1,0 +1,11 @@
+.dpadButton {
+    height: 50px;
+    width: 50px;
+}
+
+.dpad {
+    height: 150px;
+    width: 150px;
+    border-color: white;
+    border-style: solid
+}

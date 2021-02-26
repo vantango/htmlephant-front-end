@@ -45,6 +45,7 @@ export default function handleMovement(player) {
   }
 
   function observeBoundaries(oldPos, newPos) {
+    console.log(newPos)
     return (
       newPos[0] >= 0 &&
       newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
@@ -235,34 +236,41 @@ export default function handleMovement(player) {
 
   const handleKeyDown = (e =>{
     if (e.target !== "userAns") {
-   
+
 
       switch (e.keyCode) {
         case 37:
+          case 65:
             e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
+          case 87:
+
             e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
+          case 68:
+
             e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
+          case 83:
+          
             e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-          console.log(e.keyCode );
+          console.log(e.keyCode);
       }
     }
   }  )
 
-    window.addEventListener("keydown", (e) => {
-      handleKeyDown(e);
-    });
+  window.addEventListener("keydown", (e) => {
+    handleKeyDown(e);
+  });
 
   return player;
 }
