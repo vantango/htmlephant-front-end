@@ -1,47 +1,56 @@
 import React from "react";
 import { connect } from "react-redux";
-
+import store from "../../config/store"
 
 class ChoiceForm extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {value: 'coconut'};
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-  
-    handleSubmit(event) {
-      alert('Your favorite flavor is: ' + this.state.value);
-      event.preventDefault();
-    }
-  
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Pick your favorite flavor:
-            <select value={this.state.value} onChange={this.handleChange}>
-              <option value="grapefruit">Grapefruit</option>
-              <option value="lime">Lime</option>
-              <option value="coconut">Coconut</option>
-              <option value="mango">Mango</option>
-            </select>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-      );
-    }
+  constructor(props) {
+    super(props);
+    this.state = { value: "" };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.state.value===this.props.correct){
+      console.log("yay!")
+      store.dispatch({
+        type: "SHOW_MODAL",
+        payload: {
+          show: false,
+        }
+      })
+    } else {
+      store.dispatch({
+        type:"SHOW_MODAL",
+        payload: {
+          ...store.getState().modal,dialogue:"The details of your incompetence do no interest me."
+        }
+      })
+    }
+  }
+  render() {
+
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <select value={this.state.value} onChange={this.handleChange}>
+          {this.props.answers.map(answer => (
+          <option value={answer}>{answer}</option>))
+        } 
+        </select>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
 function mapStateToProps(state) {
   return {
-    ...state.form,
+    ...state.question,
   };
 }
 
