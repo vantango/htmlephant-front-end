@@ -1,12 +1,15 @@
 import store from "../../config/store";
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from "../../config/constants";
 import Modal from "../../components/Modal/index";
+import _debounce from 'lodash.debounce';
 
 import { tiles1 } from "../../data/maps/1";
 import { tiles2 } from "../../data/maps/2";
 import { tiles3 } from "../../data/maps/3";
 import { tiles4 } from "../../data/maps/4";
-import { STATES } from "mongoose";
+import { ANIMATION_SPEED } from '../../config/constants'
+
+const ANIMATION_WITH_PADDING = ANIMATION_SPEED * 1.25
 
 export default function handleMovement(player) {
   // const stepSize =
@@ -186,6 +189,8 @@ export default function handleMovement(player) {
   }
 
   function changeRoom(tiles) {
+    // take out player animation transition
+    document.querySelector('.player_animation').classList.add('notransition')
     // console.log(room)
     store.dispatch({
       type: "ADD_TILES",
@@ -195,7 +200,8 @@ export default function handleMovement(player) {
     });
   }
 
-  function dispatchMove(direction, newPos) {
+  const dispatchMove = _debounce((direction, newPos) => {
+    document.querySelector('.player_animation').classList.remove('notransition')
     const walkIndex = getWalkIndex();
     store.dispatch({
       type: "MOVE_PLAYER",
@@ -206,22 +212,28 @@ export default function handleMovement(player) {
         spriteLocation: getSpriteLocation(direction, walkIndex),
       },
     });
-  }
+  },
+  ANIMATION_WITH_PADDING,
+  { 
+    maxWait: ANIMATION_WITH_PADDING, leading: true, trailing: false
+  })
 
   function attemptMove(direction) {
     const oldPos = store.getState().player.position;
     const newPos = getNewPosition(oldPos, direction);
-    if (!observeAction(oldPos, newPos)) {
-      if (
-        observeBoundaries(oldPos, newPos) &&
-        observeImpassable(oldPos, newPos)
-      ) {
-        dispatchMove(direction, newPos);
+    if (observeBoundaries(oldPos, newPos))
+    {
+      if (!observeAction(oldPos, newPos)) {
+        if (
+          observeImpassable(oldPos, newPos)
+          ) {
+            dispatchMove(direction, newPos);
+          }
+        }
       }
-    }
   }
 
-  function handleKeyDown(e) {
+  const handleKeyDown = (e =>{
     if (e.target !== "userAns") {
    
 
@@ -246,7 +258,7 @@ export default function handleMovement(player) {
           console.log(e.keyCode );
       }
     }
-  }
+  }  )
 
     window.addEventListener("keydown", (e) => {
       handleKeyDown(e);
