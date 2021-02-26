@@ -25,6 +25,23 @@ const API = {
     },
     signup: userData => {
         return axios.post(`${URL_PREFIX}/signup`, userData)
+    },
+    login: userData => {
+        return axios.post(`${URL_PREFIX}/login`, userData)
+    },
+    getVip: token => {
+        return axios.get(`${URL_PREFIX}/vip`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    levelUp: (id, token) => {
+        return axios.put(`${URL_PREFIX}/levelup/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
     }
 }
 
