@@ -5,28 +5,36 @@ import InputForm from "../Forms/InputForm"
 
 
 function Question(props) {
-  if(props.type==="mc"){
+  console.log(props.form)
+  switch (props.form) {
+    case "dialogue":
     return (
       <div className= {"question"}>
           <h3>{props.name} says:</h3>
+          <h2>{props.dialogue}</h2>
+      </div>
+    );
+    case "mc":
+    return (
+      <div className= {"question"}>
           <h2>{props.question}</h2>
           <ChoiceForm />
       </div>
     );
-    } else if (props.type==="input"){
+    case "input":
         return (
             <div className= {"question"}>
-                <h3>{props.name} says:</h3>
-                <h2>{props.question}</h2>
+               <h2>{props.question}</h2>
                 <InputForm />
             </div>
         );
-    }
-    else {
+    default:
         return(
-        <h1>No question found.</h1>
+          <div className= {"question"}>
+            <h1>No question found.</h1>
+          </div>
         )
-    }
+      }  
 }
 
 function mapStateToProps(state) {

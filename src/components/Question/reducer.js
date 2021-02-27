@@ -1,8 +1,9 @@
 const intitialState = {
-   name: "Denis",
-   question: "How are you?",
-   type: "",
-   input: ""
+   name: "",
+   question: "",
+   form: "",
+   input: "",
+   answers: []
 }
 
 const questionReducer = (state=intitialState, action) => {

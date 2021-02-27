@@ -1,5 +1,7 @@
 const intitialState = {
     show: false,
+    name: "",
+    dialogue: ""
 }
 
 const modalReducer = (state=intitialState, action) => {

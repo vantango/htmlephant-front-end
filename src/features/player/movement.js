@@ -2,7 +2,7 @@ import store from "../../config/store";
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from "../../config/constants";
 import Modal from "../../components/Modal/index";
 import _debounce from 'lodash.debounce';
-
+import API from "../../utils/API"
 import { tiles1 } from "../../data/maps/1";
 import { tiles2 } from "../../data/maps/2";
 import { tiles3 } from "../../data/maps/3";
@@ -62,14 +62,14 @@ export default function handleMovement(player) {
     return nextTile < 10;
   }
 
-  function showModal() {
-    store.dispatch({
-      type: "SHOW_MODAL",
-      payload: {
-        show: true,
-      },
-    });
-  }
+  // function showModal() {
+  //   store.dispatch({
+  //     type: "SHOW_MODAL",
+  //     payload: {
+  //       show: true,
+  //     },
+  //   });
+  // }
 
   function observeAction(oldPos, newPos) {
     const tiles = store.getState().map.tiles;
@@ -80,26 +80,34 @@ export default function handleMovement(player) {
     console.log(tiles[y][x]);
     switch (nextTile) {
       case 18:
-        showModal();
-        store.dispatch({
-          type: "ASK_QUESTION",
-          payload: {
-            name: "Joe",
-            question: "Why are you using state??",
-            type: "mc",
-          },
+        API.allNPC().then(res=> {
+          store.dispatch({
+            type: "SHOW_MODAL",
+            payload: {
+              show: true,
+              name: `${res.data[0].name}`,
+              dialogue: `${res.data[0].dialogue[1]}`,
+              form: "mc",
+            },
+          })
         });
+        // showModal();
         return true;
       case 17:
-        showModal();
-        store.dispatch({
-          type: "ASK_QUESTION",
-          payload: {
-            name: "Aslan",
-            question: "Keep up the good work!",
-            type: "input",
-          },
+        API.easyAlgo().then(res=> {
+          const hints = JSON.parse(res.data.hints)
+          console.log(hints)
+          store.dispatch({
+            type: "ASK_QUESTION",
+            payload: {
+              hints: hints[0],
+              question: `${res.data.question}`,
+              // dialogue: `${res.data[0].dialogue}`,
+             form: "mc",
+            },
+          })
         });
+        // showModal();
         return true;
       case 3:
         alert("Leaving Room");
