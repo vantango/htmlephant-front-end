@@ -24,7 +24,6 @@ function Editor() {
     // On submit, grab text from code editor
     const onSubmit = event => {
         event.preventDefault();
-        console.log(`Here's the text, dummy: ${editorState.editorText}`);
 
         // API call for easy algorithm, parse arguments and output
         API.easyAlgo().then(res => {
@@ -33,14 +32,18 @@ function Editor() {
             // Create and call a new function to run the code written into the editor
             const testFunction = new Function("str", editorState.editorText);
             const result = testFunction(info.args)
-            console.log(result)
 
-            // Evaluate result based on expected output from API call
-            result === info.output ? console.log("You did it!") : console.log("Die in shame.")
-        })
+            // API call for NPCs
+            API.allNPC().then(data => {
+                const luther = data.data[0]
 
+                // Luther will evaluate your answer and judge you
+                result === info.output ? console.log(luther.usefulDialogue[3]) : console.log(luther.usefulDialogue[4])
+            })
+        });
     }
 
+    
     // Ace editor component
     return (
         <div>
