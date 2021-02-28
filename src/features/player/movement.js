@@ -80,13 +80,13 @@ export default function handleMovement(player) {
     console.log(tiles[y][x]);
     switch (nextTile) {
       case 18:
-        API.allNPC().then(res=> {
+        API.allNPC().then(res => {
           store.dispatch({
             type: "SHOW_MODAL",
             payload: {
               show: true,
               name: `${res.data[0].name}`,
-              dialogue: `${res.data[0].dialogue[1]}`,
+              dialogue: `${res.data[0].usefulDialogue[0]}`,
               form: "mc",
             },
           })
@@ -94,7 +94,7 @@ export default function handleMovement(player) {
         // showModal();
         return true;
       case 17:
-        API.easyAlgo().then(res=> {
+        API.easyAlgo().then(res => {
           const hints = JSON.parse(res.data.hints)
           console.log(hints)
           store.dispatch({
@@ -103,7 +103,7 @@ export default function handleMovement(player) {
               hints: hints[0],
               question: `${res.data.question}`,
               // dialogue: `${res.data[0].dialogue}`,
-             form: "mc",
+              form: "mc",
             },
           })
         });
@@ -222,59 +222,58 @@ export default function handleMovement(player) {
       },
     });
   },
-  ANIMATION_WITH_PADDING,
-  { 
-    maxWait: ANIMATION_WITH_PADDING, leading: true, trailing: false
-  })
+    ANIMATION_WITH_PADDING,
+    {
+      maxWait: ANIMATION_WITH_PADDING, leading: true, trailing: false
+    })
 
   function attemptMove(direction) {
     const oldPos = store.getState().player.position;
     const newPos = getNewPosition(oldPos, direction);
-    if (observeBoundaries(oldPos, newPos))
-    {
+    if (observeBoundaries(oldPos, newPos)) {
       if (!observeAction(oldPos, newPos)) {
         if (
           observeImpassable(oldPos, newPos)
-          ) {
-            dispatchMove(direction, newPos);
-          }
+        ) {
+          dispatchMove(direction, newPos);
         }
       }
+    }
   }
 
-  const handleKeyDown = (e =>{
+  const handleKeyDown = (e => {
     if (e.target !== "userAns") {
 
 
       switch (e.keyCode) {
         case 37:
-          case 65:
-            e.preventDefault();
+        case 65:
+          e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-          case 87:
+        case 87:
 
-            e.preventDefault();
+          e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-          case 68:
+        case 68:
 
-            e.preventDefault();
+          e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-          case 83:
-          
-            e.preventDefault();
+        case 83:
+
+          e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
           console.log(e.keyCode);
       }
     }
-  }  )
+  })
 
   window.addEventListener("keydown", (e) => {
     handleKeyDown(e);
