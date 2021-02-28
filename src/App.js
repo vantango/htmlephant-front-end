@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import World from "./features/world";
 import API from "./utils/API"
 import Menu from "./pages/menu"
-
-
+import LoadGame from "./pages/loadgame"
+import NewGame from "./pages/newgame"
 // import "./styles.css";
 
 const apiCall = () => {
@@ -20,15 +20,18 @@ function App() {
       <div>
         {/* <Nav /> */}
         <Switch>
-          <Route exact path={["/game"]}>
-            <World />
-          </Route>
           <Route exact path= {["/", "/menu"]}>
             <Menu />
           </Route>
-          {/* <Route> */}
-            {/* <NoMatch /> */}
-          {/* </Route> */}
+          <Route exact path={["/game"]}>
+            <World />
+          </Route>
+          <Route exact path ={["/load"]}> 
+            <LoadGame />
+           </Route>
+           <Route exact path ={["/new"]}> 
+            <NewGame />
+           </Route>
         </Switch>
       </div>
     </Router>
