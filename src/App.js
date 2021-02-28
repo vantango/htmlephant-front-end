@@ -1,7 +1,7 @@
 import "./App.css";
 import World from "./features/world";
 import API from "./utils/API"
-
+import Game from "./components/Menu/Game"
 
 // import "./styles.css";
 
@@ -14,7 +14,8 @@ const apiCall = () => {
 function App() {
   return (
     <div>
-      <World />
+      {/* <World /> */}
+      <Game />
 
       
 
