@@ -19,7 +19,8 @@ function Question(props) {
       return (
         <div className={"question"}>
           <h2>{props.question}</h2>
-          <ChoiceForm />
+          {/* <ChoiceForm /> */}
+          <Editor />
         </div>
       );
     case "input":
