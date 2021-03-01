@@ -8,9 +8,6 @@ import store from "../../config/store"
 
 function Modal(props) {
   console.log(props.show);
-  if (props.questionNumber === 0) {
-
-  }
   // onClose = e => {
   //   this.props.onClose && this.props.onClose(e);
   // };
@@ -19,8 +16,6 @@ function Modal(props) {
       const number = props.questionNumber
       let answers, question, correct
       switch (number) {
-        case 0:
-
         case 1:
           answers = res.data.answers1
           question = res.data.question1

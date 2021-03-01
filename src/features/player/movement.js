@@ -114,7 +114,6 @@ export default function handleMovement(player) {
           });
         }
         else {
-
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
@@ -132,38 +131,70 @@ export default function handleMovement(player) {
         // showModal();
         return true;
       case 15:
-        API.allNPC().then(res => {
-          store.dispatch({
-            type: "SHOW_MODAL",
-            payload: {
-              show: true,
-              name: `${res.data[3].name}`,
-              dialogue: `${res.data[3].usefulDialogue[0]}`,
-              rightDialogue:  `${res.data[3].usefulDialogue[1]}`,
-              wrongDialogue: `${res.data[3].usefulDialogue[2]}`,
-              form: "mc",
-              questionNumber: 3
-            },
-          })
-        });
+        if (store.getState().user.question3 === false) {
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[3].name}`,
+                dialogue: `${res.data[3].usefulDialogue[0]}`,
+                rightDialogue:  `${res.data[3].usefulDialogue[1]}`,
+                wrongDialogue: `${res.data[3].usefulDialogue[2]}`,
+                form: "mc",
+                questionNumber: 3
+              },
+            })
+          });
+        }
+        else {
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].flavorDialogue[1]}`,
+                questionNumber: 0
+              },
+            })
+          });
+        }
         return true;
       case 16:
-        API.allNPC().then(res => {
-          store.dispatch({
-            type: "SHOW_MODAL",
-            payload: {
-              show: true,
-              name: `${res.data[2].name}`,
-              dialogue: `${res.data[2].usefulDialogue[0]}`,
-              rightDialogue:  `${res.data[2].usefulDialogue[1]}`,
-              wrongDialogue: `${res.data[2].usefulDialogue[2]}`,
-              form: "mc",
-              questionNumber: 2
-            },
-          })
-        });
+        if (store.getState().user.question2 === false) {
+
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[2].name}`,
+                dialogue: `${res.data[2].usefulDialogue[0]}`,
+                rightDialogue:  `${res.data[2].usefulDialogue[1]}`,
+                wrongDialogue: `${res.data[2].usefulDialogue[2]}`,
+                form: "mc",
+                questionNumber: 2
+              },
+            })
+          });
+        } 
+        else {
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[2].name}`,
+                dialogue: `${res.data[2].flavorDialogue[2]}`,
+                questionNumber: 0
+              },
+            })
+          });
+        }
         return true;
       case 17:
+        if (store.getState().user.question1 === false) {
         API.allNPC().then(res => {
           store.dispatch({
             type: "SHOW_MODAL",
@@ -178,6 +209,20 @@ export default function handleMovement(player) {
             },
           })
         });
+      }
+      else {
+        API.allNPC().then(res => {
+          store.dispatch({
+            type: "SHOW_MODAL",
+            payload: {
+              show: true,
+              name: `${res.data[0].name}`,
+              dialogue: `${res.data[0].flavorDialogue[1]}`,
+              questionNumber: 0
+            },
+          })
+        });
+      }
         return true;
       // case 3:
       //   alert("Leaving Room");
