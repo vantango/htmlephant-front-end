@@ -18,7 +18,7 @@ class ChoiceForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.value===this.props.correct){
+    if (this.state.value === this.props.correct) {
       console.log("yay!")
       // alert("you get a salmon")
       // document.querySelector('.key1').src = filled
@@ -39,9 +39,9 @@ class ChoiceForm extends React.Component {
       })
     } else {
       store.dispatch({
-        type:"SHOW_MODAL",
+        type: "SHOW_MODAL",
         payload: {
-          ...store.getState().modal,dialogue:"The details of your incompetence do no interest me."
+          ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
         }
       })
     }
@@ -52,8 +52,8 @@ class ChoiceForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <select value={this.state.value} onChange={this.handleChange}>
           {this.props.answers.map(answer => (
-          <option value={answer}>{answer}</option>))
-        } 
+            <option value={answer}>{answer}</option>))
+          }
         </select>
         <input type="submit" value="Submit" />
       </form>
