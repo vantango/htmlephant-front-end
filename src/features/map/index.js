@@ -5,7 +5,7 @@ import rock from './tiles/rock.png'
 import tree from './tiles/tree.png'
 import chest from './tiles/chest.png'
 import door from './tiles/door.jpg'
-import denis from './tiles/m2.png'
+import denis from './tiles/denis.png'
 import zac from './tiles/f2.png'
 import aslan from './tiles/f1.png'
 import joe from './tiles/e1.png'
@@ -59,24 +59,24 @@ function getTileSprite(type) {
 }
 
 function MapTile(props) {
-    if(props.tile === 15 || props.tile === 16 || props.tile === 17 || props.tile === 18 ) {
+    if (props.tile === 15 || props.tile === 16 || props.tile === 17 || props.tile === 18) {
         return <div
-        className={`tile`}
+            className={`tile`}
         >
-            <div className = {`Character tile`} style={{height: SPRITE_SIZE, width:SPRITE_SIZE}}>
-             <img className = {`Character_spritesheet`} src={`${getTileSprite(props.tile)}`} alt={`Character`} />
+            <div className={`Character tile`} style={{ height: SPRITE_SIZE, width: SPRITE_SIZE }}>
+                <img className={`Character_spritesheet`} src={`${getTileSprite(props.tile)}`} alt={`Character`} />
             </div>
-            
+
         </div>
     } else {
         return <div
-        className={`tile`}
-        style={{
-            backgroundImage: `url(${getTileSprite(props.tile)})`,
-            height: SPRITE_SIZE,
-            width: SPRITE_SIZE,
-            
-        }}
+            className={`tile`}
+            style={{
+                backgroundImage: `url(${getTileSprite(props.tile)})`,
+                height: SPRITE_SIZE,
+                width: SPRITE_SIZE,
+
+            }}
         />
     }
 
@@ -96,7 +96,7 @@ function MapRow(props) {
 function Map(props) {
     return (
         <div
-        name ="map"
+            name="map"
             style={{
                 position: 'relative',
                 top: '0px',
