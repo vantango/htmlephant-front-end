@@ -243,8 +243,6 @@ export default function handleMovement(player) {
 
   const handleKeyDown = (e => {
     if (e.target !== "userAns") {
-
-
       switch (e.keyCode) {
         case 37:
         case 65:
