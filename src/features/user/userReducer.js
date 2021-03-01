@@ -5,7 +5,8 @@ const intitialState = {
     token: "",
     level: 0,
     id: "",
-    isLoggedIn: false
+    isLoggedIn: false,
+    encounters:0
 
 }
 const userReducer = (state=intitialState, action) => {
