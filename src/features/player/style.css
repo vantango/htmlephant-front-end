@@ -1,0 +1,16 @@
+.player_animation {
+    transition: left .2s ease-in-out 0s, top .2s ease-in-out 0s;
+}
+
+.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+  }
+
+@keyframes dispatchMove {
+    100% {
+        background-position-x: 320px
+    }
+}
