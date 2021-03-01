@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AceEditor from "react-ace";
 import API from "../../utils/API";
+import store from "../../config/store";
 import "./CodeEditor.css";
 
 import "ace-builds/src-noconflict/mode-javascript";
@@ -39,7 +40,30 @@ function Editor() {
                 const luther = data.data[0]
 
                 // Luther will evaluate your answer and judge you
-                result === info.output ? console.log(luther.usefulDialogue[3]) : console.log(luther.usefulDialogue[4])
+                if(result===info.output) {
+                    store.dispatch({
+                        type: "SHOW_MODAL",
+                        payload: {
+                            ...store.getState().modal, dialogue: luther.usefulDialogue[3]
+                        }
+                    })
+                } else if (!result) {
+                    store.dispatch({
+                        type: "SHOW_MODAL",
+                        payload: {
+                            ...store.getState().modal, dialogue: luther.usefulDialogue[4]
+                        }
+                    })
+                }
+                else {
+                    store.dispatch({
+                        type: "SHOW_MODAL",
+                        payload: {
+                            ...store.getState().modal, dialogue: luther.usefulDialogue[4]
+                        }
+                    })
+                }
+                
             })
         });
     }

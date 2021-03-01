@@ -103,9 +103,9 @@ export default function handleMovement(player) {
               payload: {
                 show: true,
                 name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[0]}`,
-                form: "mc",
-                questionNumber: 0
+                dialogue: `${res.data[0].usefulDialogue[2]}`,
+                form: "editor",
+                questionNumber: "algorithm"
               },
             })
           });
@@ -120,6 +120,8 @@ export default function handleMovement(player) {
               show: true,
               name: `${res.data[3].name}`,
               dialogue: `${res.data[3].usefulDialogue[0]}`,
+              rightDialogue:  `${res.data[3].usefulDialogue[1]}`,
+              wrongDialogue: `${res.data[3].usefulDialogue[2]}`,
               form: "mc",
               questionNumber: 3
             },
@@ -134,6 +136,8 @@ export default function handleMovement(player) {
               show: true,
               name: `${res.data[2].name}`,
               dialogue: `${res.data[2].usefulDialogue[0]}`,
+              rightDialogue:  `${res.data[2].usefulDialogue[1]}`,
+              wrongDialogue: `${res.data[2].usefulDialogue[2]}`,
               form: "mc",
               questionNumber: 2
             },
@@ -148,6 +152,8 @@ export default function handleMovement(player) {
               show: true,
               name: `${res.data[1].name}`,
               dialogue: `${res.data[1].usefulDialogue[0]}`,
+              rightDialogue:  `${res.data[1].usefulDialogue[1]}`,
+              wrongDialogue: `${res.data[1].usefulDialogue[2]}`,
               form: "mc",
               questionNumber: 1
             },
@@ -293,24 +299,24 @@ export default function handleMovement(player) {
 
       switch (e.keyCode) {
         case 37:
-        // case 65:
+          // case 65:
           e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-        // case 87:
+          // case 87:
 
           // e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-        // case 68:
+          // case 68:
 
           // e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-        // case 83:
+          // case 83:
 
           // e.preventDefault();
           return attemptMove("SOUTH");
