@@ -20,8 +20,7 @@ class ChoiceForm extends React.Component {
     event.preventDefault();
     if (this.state.value === this.props.correct) {
       console.log("yay!")
-      // alert("you get a salmon")
-      // document.querySelector('.key1').src = filled
+
 
       const newAmount = store.getState().key.amount + 1
       store.dispatch({
@@ -30,6 +29,40 @@ class ChoiceForm extends React.Component {
           amount: newAmount
         }
       })
+
+      
+      const number = store.getState().modal.questionNumber
+      let questionNumber
+      switch (number) {
+        case 1:
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {
+              ...store.getState().user, question1: true 
+            }
+          })
+          break;
+        case 2:
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {
+              ...store.getState().user, question2: true 
+            }
+          })
+          break;
+        case 3:
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {
+              ...store.getState().user, question3: true 
+            }
+          })
+          break;
+      
+        default:
+          break;
+      }
+
 
       store.dispatch({
         type: "SHOW_MODAL",
