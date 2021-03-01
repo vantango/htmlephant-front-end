@@ -4,7 +4,9 @@ import World from "./features/world";
 import API from "./utils/API"
 import Menu from "./pages/menu"
 import LoadGame from "./pages/loadgame"
-// import NewGame from "./pages/newgame"
+import NewGame from "./pages/newgame"
+import Game from "./pages/game"
+import WinScreen from "./pages/winscreen"
 // import "./styles.css";
 
 const apiCall = () => {
@@ -14,29 +16,32 @@ const apiCall = () => {
 }
 
 function App() {
- 
+
   return (
     <Router>
       <div>
         {/* <Nav /> */}
         <Switch>
-          <Route exact path= {["/", "/menu"]}>
+          <Route exact path={["/", "/menu"]}>
             <Menu />
           </Route>
           <Route exact path={["/game"]}>
-            <World />
+            <Game />
           </Route>
-          <Route exact path ={["/load"]}> 
+          <Route exact path={["/load"]}>
             <LoadGame />
-           </Route>
-           {/* <Route exact path ={["/new"]}> 
+          </Route>
+          <Route exact path={["/new"]}>
             <NewGame />
-           </Route> */}
+          </Route>
+            <Route exact path={["/winscreen"]}>
+            <WinScreen />
+          </Route>
         </Switch>
       </div>
     </Router>
   );
-  
+
 }
 
 export default App;

@@ -1,12 +1,17 @@
 import store from '../../config/store'
 import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from '../../config/constants'
 import Modal from "../../components/Modal/index"
-
+import _debounce from 'lodash.debounce';
+import API from "../../utils/API"
 
 import { tiles1 } from '../../data/maps/1'
 import { tiles2 } from '../../data/maps/2'
 import { tiles3 } from '../../data/maps/3'
 import { tiles4 } from '../../data/maps/4'
+import { ANIMATION_SPEED } from '../../config/constants'
+
+const ANIMATION_WITH_PADDING = ANIMATION_SPEED * 1.25
+
 
 export default function handleMovement(direction) {
 
@@ -59,14 +64,14 @@ export default function handleMovement(direction) {
         return nextTile < 10
     }
 
-    function showModal() {
-       store.dispatch({
-           type: 'SHOW_MODAL',
-           payload: {
-               show: true
-           }
-       })
-    };
+    // function showModal() {
+    //    store.dispatch({
+    //        type: 'SHOW_MODAL',
+    //        payload: {
+    //            show: true
+    //        }
+    //    })
+    // };
 
     function observeAction(oldPos, newPos) {
         const tiles = store.getState().map.tiles
@@ -76,91 +81,153 @@ export default function handleMovement(direction) {
         const nextTile = tiles[y][x]
         console.log(tiles[y][x])
         switch (nextTile) {
-            case 4:
-               showModal()
-                return true
-            case 3:
-                alert ("Leaving Room")
-                changeRoom()
-            case 21:
+            case 18:
+                if (store.getState().key.amount < 3)
+                {
+                  alert("Must have three keys to answer my question")
+                }
+                else {
+        
+                  API.allNPC().then(res => {
+                    store.dispatch({
+                      type: "SHOW_MODAL",
+                      payload: {
+                        show: true,
+                        name: `${res.data[0].name}`,
+                        dialogue: `${res.data[0].usefulDialogue[0]}`,
+                        form: "mc",
+                        questionNumber: 0
+                      },
+                    })
+                  });
+                }
+                // showModal();
+                return true;
+              case 15:
+                API.allNPC().then(res => {
+                  store.dispatch({
+                    type: "SHOW_MODAL",
+                    payload: {
+                      show: true,
+                      name: `${res.data[3].name}`,
+                      dialogue: `${res.data[3].usefulDialogue[0]}`,
+                      form: "mc",
+                      questionNumber: 3
+                    },
+                  })
+                });
+                return true;
+              case 16:
+                API.allNPC().then(res => {
+                  store.dispatch({
+                    type: "SHOW_MODAL",
+                    payload: {
+                      show: true,
+                      name: `${res.data[2].name}`,
+                      dialogue: `${res.data[2].usefulDialogue[0]}`,
+                      form: "mc",
+                      questionNumber: 2
+                    },
+                  })
+                });
+                return true;
+              case 17:
+                API.allNPC().then(res => {
+                  store.dispatch({
+                    type: "SHOW_MODAL",
+                    payload: {
+                      show: true,
+                      name: `${res.data[1].name}`,
+                      dialogue: `${res.data[1].usefulDialogue[0]}`,
+                      form: "mc",
+                      questionNumber: 1
+                    },
+                  })
+                });
+                return true;
+              // case 3:
+              //   alert("Leaving Room");
+              //   changeRoom();
+              case 21:
                 // alert ("Leaving main Room to WEST")
-                changeRoom(tiles2)
+                changeRoom(tiles2);
                 store.dispatch({
-                    type: 'MOVE_PLAYER',
-                    payload: {
-                        position: [576, 128],
-                        direction: "WEST",
-                        walkIndex: 0,
-                        spriteLocation: getSpriteLocation("WEST", 0)
-                    }
-                })
-                return true
-            case 22:
+                  type: "MOVE_PLAYER",
+                  payload: {
+                    position: [576, 128],
+                    direction: "WEST",
+                    walkIndex: 0,
+                    spriteLocation: getSpriteLocation("WEST", 0),
+                  },
+                });
+                return true;
+              case 22:
                 // alert ("Leaving Main Room to NORTH")
-                changeRoom(tiles3)
+                changeRoom(tiles3);
                 store.dispatch({
-                    type: 'MOVE_PLAYER',
-                    payload: {
-                        position: [288, 256],
-                        direction: "NORTH",
-                        walkIndex: 0,
-                        spriteLocation: getSpriteLocation("NORTH", 0)
-                    }
-                })
-                return true
-            case 23:
+                  type: "MOVE_PLAYER",
+                  payload: {
+                    position: [288, 256],
+                    direction: "NORTH",
+                    walkIndex: 0,
+                    spriteLocation: getSpriteLocation("NORTH", 0),
+                  },
+                });
+                return true;
+              case 23:
                 // alert ("Leaving Main Room to EAST")
-                changeRoom(tiles4)
+                changeRoom(tiles4);
                 store.dispatch({
-                    type: 'MOVE_PLAYER',
-                    payload: {
-                        position: [32, 128],
-                        direction: "EAST",
-                        walkIndex: 0,
-                        spriteLocation: getSpriteLocation("EAST", 0)
-                    }
-                })
-                return true
-
-            case 24:
+                  type: "MOVE_PLAYER",
+                  payload: {
+                    position: [32, 128],
+                    direction: "EAST",
+                    walkIndex: 0,
+                    spriteLocation: getSpriteLocation("EAST", 0),
+                  },
+                });
+                return true;
+        
+              case 24:
                 // alert ("Leaving WEST Room")
-                changeRoom(tiles1)
+                changeRoom(tiles1);
                 store.dispatch({
-                    type: 'MOVE_PLAYER',
-                    payload: {
-                        position: [32, 128],
-                        direction: "EAST",
-                        walkIndex: 0,
-                        spriteLocation: getSpriteLocation("EAST", 0)
-                    }
-                })
-                return true
-            case 25:
+                  type: "MOVE_PLAYER",
+                  payload: {
+                    position: [32, 128],
+                    direction: "EAST",
+                    walkIndex: 0,
+                    spriteLocation: getSpriteLocation("EAST", 0),
+                  },
+                });
+                return true;
+              case 25:
                 // alert ("Leaving NORTH Room")
-                changeRoom(tiles1)
+                changeRoom(tiles1);
                 store.dispatch({
-                    type: 'MOVE_PLAYER',
-                    payload: {
-                        position: [288, 32],
-                        direction: "SOUTH",
-                        walkIndex: 0,
-                        spriteLocation: getSpriteLocation("SOUTH", 0)
-                    }
-                })
-                return true
-            case 26:
+                  type: "MOVE_PLAYER",
+                  payload: {
+                    position: [288, 32],
+                    direction: "SOUTH",
+                    walkIndex: 0,
+                    spriteLocation: getSpriteLocation("SOUTH", 0),
+                  },
+                });
+                return true;
+              case 26:
                 // alert ("Leaving EAST Room")
-                changeRoom(tiles1)
+                changeRoom(tiles1);
                 store.dispatch({
-                    type: 'MOVE_PLAYER',
-                    payload: {
-                        position: [576, 128],
-                        direction: "WEST",
-                        walkIndex: 0,
-                        spriteLocation: getSpriteLocation("WEST", 0)
-                    }
-                })
-                return true
+                  type: "MOVE_PLAYER",
+                  payload: {
+                    position: [576, 128],
+                    direction: "WEST",
+                    walkIndex: 0,
+                    spriteLocation: getSpriteLocation("WEST", 0),
+                  },
+                });
+                return true;
+        
         
             default:
                 return false;
@@ -169,6 +236,8 @@ export default function handleMovement(direction) {
 
 
     function changeRoom(tiles) {
+    // take out player animation transition
+    document.querySelector('.player_animation').classList.add('notransition')
         // console.log(room)
         store.dispatch({
             type: 'ADD_TILES',

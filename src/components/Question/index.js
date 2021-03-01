@@ -29,6 +29,13 @@ function Question(props) {
           <InputForm />
         </div>
       );
+      case "editor":
+      return (
+        <div className={"question"}>
+          <h2>{props.question}</h2>
+          <Editor />
+        </div>
+      );
     default:
       return (
         <div className={"question"}>

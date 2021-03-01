@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import AceEditor from "react-ace";
-import API from "../../utils/API"
+import { useHistory } from "react-router-dom";
+import API from "../../utils/API";
+import store from "../../config/store";
+import "./CodeEditor.css";
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -9,6 +12,7 @@ import "ace-builds/src-noconflict/ext-language_tools"
 
 
 function Editor() {
+    let history = useHistory()
     // Create state for text in code editor
     const [editorState, setEditorState] = useState({
         editorText: ""
@@ -38,19 +42,44 @@ function Editor() {
                 const luther = data.data[0]
 
                 // Luther will evaluate your answer and judge you
-                result === info.output ? console.log(luther.usefulDialogue[3]) : console.log(luther.usefulDialogue[4])
+                if(result===info.output) {
+                    store.dispatch({
+                        type: "SHOW_MODAL",
+                        payload: {
+                            ...store.getState().modal, dialogue: luther.usefulDialogue[3]
+                        }
+                    })
+                    history.push("/winscreen")
+                } else if (!result) {
+                    store.dispatch({
+                        type: "SHOW_MODAL",
+                        payload: {
+                            ...store.getState().modal, dialogue: luther.usefulDialogue[4]
+                        }
+                    })
+                }
+                else {
+                    store.dispatch({
+                        type: "SHOW_MODAL",
+                        payload: {
+                            ...store.getState().modal, dialogue: luther.usefulDialogue[4]
+                        }
+                    })
+                    history.push("/")
+                }
+                
             })
         });
     }
 
-    
+
     // Ace editor component
     return (
         <div>
             <AceEditor
                 className="ace-editor"
                 mode="javascript"
-                theme="monokai"
+                theme="solarized-dark"
                 onChange={onChange}
                 name="test"
                 width="50vw"
