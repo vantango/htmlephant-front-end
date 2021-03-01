@@ -294,7 +294,7 @@ export default function handleMovement(player) {
       switch (e.keyCode) {
         case 37:
         // case 65:
-          // e.preventDefault();
+          e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
