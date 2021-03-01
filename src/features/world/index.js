@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Map from '../map'
 import Player from '../player'
 import Dpad from '../dpad'
+import Keys from '../keys'
 import Modal, {showModal} from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
 
@@ -32,6 +33,7 @@ function World(props) {
             <Player />
             {/* <Modal /> */}
             <Dpad />
+            <Keys />
             <Modal onClose={props.showModal} show="false" />
         </div>
     )
