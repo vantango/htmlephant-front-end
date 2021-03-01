@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import store from "../config/store";
 import { useHistory } from "react-router-dom";
 import API from "../utils/API";
-
+import "./pages.css"
 function LoadGame() {
   let history = useHistory();
   // Set initial user state
@@ -10,7 +10,9 @@ function LoadGame() {
     username: "",
     password: "",
     token: "",
-    isLoggedIn: false
+    isLoggedIn: false,
+    level: 0,
+    id: "",
   })
 
   // Set initial login state
@@ -38,6 +40,8 @@ function LoadGame() {
         username: res.data.user.username,
         password: res.data.user.password,
         token: res.data.token,
+        level: res.data.user.level,
+        id: res.data.user._id,
         isLoggedIn: true
       });
       store.dispatch({
@@ -46,6 +50,8 @@ function LoadGame() {
           username: res.data.user.username,
           password: res.data.user.password,
           token: res.data.token,
+          level: res.data.user.level,
+          id: res.data.user._id,
           isLoggedIn: true
         }
       });
@@ -62,6 +68,8 @@ function LoadGame() {
           username: "",
           password: "",
           token: "",
+          level: 0,
+          id: "",
           isLoggedIn: false
         }
       })

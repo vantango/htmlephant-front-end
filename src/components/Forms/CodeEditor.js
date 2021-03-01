@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AceEditor from "react-ace";
+import { useHistory } from "react-router-dom";
 import API from "../../utils/API";
 import store from "../../config/store";
 import "./CodeEditor.css";
@@ -11,6 +12,7 @@ import "ace-builds/src-noconflict/ext-language_tools"
 
 
 function Editor() {
+    let history = useHistory()
     // Create state for text in code editor
     const [editorState, setEditorState] = useState({
         editorText: ""
@@ -47,6 +49,7 @@ function Editor() {
                             ...store.getState().modal, dialogue: luther.usefulDialogue[3]
                         }
                     })
+                    history.push("/winscreen")
                 } else if (!result) {
                     store.dispatch({
                         type: "SHOW_MODAL",
@@ -62,6 +65,7 @@ function Editor() {
                             ...store.getState().modal, dialogue: luther.usefulDialogue[4]
                         }
                     })
+                    history.push("/")
                 }
                 
             })

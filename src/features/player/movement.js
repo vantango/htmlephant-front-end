@@ -105,7 +105,8 @@ export default function handleMovement(player) {
                 name: `${res.data[0].name}`,
                 dialogue: `${res.data[0].usefulDialogue[2]}`,
                 form: "editor",
-                questionNumber: "algorithm"
+                questionNumber: "algorithm",
+                winDialogue: `${res.data[0].usefulDialogue[3]}`
               },
             })
           });
@@ -295,8 +296,6 @@ export default function handleMovement(player) {
   const handleKeyDown = (e => {
     console.log(e.target)
     if (e.target !== "userAns") {
-
-
       switch (e.keyCode) {
         case 37:
           // case 65:
