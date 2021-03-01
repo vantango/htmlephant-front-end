@@ -67,13 +67,18 @@ function LoadGame() {
 
   // Render form component
   return (
-    <form>
-      <label>User:</label>
-      <input name="username" type="text" onChange={handleInputChange} />
-      <label>Password:</label>
-      <input name="password" type="password" onChange={handleInputChange} />
-      <input type="submit" value="Submit" onClick={handleSubmit} />
-    </form>
+
+    <div className="game-wrapper">
+        <div className="signin-select">
+            <form>
+            <label>User:</label>
+            <input name="username" type="text" onChange={handleInputChange} />
+            <label>Password:</label>
+            <input name="password" type="password" onChange={handleInputChange} />
+            <input type="submit" value="Submit" onClick={handleSubmit} />
+            </form>
+        </div>
+    </div>
   );
 }
 
