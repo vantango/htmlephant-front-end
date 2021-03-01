@@ -45,7 +45,7 @@ export default function handleMovement(player) {
   }
 
   function observeBoundaries(oldPos, newPos) {
-    console.log(newPos)
+    // console.log(newPos)
     return (
       newPos[0] >= 0 &&
       newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
@@ -75,9 +75,9 @@ export default function handleMovement(player) {
     const tiles = store.getState().map.tiles;
     const y = newPos[1] / SPRITE_SIZE;
     const x = newPos[0] / SPRITE_SIZE;
-    console.log(x, y);
+    // console.log(x, y);
     const nextTile = tiles[y][x];
-    console.log(tiles[y][x]);
+    // console.log(tiles[y][x]);
     switch (nextTile) {
       case 18:
         if (store.getState().user.encounter===0) {
@@ -357,7 +357,7 @@ export default function handleMovement(player) {
   }
 
   const handleKeyDown = (e => {
-    console.log(e.target)
+    // console.log(e.target)
     if (e.target !== "userAns") {
       switch (e.keyCode) {
         case 37:
@@ -368,19 +368,19 @@ export default function handleMovement(player) {
         case 38:
           // case 87:
 
-          // e.preventDefault();
+          e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
           // case 68:
 
-          // e.preventDefault();
+          e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
           // case 83:
 
-          // e.preventDefault();
+          e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
