@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AceEditor from "react-ace";
-import API from "../../utils/API"
+import API from "../../utils/API";
+import "./CodeEditor.css";
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
@@ -43,14 +44,14 @@ function Editor() {
         });
     }
 
-    
+
     // Ace editor component
     return (
         <div>
             <AceEditor
                 className="ace-editor"
                 mode="javascript"
-                theme="monokai"
+                theme="solarized-dark"
                 onChange={onChange}
                 name="test"
                 width="50vw"

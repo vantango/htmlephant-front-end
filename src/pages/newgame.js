@@ -32,21 +32,23 @@ function NewGame() {
       console.log(`Congrats! ${JSON.stringify(res.data)}`);
       localStorage.setItem("token",res.data.token)
       setUserState({
-        username: res.data.username,
-        password: res.data.password,
+        username: res.data.user.username,
+        password: res.data.user.password,
         token: res.data.token,
         isLoggedIn: true
       });
-      store.dispatch({
-        type: "USER_ACTION",
-        payload: {
-          ...userState
-        }
-      });
+        store.dispatch({
+          type: "USER_ACTION",
+          payload: {
+            username: res.data.user.username,
+            password: res.data.user.password,
+            token: res.data.token,
+            isLoggedIn: true
+          }
+        });
       setSignupState({
-        email:"",
+        username: "",
         password:"",
-        name:''
       });
     }).catch(err=>{
       console.log(`FOOL! Due to your stupidity, ${err}`);
@@ -82,4 +84,4 @@ function NewGame() {
   );
 }
 
-// export default NewGame
+export default NewGame

@@ -34,15 +34,18 @@ function LoadGame() {
       console.log(`Congrats! ${JSON.stringify(res.data)}`)
       localStorage.setItem("token", res.data.token);
       setUserState({
-        username: res.data.username,
-        password: res.data.password,
+        username: res.data.user.username,
+        password: res.data.user.password,
         token: res.data.token,
         isLoggedIn: true
       });
       store.dispatch({
         type: "USER_ACTION",
         payload: {
-          ...userState
+          username: res.data.user.username,
+            password: res.data.user.password,
+            token: res.data.token,
+            isLoggedIn: true
         }
       });
       setLoginState({
