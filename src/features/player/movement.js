@@ -80,15 +80,33 @@ export default function handleMovement(player) {
     console.log(tiles[y][x]);
     switch (nextTile) {
       case 18:
-        if (store.getState().key.amount < 3) {
+        if (store.getState().user.encounter===0) {
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {...store.getState().user,
+            encounter: 1}
+          })
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[0]}`,
+                questionNumber: 0
+              },
+            })
+          });
+        }
+        else if (store.getState().key.amount < 3) {
           // alert("Must have three keys to answer my question")
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[1]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[1]}`,
                 form: "mc",
                 questionNumber: 0
               },
@@ -102,11 +120,11 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[2]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[2]}`,
                 form: "editor",
                 questionNumber: "algorithm",
-                winDialogue: `${res.data[0].usefulDialogue[3]}`
+                winDialogue: `${res.data[1].usefulDialogue[3]}`
               },
             })
           });
@@ -151,10 +169,10 @@ export default function handleMovement(player) {
             type: "SHOW_MODAL",
             payload: {
               show: true,
-              name: `${res.data[1].name}`,
-              dialogue: `${res.data[1].usefulDialogue[0]}`,
-              rightDialogue:  `${res.data[1].usefulDialogue[1]}`,
-              wrongDialogue: `${res.data[1].usefulDialogue[2]}`,
+              name: `${res.data[0].name}`,
+              dialogue: `${res.data[0].usefulDialogue[0]}`,
+              rightDialogue:  `${res.data[0].usefulDialogue[1]}`,
+              wrongDialogue: `${res.data[0].usefulDialogue[2]}`,
               form: "mc",
               questionNumber: 1
             },

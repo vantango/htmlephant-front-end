@@ -39,7 +39,7 @@ function Editor() {
 
             // API call for NPCs
             API.allNPC().then(data => {
-                const luther = data.data[0]
+                const luther = data.data[1]
 
                 // Luther will evaluate your answer and judge you
                 if(result===info.output) {
