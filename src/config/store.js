@@ -3,6 +3,7 @@ import playerReducer from '../features/player/reducer'
 import mapReducer from '../features/map/reducer'
 import modalReducer from '../components/Modal/reducer'
 import questionReducer from '../components/Question/reducer'
+import userReducer from '../features/user/userReducer'
 
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
     map: mapReducer,
     modal: modalReducer,
     question: questionReducer,
+    user: userReducer,
     
 })
 
