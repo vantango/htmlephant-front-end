@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import store from "../config/store";
 import API from "../utils/API";
+import { useHistory } from "react-router-dom";
 import "./pages.css";
 
 function WinScreen() {
+  let history = useHistory()
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = store.getState().user._id;
@@ -18,6 +20,7 @@ function WinScreen() {
         },
       });
     });
+    history.push("/");
   };
   return (
     <div className="game-wrapper">
@@ -25,7 +28,7 @@ function WinScreen() {
         <label>Wizards and Whiteboards</label>
         <h1> Congratulations!</h1>
         <h2>
-        Despite your idiocy, you have conquered all my challenges. You live to walk another day, and for the love of god, don't waste it.
+          Despite your idiocy, you have conquered all my challenges. You live to walk another day, and for the love of god, don't waste it.
         </h2>
         <input type="submit" value="Save Game" onClick={handleSubmit} />
       </div>
