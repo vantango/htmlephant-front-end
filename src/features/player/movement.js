@@ -80,38 +80,83 @@ export default function handleMovement(player) {
     console.log(tiles[y][x]);
     switch (nextTile) {
       case 18:
+        if (store.getState().key.amount < 3) {
+          // alert("Must have three keys to answer my question")
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[1]}`,
+                form: "mc",
+                questionNumber: 0
+              },
+            })
+          });
+        }
+        else {
+
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[0]}`,
+                form: "mc",
+                questionNumber: 0
+              },
+            })
+          });
+        }
+        // showModal();
+        return true;
+      case 15:
         API.allNPC().then(res => {
           store.dispatch({
             type: "SHOW_MODAL",
             payload: {
               show: true,
-              name: `${res.data[0].name}`,
-              dialogue: `${res.data[0].usefulDialogue[0]}`,
+              name: `${res.data[3].name}`,
+              dialogue: `${res.data[3].usefulDialogue[0]}`,
               form: "mc",
+              questionNumber: 3
             },
           })
         });
-        // showModal();
+        return true;
+      case 16:
+        API.allNPC().then(res => {
+          store.dispatch({
+            type: "SHOW_MODAL",
+            payload: {
+              show: true,
+              name: `${res.data[2].name}`,
+              dialogue: `${res.data[2].usefulDialogue[0]}`,
+              form: "mc",
+              questionNumber: 2
+            },
+          })
+        });
         return true;
       case 17:
-        API.easyAlgo().then(res => {
-          const hints = JSON.parse(res.data.hints)
-          console.log(hints)
+        API.allNPC().then(res => {
           store.dispatch({
-            type: "ASK_QUESTION",
+            type: "SHOW_MODAL",
             payload: {
-              hints: hints[0],
-              question: `${res.data.question}`,
-              // dialogue: `${res.data[0].dialogue}`,
+              show: true,
+              name: `${res.data[1].name}`,
+              dialogue: `${res.data[1].usefulDialogue[0]}`,
               form: "mc",
+              questionNumber: 1
             },
           })
         });
-        // showModal();
         return true;
-      case 3:
-        alert("Leaving Room");
-        changeRoom();
+      // case 3:
+      //   alert("Leaving Room");
+      //   changeRoom();
       case 21:
         // alert ("Leaving main Room to WEST")
         changeRoom(tiles2);
@@ -242,6 +287,7 @@ export default function handleMovement(player) {
   }
 
   const handleKeyDown = (e => {
+    console.log(e.target)
     if (e.target !== "userAns") {
 
 
@@ -254,19 +300,19 @@ export default function handleMovement(player) {
         case 38:
         // case 87:
 
-          e.preventDefault();
+          // e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
         // case 68:
 
-          e.preventDefault();
+          // e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
         // case 83:
 
-          e.preventDefault();
+          // e.preventDefault();
           return attemptMove("SOUTH");
 
         default:

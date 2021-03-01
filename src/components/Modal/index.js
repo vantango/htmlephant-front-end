@@ -8,31 +8,82 @@ import store from "../../config/store"
 
 function Modal(props) {
   console.log(props.show);
+  if(props.questionNumber === 0) {
 
+  }
   // onClose = e => {
   //   this.props.onClose && this.props.onClose(e);
   // };
   function showQuestion() {
     API.easyAlgo().then(res=> {
-      const answers = res.data.answers1
-      console.log(answers)
-      store.dispatch({
-        type: "ASK_QUESTION",
-        payload: {
-          answers: answers,
-          question: `${res.data.question1}`,
-          correct: `${res.data.correctAnswer1}`,
-          // dialogue: `${res.data[0].dialogue}`,
-         form: "mc",
-        },
-      })
-      document.querySelector(".question").style.display = "block";
+      const number = props.questionNumber
+      let answers, question, correct
+      switch (number) {
+        case 0:
+          
+        case 1:
+            answers = res.data.answers1
+            question = res.data.question1
+            correct = res.data.correctAnswer1
+            dispatchQuestion()
+          break;
+        case 2:
+            answers = res.data.answers2
+            question = res.data.question2
+            correct = res.data.correctAnswer2
+            dispatchQuestion()
+          break;
+        case 3:
+            answers = res.data.answers3
+            question = res.data.question3
+            correct = res.data.correctAnswer3
+            dispatchQuestion()
+          break;
+      
+        default:
+          break;
+      }
+      // const answers = res.data.answers + question
+      // console.log(answers)
+      function dispatchQuestion() {
+
+        store.dispatch({
+          type: "ASK_QUESTION",
+          payload: {
+            answers: answers,
+            question: `${question}`,
+            correct: `${correct}`,
+            // dialogue: `${res.data[0].dialogue}`,
+            form: "mc",
+          },
+        })
+        document.querySelector(".question").style.display = "block";
+      }
     });
     console.log(store.getState().question.answers)
   }
+
+  function closeModal() {
+    store.dispatch({
+      type: "SHOW_MODAL",
+      payload: {
+        show: false,
+      }
+    })
+  }
+
   if (!props.show) {
     return null;
-  } else {
+  } else if (props.questionNumber === 0){
+    return (
+      <div className={"modal"} id={"modal"} style={{ color: "Salmon" }}>
+      <h3>{props.name} says:</h3>
+      <h2>{props.dialogue}</h2>
+      <button onClick={closeModal}>Close</button>
+    </div>
+    )
+  }
+  else {
     return (
       <div className={"modal"} id={"modal"} style={{ color: "Salmon" }}>
         <h3>{props.name} says:</h3>

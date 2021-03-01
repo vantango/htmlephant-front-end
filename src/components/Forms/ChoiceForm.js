@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import store from "../../config/store"
+import filled from '../../features/keys/filled.png'
 
 class ChoiceForm extends React.Component {
   constructor(props) {
@@ -19,6 +20,17 @@ class ChoiceForm extends React.Component {
     event.preventDefault();
     if (this.state.value===this.props.correct){
       console.log("yay!")
+      // alert("you get a salmon")
+      // document.querySelector('.key1').src = filled
+
+      const newAmount = store.getState().key.amount + 1
+      store.dispatch({
+        type: "ADD_KEY",
+        payload: {
+          amount: newAmount
+        }
+      })
+
       store.dispatch({
         type: "SHOW_MODAL",
         payload: {

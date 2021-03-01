@@ -96,13 +96,13 @@ function MapRow(props) {
 function Map(props) {
     return (
         <div
+        name ="map"
             style={{
                 position: 'relative',
                 top: '0px',
                 left: '0px',
                 width: '640px',
                 height: '320px',
-                border: '4px solid white',
             }}
         >
             {
