@@ -4,6 +4,7 @@ import mapReducer from '../features/map/reducer'
 import modalReducer from '../components/Modal/reducer'
 import questionReducer from '../components/Question/reducer'
 import keyReducer from '../features/keys/reducer'
+import userReducer from '../features/user/userReducer'
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,8 @@ const rootReducer = combineReducers({
     modal: modalReducer,
     question: questionReducer,
     key: keyReducer,
+    user: userReducer,
+    
 })
 
 const store = createStore(
