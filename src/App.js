@@ -6,6 +6,7 @@ import Menu from "./pages/menu"
 import LoadGame from "./pages/loadgame"
 import NewGame from "./pages/newgame"
 import Game from "./pages/game"
+import WinScreen from "./pages/winscreen"
 // import "./styles.css";
 
 const apiCall = () => {
@@ -32,6 +33,9 @@ function App() {
           </Route>
           <Route exact path={["/new"]}>
             <NewGame />
+          </Route>
+            <Route exact path={["/winscreen"]}>
+            <WinScreen />
           </Route>
         </Switch>
       </div>

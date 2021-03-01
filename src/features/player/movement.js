@@ -105,7 +105,8 @@ export default function handleMovement(player) {
                 name: `${res.data[0].name}`,
                 dialogue: `${res.data[0].usefulDialogue[2]}`,
                 form: "editor",
-                questionNumber: "algorithm"
+                questionNumber: "algorithm",
+                winDialogue: `${res.data[0].usefulDialogue[3]}`
               },
             })
           });
