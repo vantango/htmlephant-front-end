@@ -43,9 +43,6 @@ const API = {
             }
         })
     },
-    getUser: username => {
-        return axios.get(`${URL_PREFIX}/getone/${username}`)
-    }
 }
 
 export default API;
