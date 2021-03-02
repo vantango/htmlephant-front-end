@@ -1,10 +1,20 @@
 import React from "react";
 import store from "../config/store";
 import API from "../utils/API";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./pages.css";
 
 function WinScreen() {
+
+  let location = useLocation();
+  console.log(location.pathname)
+  store.dispatch({
+      type: 'CHANGE_LOCATION',
+      payload: {
+          location: location.pathname
+      }
+  })
+
   let history = useHistory()
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -348,13 +348,18 @@ export default function handleMovement(player) {
       }
     }
   })
-  // console.log(usePathname)
 
-  // if(window.location.pathname === "/game") {
+  
+  
+  // only adds an event listener when url path is '/game/
   window.addEventListener("keydown", (e) => {
-    handleKeyDown(e);
-  });
-  // }
+    const location = store.getState().world.location
+    console.log("this is the location from state" + location)
+    
+      if (location === "/game") {
+      handleKeyDown(e);
+    };
+  }) 
 
   return player;
 }
