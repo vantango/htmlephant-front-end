@@ -1,13 +1,23 @@
 import React from "react";
 import World from "../features/world/index"
 import API from "../utils/API";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import store from "../config/store";
 
 
 // Render world and export as Game
 function Game() {
     let history = useHistory();
+
+    let location = useLocation();
+    console.log(location.pathname)
+    store.dispatch({
+        type: 'CHANGE_LOCATION',
+        payload: {
+            location: location.pathname
+        }
+    })
+    
 
     console.log("loaded")
     const token = localStorage.getItem('token')
@@ -35,9 +45,6 @@ function Game() {
     })
     
 
-    window.addEventListener('onload', e => {
-        console.log(e)
-    })
 
     return (
         <World />

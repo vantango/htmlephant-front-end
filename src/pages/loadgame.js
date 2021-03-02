@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import store from "../config/store";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import API from "../utils/API";
 import "./pages.css"
 function LoadGame() {
+
+  let location = useLocation();
+  console.log(location.pathname)
+  store.dispatch({
+      type: 'CHANGE_LOCATION',
+      payload: {
+          location: location.pathname
+      }
+  })
+
   let history = useHistory();
   // Set initial user state
   const [userState, setUserState] = useState({
