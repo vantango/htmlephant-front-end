@@ -2,18 +2,32 @@ import React from "react";
 import World from "../features/world/index"
 import API from "../utils/API";
 import { useHistory } from "react-router-dom";
+import store from "../config/store";
 
 
 // Render world and export as Game
 function Game() {
-<<<<<<< HEAD
     let history = useHistory();
 
     console.log("loaded")
-    API.getVip(localStorage.getItem('token')).then((res) => {
+    const token = localStorage.getItem('token')
+    API.getVip(token).then((res) => {
         if(res) {
-            console.log(res)
-            
+            console.log(res.data)
+            store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                    level: res.data.level,
+                    name: res.data.username,
+                    password: res.data.password,
+                    question1: false,
+                    question2: false,
+                    question3: false,
+                    encounter: 0,
+                    id: res.data._id,
+                    token: token
+                }
+            })
         }
     }).catch(() => {
         console.log("not signed in")
@@ -24,11 +38,6 @@ function Game() {
     window.addEventListener('onload', e => {
         console.log(e)
     })
-=======
-    API.getVip(localStorage.getItem("token")).then() => {
-        
-    }
->>>>>>> dev
 
     return (
         <World />
