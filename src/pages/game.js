@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 // Render world and export as Game
 function Game() {
+<<<<<<< HEAD
     let history = useHistory();
 
     console.log("loaded")
@@ -23,6 +24,11 @@ function Game() {
     window.addEventListener('onload', e => {
         console.log(e)
     })
+=======
+    API.getVip(localStorage.getItem("token")).then() => {
+        
+    }
+>>>>>>> dev
 
     return (
         <World />
