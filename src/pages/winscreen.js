@@ -17,9 +17,14 @@ function WinScreen() {
           ...store.getState().user,
           key: 0,
           level: store.getState().user.level + 1,
+          question1: false,
+          question2: false,
+          question3: false,
+          encounter: 0
         },
       });
     });
+
     history.push("/game");
   };
   return (
