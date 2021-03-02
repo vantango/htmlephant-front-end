@@ -7,9 +7,9 @@ import rock from './tiles/rock.png'
 import tree from './tiles/tree.png'
 import chest from './tiles/chest.png'
 import door from './tiles/door.jpg'
-import denis from './tiles/denisv2.png'
+import denis from './tiles/denisv3.png'
 import zac from './tiles/f2.png'
-import aslan from './tiles/aslanv2.png'
+import aslan from './tiles/aslanv3.png'
 import joe from './tiles/e1.png'
 
 
