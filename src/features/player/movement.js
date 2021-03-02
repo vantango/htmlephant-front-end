@@ -126,8 +126,8 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[3].name}`,
-                dialogue: `${res.data[3].usefulDialogue[level][0]}`,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
                 questionNumber: 0
               },
             })
@@ -140,8 +140,8 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[3].name}`,
-                dialogue: `${res.data[3].usefulDialogue[level][1]}`,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
                 form: "mc",
                 questionNumber: 0
               },
@@ -154,12 +154,12 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[3].name}`,
-                dialogue: `${res.data[3].usefulDialogue[level][2]}`,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
                 form: "editor",
                 questionNumber: "algorithm",
-                winDialogue: `${res.data[3].usefulDialogue[level][3]}`,
-                wrongDialogue: `${res.data[3].usefulDialogue[level][4]}`
+                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
+                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
               },
             })
           });
@@ -167,26 +167,26 @@ export default function handleMovement(player) {
         return true;
       case 15:
         if (store.getState().user.question3 === false) {
-          sendQuestion(2, 3)
+          sendQuestion(1, 3)
         }
         else {
-          sendMessage(2)
+          sendMessage(1)
         }
         return true;
       case 16:
         if (store.getState().user.question2 === false) {
-          sendQuestion(0, 2)
+          sendQuestion(3, 2)
         }
         else {
-          sendMessage(0)
+          sendMessage(3)
         }
         return true;
       case 17:
         if (store.getState().user.question1 === false) {
-          sendQuestion(1, 1)
+          sendQuestion(2, 1)
         }
         else {
-          sendMessage(1)
+          sendMessage(2)
         }
         return true;
 
