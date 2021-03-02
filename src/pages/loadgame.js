@@ -42,11 +42,16 @@ function LoadGame() {
         token: res.data.token,
         level: res.data.user.level,
         id: res.data.user._id,
-        isLoggedIn: true
+        isLoggedIn: true,
+        encounter: 0,
+        question1: false,
+        question2: false,
+        question3: false
       });
       store.dispatch({
         type: "USER_ACTION",
         payload: {
+          ...store.getState().user,
           username: res.data.user.username,
           password: res.data.user.password,
           token: res.data.token,
@@ -68,7 +73,7 @@ function LoadGame() {
           username: "",
           password: "",
           token: "",
-          level: 0,
+          level: 1,
           id: "",
           isLoggedIn: false
         }

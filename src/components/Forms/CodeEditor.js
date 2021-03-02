@@ -36,13 +36,20 @@ function Editor() {
             // Create and call a new function to run the code written into the editor
             const testFunction = new Function("str", editorState.editorText);
             const result = testFunction(info.args)
+            console.log(`Here's what we get back: ${result}`);
+            console.log(`Here's what we expect: ${info.output}`);
 
             // API call for NPCs
             API.allNPC().then(data => {
                 const luther = data.data[1]
-
                 // Luther will evaluate your answer and judge you
-                if(result===info.output) {
+                if (result === info.output) {
+                    store.dispatch({
+                        type: "ADD_KEY",
+                        payload: {
+                            ...store.getState().key, amount: 0
+                        }
+                    })
                     store.dispatch({
                         type: "SHOW_MODAL",
                         payload: {
@@ -50,26 +57,43 @@ function Editor() {
                         }
                     })
                     history.push("/winscreen")
-                } else if (!result) {
-                    store.dispatch({
-                        type: "SHOW_MODAL",
-                        payload: {
-                            ...store.getState().modal, dialogue: luther.usefulDialogue[4]
-                        }
-                    })
                 }
                 else {
+                    // store.dispatch({
+                    //     type: "ADD_KEY",
+                    //     payload: {
+                    //         ...store.getState().key, amount: 0
+                    //     }
+                    // })
                     store.dispatch({
                         type: "SHOW_MODAL",
                         payload: {
                             ...store.getState().modal, dialogue: luther.usefulDialogue[4]
                         }
                     })
-                    history.push("/")
+ 
+                    // history.push("/")
                 }
-                
+
             })
-        });
+        }).catch(err => {
+            // store.dispatch({
+            //     type: "ADD_KEY",
+            //     payload: {
+            //         ...store.getState().key, amount: 0
+            //     }
+            // })
+
+            store.dispatch({
+                type: "SHOW_MODAL",
+                payload: {
+                    ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
+                }
+            })
+
+            console.log(`Due to your idiocy, ${err}`);
+            // history.push("/")
+        })
     }
 
 

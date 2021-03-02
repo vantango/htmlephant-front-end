@@ -20,7 +20,7 @@ function WinScreen() {
         },
       });
     });
-    history.push("/");
+    history.push("/game");
   };
   return (
     <div className="game-wrapper">
