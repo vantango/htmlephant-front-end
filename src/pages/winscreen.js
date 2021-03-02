@@ -33,7 +33,7 @@ function WinScreen() {
         <label>Wizards and Whiteboards</label>
         <h1> Congratulations!</h1>
         <h2>
-          Despite your idiocy, you have conquered all my challenges. You live to walk another day, and for the love of god, don't waste it.
+          Nice work! Snaps to you, and good luck on the next challenge!
         </h2>
         <input type="submit" value="Save Game" onClick={handleSubmit} />
       </div>
