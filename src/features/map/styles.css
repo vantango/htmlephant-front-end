@@ -11,8 +11,8 @@
 }
 
 .Character_spritesheet {
-    animation: moveSpritesheet 1s steps(3) infinite;
-    width: 96px;
+    animation: moveSpritesheet 3s steps(38) infinite;
+    width: 1216px;
     position: absolute;
 }
 
