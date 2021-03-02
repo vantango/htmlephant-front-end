@@ -8,51 +8,156 @@ import store from "../../config/store"
 
 function Modal(props) {
   console.log(props.show);
-  // onClose = e => {
-  //   this.props.onClose && this.props.onClose(e);
-  // };
-  function showQuestion() {
-    API.easyAlgo().then(res => {
-      const number = props.questionNumber
-      let answers, question, correct
-      switch (number) {
-        case 1:
-          answers = res.data.answers1
-          question = res.data.question1
-          correct = res.data.correctAnswer1
-          dispatchQuestion()
-          break;
-        case 2:
-          answers = res.data.answers2
-          question = res.data.question2
-          correct = res.data.correctAnswer2
-          dispatchQuestion()
-          break;
-        case 3:
-          answers = res.data.answers3
-          question = res.data.question3
-          correct = res.data.correctAnswer3
-          dispatchQuestion()
-          break;
-        case "algorithm":
-          dispatchAlgorithm()
+  const number = props.questionNumber
+  let answers, question, correct
 
-        default:
-          break;
-      }
+  function showQuestion() {
+    const level = store.getState().user.level
+
+    switch (level) {
+      case 1:
+        API.easyAlgo().then(res => {
+          switch (number) {
+            case 1:
+              answers = res.data.answers1
+              question = res.data.question1
+              correct = res.data.correctAnswer1
+              dispatchQuestion()
+              break;
+            case 2:
+              answers = res.data.answers2
+              question = res.data.question2
+              correct = res.data.correctAnswer2
+              dispatchQuestion()
+              break;
+            case 3:
+              answers = res.data.answers3
+              question = res.data.question3
+              correct = res.data.correctAnswer3
+              dispatchQuestion()
+              break;
+            case "algorithm":
+              dispatchAlgorithm()
+    
+            default:
+              break;
+          }
+        });
+        break;
+
+      case 2:
+        API.medAlgo().then(res => {
+          switch (number) {
+            case 1:
+              answers = res.data.answers1
+              question = res.data.question1
+              correct = res.data.correctAnswer1
+              dispatchQuestion()
+              break;
+            case 2:
+              answers = res.data.answers2
+              question = res.data.question2
+              correct = res.data.correctAnswer2
+              dispatchQuestion()
+              break;
+            case 3:
+              answers = res.data.answers3
+              question = res.data.question3
+              correct = res.data.correctAnswer3
+              dispatchQuestion()
+              break;
+            case "algorithm":
+              dispatchAlgorithm()
+    
+            default:
+              break;
+          }
+        });
+        break;
+
+      case 3:
+        API.hardAlgo().then(res => {
+          switch (number) {
+            case 1:
+              answers = res.data.answers1
+              question = res.data.question1
+              correct = res.data.correctAnswer1
+              dispatchQuestion()
+              break;
+            case 2:
+              answers = res.data.answers2
+              question = res.data.question2
+              correct = res.data.correctAnswer2
+              dispatchQuestion()
+              break;
+            case 3:
+              answers = res.data.answers3
+              question = res.data.question3
+              correct = res.data.correctAnswer3
+              dispatchQuestion()
+              break;
+            case "algorithm":
+              dispatchAlgorithm()
+    
+            default:
+              break;
+          }
+        });
+        break;
+        
+    
+      default:
+        break;
+    }
 
       function dispatchAlgorithm() {
-        API.easyAlgo().then(res => {
-          const algorithm = res.data.algorithm
-          store.dispatch({
-            type: "ASK_QUESTION",
-            payload: {
-              question: algorithm,
-              form: "editor",
-            }
-          });
-          document.querySelector(".question").style.display = "block";
-        })
+        const level = store.getState().user.level
+        switch (level) {
+          case 1:
+            API.easyAlgo().then(res => {
+              const algorithm = res.data.algorithm
+              store.dispatch({
+                type: "ASK_QUESTION",
+                payload: {
+                  question: algorithm,
+                  form: "editor",
+                }
+              });
+              document.querySelector(".question").style.display = "block";
+            })
+            break;
+
+          case 2:
+            API.medAlgo().then(res => {
+              const algorithm = res.data.algorithm
+              store.dispatch({
+                type: "ASK_QUESTION",
+                payload: {
+                  question: algorithm,
+                  form: "editor",
+                }
+              });
+              document.querySelector(".question").style.display = "block";
+            })
+            break;
+
+          case 2:
+            API.hardAlgo().then(res => {
+              const algorithm = res.data.algorithm
+              store.dispatch({
+                type: "ASK_QUESTION",
+                payload: {
+                  question: algorithm,
+                  form: "editor",
+                }
+              });
+              document.querySelector(".question").style.display = "block";
+            })
+            break;
+        
+          default:
+            break;
+        }
       }
       // const answers = res.data.answers + question
       // console.log(answers)
@@ -70,7 +175,6 @@ function Modal(props) {
         })
         document.querySelector(".question").style.display = "block";
       }
-    });
     console.log(store.getState().question.answers)
   }
 

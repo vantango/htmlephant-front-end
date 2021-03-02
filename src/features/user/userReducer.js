@@ -3,7 +3,7 @@ const intitialState = {
     password: "",
     key: 0,
     token: "",
-    level: 0,
+    level: 1,
     id: "",
     isLoggedIn: false,
     encounter:0,

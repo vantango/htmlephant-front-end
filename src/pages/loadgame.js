@@ -73,7 +73,7 @@ function LoadGame() {
           username: "",
           password: "",
           token: "",
-          level: 0,
+          level: 1,
           id: "",
           isLoggedIn: false
         }

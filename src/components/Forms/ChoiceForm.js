@@ -32,7 +32,6 @@ class ChoiceForm extends React.Component {
 
       
       const number = store.getState().modal.questionNumber
-      let questionNumber
       switch (number) {
         case 1:
           store.dispatch({

@@ -45,6 +45,12 @@ function Editor() {
                 // Luther will evaluate your answer and judge you
                 if (result === info.output) {
                     store.dispatch({
+                        type: "ADD_KEY",
+                        payload: {
+                            ...store.getState().key, amount: 0
+                        }
+                    })
+                    store.dispatch({
                         type: "SHOW_MODAL",
                         payload: {
                             ...store.getState().modal, dialogue: luther.usefulDialogue[3]
@@ -53,19 +59,40 @@ function Editor() {
                     history.push("/winscreen")
                 }
                 else {
+                    // store.dispatch({
+                    //     type: "ADD_KEY",
+                    //     payload: {
+                    //         ...store.getState().key, amount: 0
+                    //     }
+                    // })
                     store.dispatch({
                         type: "SHOW_MODAL",
                         payload: {
                             ...store.getState().modal, dialogue: luther.usefulDialogue[4]
                         }
                     })
-                    history.push("/")
+ 
+                    // history.push("/")
                 }
 
             })
         }).catch(err => {
+            // store.dispatch({
+            //     type: "ADD_KEY",
+            //     payload: {
+            //         ...store.getState().key, amount: 0
+            //     }
+            // })
+
+            store.dispatch({
+                type: "SHOW_MODAL",
+                payload: {
+                    ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
+                }
+            })
+
             console.log(`Due to your idiocy, ${err}`);
-            history.push("/")
+            // history.push("/")
         })
     }
 
