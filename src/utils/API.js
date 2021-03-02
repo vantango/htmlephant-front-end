@@ -42,6 +42,9 @@ const API = {
                 authorization: `Bearer: ${token}`
             }
         })
+    },
+    getUser: username => {
+        return axios.get(`${URL_PREFIX}/getone/${username}`)
     }
 }
 
