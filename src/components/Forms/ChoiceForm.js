@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import store from "../../config/store"
 import filled from '../../features/keys/filled.png'
+import { v4 as uuidv4 } from 'uuid'
+
 
 class ChoiceForm extends React.Component {
   constructor(props) {
@@ -13,7 +15,9 @@ class ChoiceForm extends React.Component {
   }
 
   handleChange(event) {
+    console.log(event.target.value)
     this.setState({ value: event.target.value });
+    // console.log(this.state.value)
   }
 
   handleSubmit(event) {
@@ -82,11 +86,24 @@ class ChoiceForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <select value={this.state.value} onChange={this.handleChange}>
+        {/* <select value={this.state.value} onChange={this.handleChange}>
           {this.props.answers.map(answer => (
-            <option value={answer}>{answer}</option>))
+            
+            <option key={uuidv4()} value={answer}>{answer}</option>))
           }
-        </select>
+        </select> */}
+        {this.props.answers.map(answer => (
+          <div key={uuidv4()}>
+          <label>
+          <input type="radio" id="male" name="gender" 
+            checked={this.state.value === `${answer}`}
+            onChange={this.handleChange}
+          value={answer} />
+            {answer}
+          </label>
+          </div>
+
+        ))}
         <input type="submit" value="Submit" />
       </form>
     );
