@@ -79,7 +79,8 @@ function LoadGame() {
         }
       })
       localStorage.removeItem("token");
-      history.push("/");
+      alert("Wrong login information")
+      // history.push("/");
     });
   }
 
