@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { SPRITE_SIZE } from '../../config/constants'
 import { v4 as uuidv4 } from 'uuid'
-
+import grass from './tiles/grassy.png'
 import rock from './tiles/rock.png'
 import tree from './tiles/tree.png'
 import chest from './tiles/chest.png'
@@ -19,7 +19,7 @@ import './styles.css'
 function getTileSprite(type) {
     switch (type) {
         case 0:
-            return 'ground'
+            return grass
         case 1:
             return 'grass'
         case 2:
