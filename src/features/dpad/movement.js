@@ -12,11 +12,9 @@ import { ANIMATION_SPEED } from '../../config/constants'
 
 const ANIMATION_WITH_PADDING = ANIMATION_SPEED * 1.25
 
-
 export default function handleMovement(direction) {
 
     let player = store.getState().player
-    attemptMove(direction)
 
     // const stepSize =
     function getNewPosition(oldPos, direction) {
@@ -64,14 +62,37 @@ export default function handleMovement(direction) {
         return nextTile < 10
     }
 
-    // function showModal() {
-    //    store.dispatch({
-    //        type: 'SHOW_MODAL',
-    //        payload: {
-    //            show: true
-    //        }
-    //    })
-    // };
+    function sendQuestion(npc, questionNumber) {
+      const level = store.getState().user.level - 1
+      API.allNPC().then(res => {
+        store.dispatch({
+          type: "SHOW_MODAL",
+          payload: {
+            show: true,
+            name: `${res.data[npc].name}`,
+            dialogue: `${res.data[npc].usefulDialogue[level][0]}`,
+            rightDialogue: `${res.data[npc].usefulDialogue[level][1]}`,
+            wrongDialogue: `${res.data[npc].usefulDialogue[level][2]}`,
+            form: "mc",
+            questionNumber: questionNumber
+          },
+        })
+      });
+    }
+  
+    function sendMessage(npc) {
+      const level = store.getState().user.level - 1
+      API.allNPC().then(res => {
+        store.dispatch({
+          type: "SHOW_MODAL",
+          payload: {
+            show: true,
+            name: `${res.data[npc].name}`,
+            dialogue: `${res.data[npc].flavorDialogue[level][2]}`,
+          },
+        })
+      });
+    }
 
     function observeAction(oldPos, newPos) {
         const tiles = store.getState().map.tiles
@@ -81,156 +102,166 @@ export default function handleMovement(direction) {
         const nextTile = tiles[y][x]
         // console.log(tiles[y][x])
         switch (nextTile) {
-            case 18:
-                if (store.getState().key.amount < 3)
-                {
-                  alert("Must have three keys to answer my question")
+          case 18:
+            const level = store.getState().user.level - 1
+            if (store.getState().user.encounter === 0) {
+              store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                  ...store.getState().user,
+                  encounter: 1
                 }
-                else {
-        
-                  API.allNPC().then(res => {
-                    store.dispatch({
-                      type: "SHOW_MODAL",
-                      payload: {
-                        show: true,
-                        name: `${res.data[0].name}`,
-                        dialogue: `${res.data[0].usefulDialogue[0]}`,
-                        form: "mc",
-                        questionNumber: 0
-                      },
-                    })
-                  });
-                }
-                // showModal();
-                return true;
-              case 15:
-                API.allNPC().then(res => {
-                  store.dispatch({
-                    type: "SHOW_MODAL",
-                    payload: {
-                      show: true,
-                      name: `${res.data[3].name}`,
-                      dialogue: `${res.data[3].usefulDialogue[0]}`,
-                      form: "mc",
-                      questionNumber: 3
-                    },
-                  })
-                });
-                return true;
-              case 16:
-                API.allNPC().then(res => {
-                  store.dispatch({
-                    type: "SHOW_MODAL",
-                    payload: {
-                      show: true,
-                      name: `${res.data[2].name}`,
-                      dialogue: `${res.data[2].usefulDialogue[0]}`,
-                      form: "mc",
-                      questionNumber: 2
-                    },
-                  })
-                });
-                return true;
-              case 17:
-                API.allNPC().then(res => {
-                  store.dispatch({
-                    type: "SHOW_MODAL",
-                    payload: {
-                      show: true,
-                      name: `${res.data[1].name}`,
-                      dialogue: `${res.data[1].usefulDialogue[0]}`,
-                      form: "mc",
-                      questionNumber: 1
-                    },
-                  })
-                });
-                return true;
-              // case 3:
-              //   alert("Leaving Room");
-              //   changeRoom();
-              case 21:
-                // alert ("Leaving main Room to WEST")
-                changeRoom(tiles2);
+              })
+              API.allNPC().then(res => {
                 store.dispatch({
-                  type: "MOVE_PLAYER",
+                  type: "SHOW_MODAL",
                   payload: {
-                    position: [576, 128],
-                    direction: "WEST",
-                    walkIndex: 0,
-                    spriteLocation: getSpriteLocation("WEST", 0),
+                    show: true,
+                    name: `${res.data[0].name}`,
+                    dialogue: `${res.data[0].usefulDialogue[level][0]}`,
+                    // questionNumber: 0
                   },
-                });
-                return true;
-              case 22:
-                // alert ("Leaving Main Room to NORTH")
-                changeRoom(tiles3);
+                })
+              });
+            }
+            else if (store.getState().key.amount < 3) {
+              // alert("Must have three keys to answer my question")
+              API.allNPC().then(res => {
                 store.dispatch({
-                  type: "MOVE_PLAYER",
+                  type: "SHOW_MODAL",
                   payload: {
-                    position: [288, 256],
-                    direction: "NORTH",
-                    walkIndex: 0,
-                    spriteLocation: getSpriteLocation("NORTH", 0),
+                    show: true,
+                    name: `${res.data[0].name}`,
+                    dialogue: `${res.data[0].usefulDialogue[level][1]}`,
+                    // questionNumber: 0
                   },
-                });
-                return true;
-              case 23:
-                // alert ("Leaving Main Room to EAST")
-                changeRoom(tiles4);
+                })
+              });
+            }
+            else {
+              API.allNPC().then(res => {
                 store.dispatch({
-                  type: "MOVE_PLAYER",
+                  type: "SHOW_MODAL",
                   payload: {
-                    position: [32, 128],
-                    direction: "EAST",
-                    walkIndex: 0,
-                    spriteLocation: getSpriteLocation("EAST", 0),
+                    show: true,
+                    name: `${res.data[0].name}`,
+                    dialogue: `${res.data[0].usefulDialogue[level][2]}`,
+                    form: "editor",
+                    questionNumber: "algorithm",
+                    winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
+                    wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
                   },
-                });
-                return true;
-        
-              case 24:
-                // alert ("Leaving WEST Room")
-                changeRoom(tiles1);
-                store.dispatch({
-                  type: "MOVE_PLAYER",
-                  payload: {
-                    position: [32, 128],
-                    direction: "EAST",
-                    walkIndex: 0,
-                    spriteLocation: getSpriteLocation("EAST", 0),
-                  },
-                });
-                return true;
-              case 25:
-                // alert ("Leaving NORTH Room")
-                changeRoom(tiles1);
-                store.dispatch({
-                  type: "MOVE_PLAYER",
-                  payload: {
-                    position: [288, 32],
-                    direction: "SOUTH",
-                    walkIndex: 0,
-                    spriteLocation: getSpriteLocation("SOUTH", 0),
-                  },
-                });
-                return true;
-              case 26:
-                // alert ("Leaving EAST Room")
-                changeRoom(tiles1);
-                store.dispatch({
-                  type: "MOVE_PLAYER",
-                  payload: {
-                    position: [576, 128],
-                    direction: "WEST",
-                    walkIndex: 0,
-                    spriteLocation: getSpriteLocation("WEST", 0),
-                  },
-                });
-                return true;
-        
-        
-            default:
-                return false;
+                })
+              });
+            }
+            return true;
+          case 15:
+            if (store.getState().user.question3 === false) {
+              sendQuestion(1, 3)
+            }
+            else {
+              sendMessage(1)
+            }
+            return true;
+          case 16:
+            if (store.getState().user.question2 === false) {
+              sendQuestion(3, 2)
+            }
+            else {
+              sendMessage(3)
+            }
+            return true;
+          case 17:
+            if (store.getState().user.question1 === false) {
+              sendQuestion(2, 1)
+            }
+            else {
+              sendMessage(2)
+            }
+            return true;
+    
+          case 21:
+            // alert ("Leaving main Room to WEST")
+            changeRoom(tiles2);
+            store.dispatch({
+              type: "MOVE_PLAYER",
+              payload: {
+                position: [576, 128],
+                direction: "WEST",
+                walkIndex: 0,
+                spriteLocation: getSpriteLocation("WEST", 0),
+              },
+            });
+            return true;
+          case 22:
+            // alert ("Leaving Main Room to NORTH")
+            changeRoom(tiles3);
+            store.dispatch({
+              type: "MOVE_PLAYER",
+              payload: {
+                position: [288, 256],
+                direction: "NORTH",
+                walkIndex: 0,
+                spriteLocation: getSpriteLocation("NORTH", 0),
+              },
+            });
+            return true;
+          case 23:
+            // alert ("Leaving Main Room to EAST")
+            changeRoom(tiles4);
+            store.dispatch({
+              type: "MOVE_PLAYER",
+              payload: {
+                position: [32, 128],
+                direction: "EAST",
+                walkIndex: 0,
+                spriteLocation: getSpriteLocation("EAST", 0),
+              },
+            });
+            return true;
+    
+          case 24:
+            // alert ("Leaving WEST Room")
+            changeRoom(tiles1);
+            store.dispatch({
+              type: "MOVE_PLAYER",
+              payload: {
+                position: [32, 128],
+                direction: "EAST",
+                walkIndex: 0,
+                spriteLocation: getSpriteLocation("EAST", 0),
+              },
+            });
+            return true;
+          case 25:
+            // alert ("Leaving NORTH Room")
+            changeRoom(tiles1);
+            store.dispatch({
+              type: "MOVE_PLAYER",
+              payload: {
+                position: [288, 32],
+                direction: "SOUTH",
+                walkIndex: 0,
+                spriteLocation: getSpriteLocation("SOUTH", 0),
+              },
+            });
+            return true;
+          case 26:
+            // alert ("Leaving EAST Room")
+            changeRoom(tiles1);
+            store.dispatch({
+              type: "MOVE_PLAYER",
+              payload: {
+                position: [576, 128],
+                direction: "WEST",
+                walkIndex: 0,
+                spriteLocation: getSpriteLocation("WEST", 0),
+              },
+            });
+            return true;
+    
+          default:
+            return false;
         }
     }
 
@@ -248,8 +279,16 @@ export default function handleMovement(direction) {
     }
 
 
-    function dispatchMove(direction, newPos) {
-        const walkIndex = getWalkIndex()
+    const dispatchMove = _debounce((direction, newPos) => {
+      store.dispatch({
+        type: "SHOW_MODAL",
+        payload: {
+          show: false
+        }
+      }) 
+    document.querySelector('.player_animation').classList.remove('notransition')
+
+      const walkIndex = getWalkIndex()
         store.dispatch({
             type: 'MOVE_PLAYER',
             payload: {
@@ -259,18 +298,28 @@ export default function handleMovement(direction) {
                 spriteLocation: getSpriteLocation(direction, walkIndex)
             }
         })
-    }
+      },
+      ANIMATION_WITH_PADDING,
+      {
+        maxWait: ANIMATION_WITH_PADDING, leading: true, trailing: false
+    })
 
     function attemptMove(direction) {
-        const oldPos = store.getState().player.position
-        const newPos = getNewPosition(oldPos, direction)
-        if(!observeAction(oldPos, newPos)) {
-
-            if(observeBoundaries(oldPos, newPos) && observeImpassable(oldPos, newPos)) {
-                dispatchMove(direction, newPos)
-            }
+      const oldPos = store.getState().player.position;
+      const newPos = getNewPosition(oldPos, direction);
+      if (observeBoundaries(oldPos, newPos)) {
+        if (!observeAction(oldPos, newPos)) {
+          if (
+            observeImpassable(oldPos, newPos)
+          ) {
+            dispatchMove(direction, newPos);
+          }
         }
+      }
     }
+
+    attemptMove(direction)
+
 
     return player
 }
