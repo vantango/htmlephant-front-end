@@ -8,7 +8,7 @@ function WinScreen() {
   let history = useHistory()
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id = store.getState().user._id;
+    const id = store.getState().user.id;
     const token = store.getState().user.token;
     API.levelUp(id, token).then((res) => {
       store.dispatch({
@@ -17,10 +17,15 @@ function WinScreen() {
           ...store.getState().user,
           key: 0,
           level: store.getState().user.level + 1,
+          question1: false,
+          question2: false,
+          question3: false,
+          encounter: 0
         },
       });
     });
-    history.push("/");
+
+    history.push("/game");
   };
   return (
     <div className="game-wrapper">

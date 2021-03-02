@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { SPRITE_SIZE } from '../../config/constants'
+import { v4 as uuidv4 } from 'uuid'
+
 import rock from './tiles/rock.png'
 import tree from './tiles/tree.png'
 import chest from './tiles/chest.png'
@@ -9,6 +11,7 @@ import denis from './tiles/m2.png'
 import zac from './tiles/f2.png'
 import aslan from './tiles/f1.png'
 import joe from './tiles/e1.png'
+
 
 
 import './styles.css'
@@ -88,7 +91,7 @@ function MapRow(props) {
             height: SPRITE_SIZE
         }}>
         {
-            props.tiles.map(tile => <MapTile tile={tile} />)
+            props.tiles.map(tile => <MapTile key={uuidv4()} tile={tile} />)
         }
     </div>
 }
@@ -106,7 +109,7 @@ function Map(props) {
             }}
         >
             {
-                props.tiles.map(row => <MapRow tiles={row} />)
+                props.tiles.map(row => <MapRow key={uuidv4()} tiles={row} />)
             }
         </div>
     )

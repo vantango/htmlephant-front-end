@@ -45,7 +45,7 @@ export default function handleMovement(player) {
   }
 
   function observeBoundaries(oldPos, newPos) {
-    console.log(newPos)
+    // console.log(newPos)
     return (
       newPos[0] >= 0 &&
       newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
@@ -71,28 +71,63 @@ export default function handleMovement(player) {
   //   });
   // }
 
+  function sendQuestion(npc, questionNumber) {
+    const level = store.getState().user.level - 1
+    API.allNPC().then(res => {
+      store.dispatch({
+        type: "SHOW_MODAL",
+        payload: {
+          show: true,
+          name: `${res.data[npc].name}`,
+          dialogue: `${res.data[npc].usefulDialogue[level][0]}`,
+          rightDialogue: `${res.data[npc].usefulDialogue[level][1]}`,
+          wrongDialogue: `${res.data[npc].usefulDialogue[level][2]}`,
+          form: "mc",
+          questionNumber: questionNumber
+        },
+      })
+    });
+  }
+
+  function sendMessage(npc) {
+    const level = store.getState().user.level - 1
+    API.allNPC().then(res => {
+      store.dispatch({
+        type: "SHOW_MODAL",
+        payload: {
+          show: true,
+          name: `${res.data[npc].name}`,
+          dialogue: `${res.data[npc].flavorDialogue[level][2]}`,
+        },
+      })
+    });
+  }
+
   function observeAction(oldPos, newPos) {
     const tiles = store.getState().map.tiles;
     const y = newPos[1] / SPRITE_SIZE;
     const x = newPos[0] / SPRITE_SIZE;
-    console.log(x, y);
+    // console.log(x, y);
     const nextTile = tiles[y][x];
-    console.log(tiles[y][x]);
+    // console.log(tiles[y][x]);
     switch (nextTile) {
       case 18:
-        if (store.getState().user.encounter===0) {
+        const level = store.getState().user.level - 1
+        if (store.getState().user.encounter === 0) {
           store.dispatch({
             type: "USER_ACTION",
-            payload: {...store.getState().user,
-            encounter: 1}
+            payload: {
+              ...store.getState().user,
+              encounter: 1
+            }
           })
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[1].name}`,
-                dialogue: `${res.data[1].usefulDialogue[0]}`,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
                 questionNumber: 0
               },
             })
@@ -105,8 +140,8 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[1].name}`,
-                dialogue: `${res.data[1].usefulDialogue[1]}`,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
                 form: "mc",
                 questionNumber: 0
               },
@@ -114,74 +149,47 @@ export default function handleMovement(player) {
           });
         }
         else {
-
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[1].name}`,
-                dialogue: `${res.data[1].usefulDialogue[2]}`,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
                 form: "editor",
                 questionNumber: "algorithm",
-                winDialogue: `${res.data[1].usefulDialogue[3]}`
+                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
+                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
               },
             })
           });
         }
-        // showModal();
         return true;
       case 15:
-        API.allNPC().then(res => {
-          store.dispatch({
-            type: "SHOW_MODAL",
-            payload: {
-              show: true,
-              name: `${res.data[3].name}`,
-              dialogue: `${res.data[3].usefulDialogue[0]}`,
-              rightDialogue:  `${res.data[3].usefulDialogue[1]}`,
-              wrongDialogue: `${res.data[3].usefulDialogue[2]}`,
-              form: "mc",
-              questionNumber: 3
-            },
-          })
-        });
+        if (store.getState().user.question3 === false) {
+          sendQuestion(1, 3)
+        }
+        else {
+          sendMessage(1)
+        }
         return true;
       case 16:
-        API.allNPC().then(res => {
-          store.dispatch({
-            type: "SHOW_MODAL",
-            payload: {
-              show: true,
-              name: `${res.data[2].name}`,
-              dialogue: `${res.data[2].usefulDialogue[0]}`,
-              rightDialogue:  `${res.data[2].usefulDialogue[1]}`,
-              wrongDialogue: `${res.data[2].usefulDialogue[2]}`,
-              form: "mc",
-              questionNumber: 2
-            },
-          })
-        });
+        if (store.getState().user.question2 === false) {
+          sendQuestion(3, 2)
+        }
+        else {
+          sendMessage(3)
+        }
         return true;
       case 17:
-        API.allNPC().then(res => {
-          store.dispatch({
-            type: "SHOW_MODAL",
-            payload: {
-              show: true,
-              name: `${res.data[0].name}`,
-              dialogue: `${res.data[0].usefulDialogue[0]}`,
-              rightDialogue:  `${res.data[0].usefulDialogue[1]}`,
-              wrongDialogue: `${res.data[0].usefulDialogue[2]}`,
-              form: "mc",
-              questionNumber: 1
-            },
-          })
-        });
+        if (store.getState().user.question1 === false) {
+          sendQuestion(2, 1)
+        }
+        else {
+          sendMessage(2)
+        }
         return true;
-      // case 3:
-      //   alert("Leaving Room");
-      //   changeRoom();
+
       case 21:
         // alert ("Leaving main Room to WEST")
         changeRoom(tiles2);
@@ -312,7 +320,7 @@ export default function handleMovement(player) {
   }
 
   const handleKeyDown = (e => {
-    console.log(e.target)
+    // console.log(e.target)
     if (e.target !== "userAns") {
       switch (e.keyCode) {
         case 37:
@@ -323,30 +331,33 @@ export default function handleMovement(player) {
         case 38:
           // case 87:
 
-          // e.preventDefault();
+          e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
           // case 68:
 
-          // e.preventDefault();
+          e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
           // case 83:
 
-          // e.preventDefault();
+          e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-          console.log(e.keyCode);
+        // console.log(e.keyCode);
       }
     }
   })
+  // console.log(usePathname)
 
+  // if(window.location.pathname === "/game") {
   window.addEventListener("keydown", (e) => {
     handleKeyDown(e);
   });
+  // }
 
   return player;
 }

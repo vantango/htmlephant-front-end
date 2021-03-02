@@ -3,11 +3,16 @@ const intitialState = {
     password: "",
     key: 0,
     token: "",
-    level: 0,
+    level: 1,
     id: "",
     isLoggedIn: false,
-    encounters:0
-
+    encounter:0,
+    // is question 1 answered
+    question1: false,
+    // is question 2 answered
+    question2: false,
+    // is question 3 answered
+    question3: false
 }
 const userReducer = (state=intitialState, action) => {
     switch(action.type) {

@@ -42,7 +42,7 @@ const API = {
                 authorization: `Bearer: ${token}`
             }
         })
-    }
+    },
 }
 
 export default API;
