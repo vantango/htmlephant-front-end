@@ -9,9 +9,15 @@ function Endscreen() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(`ID: ${id}`);
+            console.log("===================================")
+            console.log(`Token: ${token}`)
+            console.log("===================================")
         const id = store.getState().user.id;
         const token = store.getState().user.token;
         API.resetLevel(id, token).then(res => {
+            console.log(`Here's what we get back: ${res}`)
+            console.log("===================================")
             store.dispatch({
                 type: "USER_ACTION",
                 payload: {
@@ -25,7 +31,6 @@ function Endscreen() {
                 },
             });
         });
-
         history.push("/");
     };
 
