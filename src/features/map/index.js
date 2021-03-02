@@ -10,7 +10,7 @@ import door from './tiles/door.jpg'
 import denis from './tiles/m2.png'
 import zac from './tiles/f2.png'
 import aslan from './tiles/f1.png'
-import joe from './tiles/e1.png'
+import joe from './tiles/codecat.png'
 
 
 
