@@ -77,9 +77,9 @@ export default function handleMovement(direction) {
         const tiles = store.getState().map.tiles
         const y = newPos[1] / SPRITE_SIZE
         const x = newPos[0] / SPRITE_SIZE
-        console.log(x,y)
+        // console.log(x,y)
         const nextTile = tiles[y][x]
-        console.log(tiles[y][x])
+        // console.log(tiles[y][x])
         switch (nextTile) {
             case 18:
                 if (store.getState().key.amount < 3)

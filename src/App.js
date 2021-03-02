@@ -9,6 +9,7 @@ import Game from "./pages/game"
 import WinScreen from "./pages/winscreen"
 // import "./styles.css";
 
+
 const apiCall = () => {
   API.allAlgo().then(data => {
     console.log(data);
