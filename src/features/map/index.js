@@ -24,6 +24,7 @@ import stars1 from './tiles/stars1.png'
 import stars2 from './tiles/stars2.png'
 import stars3 from './tiles/stars3.png'
 import drums from './tiles/drums.png'
+import skeleton from './tiles/skelegrass.png'
 
 
 
@@ -95,6 +96,8 @@ function getTileSprite(type) {
             return wall2
         case 37:
             return drums
+        case 38:
+            return skeleton
         default:
             break;
     }
