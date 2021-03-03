@@ -89,7 +89,7 @@ export default function handleMovement(player) {
         payload: {
           show: true,
           name: `${res.data[npc].name}`,
-          dialogue: `${res.data[npc].flavorDialogue[level][2]}`,
+          dialogue: `${res.data[npc].flavorDialogue[level][Math.floor(Math.random()*3)]}`,
         },
       })
     });

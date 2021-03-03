@@ -141,7 +141,7 @@ function Modal(props) {
             })
             break;
 
-          case 2:
+          case 3:
             API.hardAlgo().then(res => {
               const algorithm = res.data.algorithm
               store.dispatch({

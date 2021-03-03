@@ -3,6 +3,8 @@ import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./pages.css"
+import { ToastContainer, toast } from 'react-toastify'
+
 
 function NewGame() {
 
@@ -14,6 +16,20 @@ function NewGame() {
           location: location.pathname
       }
   })
+
+  const userAlreadyExists = () => {
+    toast.error("User already exists", 
+    {
+      position: toast.POSITION.TOP_CENTER
+    })
+  }
+
+  const emptyUsernameOrPassword = () => {
+    toast.error("Username and Password are required", 
+    {
+      position: toast.POSITION.TOP_CENTER
+    })
+  }
 
   let history = useHistory();
   // Set initial user state
@@ -43,6 +59,10 @@ function NewGame() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (!signupState.username || !signupState.password) {
+      console.log("username and password required")
+      emptyUsernameOrPassword()
+    } else {
     API.signup(signupState).then(res => {
       console.log(`Congrats! ${JSON.stringify(res.data)}`);
       localStorage.setItem("token", res.data.token)
@@ -83,9 +103,11 @@ function NewGame() {
           isLoggedIn: false
         }
       });
+      userAlreadyExists()
       localStorage.removeItem("token");
-      history.push("/");
+      // history.push("/");
     });
+  }
   }
 
   return (
@@ -103,6 +125,7 @@ function NewGame() {
           <input type="submit" value="Submit" onClick={handleSubmit} />
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }
