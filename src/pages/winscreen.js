@@ -36,6 +36,13 @@ function WinScreen() {
       });
     });
 
+    store.dispatch({
+      type: "SHOW_MODAL",
+      payload: {
+        show: false
+      }
+    })
+
     history.push("/game");
   };
   return (

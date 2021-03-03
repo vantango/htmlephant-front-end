@@ -1,6 +1,6 @@
 .player {
   height: 25vh;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   flex-direction: column;
   justify-content: center;

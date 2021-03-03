@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
-import "./pages.css"
+import "./newgame.css"
 import { ToastContainer, toast } from 'react-toastify'
 
 
@@ -11,24 +11,24 @@ function NewGame() {
   let location = useLocation();
   console.log(location.pathname)
   store.dispatch({
-      type: 'CHANGE_LOCATION',
-      payload: {
-          location: location.pathname
-      }
+    type: 'CHANGE_LOCATION',
+    payload: {
+      location: location.pathname
+    }
   })
 
   const userAlreadyExists = () => {
-    toast.error("User already exists", 
-    {
-      position: toast.POSITION.TOP_CENTER
-    })
+    toast.error("User already exists",
+      {
+        position: toast.POSITION.TOP_CENTER
+      })
   }
 
   const emptyUsernameOrPassword = () => {
-    toast.error("Username and Password are required", 
-    {
-      position: toast.POSITION.TOP_CENTER
-    })
+    toast.error("Username and Password are required",
+      {
+        position: toast.POSITION.TOP_CENTER
+      })
   }
 
   let history = useHistory();
@@ -63,66 +63,69 @@ function NewGame() {
       console.log("username and password required")
       emptyUsernameOrPassword()
     } else {
-    API.signup(signupState).then(res => {
-      console.log(`Congrats! ${JSON.stringify(res.data)}`);
-      localStorage.setItem("token", res.data.token)
-      setUserState({
-        username: res.data.user.username,
-        password: res.data.user.password,
-        token: res.data.token,
-        level: res.data.user.level,
-        id: res.data.user._id,
-        isLoggedIn: true
-      });
-      store.dispatch({
-        type: "USER_ACTION",
-        payload: {
+      API.signup(signupState).then(res => {
+        console.log(`Congrats! ${JSON.stringify(res.data)}`);
+        localStorage.setItem("token", res.data.token)
+        setUserState({
           username: res.data.user.username,
           password: res.data.user.password,
           token: res.data.token,
           level: res.data.user.level,
           id: res.data.user._id,
           isLoggedIn: true
-        }
-      });
-      setSignupState({
-        username: "",
-        password: "",
-      });
-      history.push("/game");
-    }).catch(err => {
-      console.log(`FOOL! Due to your stupidity, ${err}`);
-      store.dispatch({
-        type: "USER_ACTION",
-        payload: {
+        });
+        store.dispatch({
+          type: "USER_ACTION",
+          payload: {
+            username: res.data.user.username,
+            password: res.data.user.password,
+            token: res.data.token,
+            level: res.data.user.level,
+            id: res.data.user._id,
+            isLoggedIn: true
+          }
+        });
+        setSignupState({
           username: "",
           password: "",
-          token: "",
-          level: 0,
-          id: "",
-          isLoggedIn: false
-        }
+        });
+        history.push("/game");
+      }).catch(err => {
+        console.log(`FOOL! Due to your stupidity, ${err}`);
+        store.dispatch({
+          type: "USER_ACTION",
+          payload: {
+            username: "",
+            password: "",
+            token: "",
+            level: 0,
+            id: "",
+            isLoggedIn: false
+          }
+        });
+        userAlreadyExists()
+        localStorage.removeItem("token");
+        // history.push("/");
       });
-      userAlreadyExists()
-      localStorage.removeItem("token");
-      // history.push("/");
-    });
-  }
+    }
   }
 
   return (
     <div className="game-wrapper">
-      <div className="signin-select">
+      <div className="signin-select rpgui-container framed-golden">
+        <h1 style={{ fontSize: '250%' }}>Signup</h1>
         <form>
           <label>
             User:
-                    </label>
           <input name="username" type="text" onChange={handleInputChange} />
+          </label>
           <label>
             Password:
-                    </label>
           <input name="password" type="password" onChange={handleInputChange} />
-          <input type="submit" value="Submit" onClick={handleSubmit} />
+          </label>
+          {/* <input type="submit" value="Submit" onClick={handleSubmit} /> */}
+          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
+
         </form>
       </div>
       <ToastContainer />

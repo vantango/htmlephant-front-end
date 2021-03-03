@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import store from "../config/store";
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../utils/API";
-import "./pages.css"
+import "./loadgame.css"
 import { ToastContainer, toast } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -111,14 +111,18 @@ function LoadGame() {
   // Render form component
   return (
 
-    <div className="game-wrapper">
-      <div className="signin-select">
-        <form>
-          <label>User:</label>
-          <input name="username" type="text" onChange={handleInputChange} />
-          <label>Password:</label>
-          <input name="password" type="password" onChange={handleInputChange} />
-          <input type="submit" value="Submit" onClick={handleSubmit} />
+    <div className="game-wrapper ">
+      <div className="signin-select rpgui-container framed-golden">
+        <h1 style={{fontSize: '250%'}}>Login</h1>
+        <form autoComplete="off">
+          <label>User:
+          <input name="username" type="text" placeholder="username" onChange={handleInputChange} />
+          </label>
+          <label>Password:
+          <input name="password" type="password" placeholder="password" onChange={handleInputChange} />
+          </label>
+          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
+          {/* <input id="submitBtn" type="submit" value="Submit" onClick={handleSubmit} /> */}
         </form>
       </div>
       <ToastContainer />

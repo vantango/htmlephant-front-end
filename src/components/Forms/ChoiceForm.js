@@ -69,12 +69,6 @@ class ChoiceForm extends React.Component {
       const rightDialogue = store.getState().modal.rightDialogue
       const name = store.getState().modal.name
 
-      // store.dispatch({
-      //   type: "SHOW_MODAL",
-      //   payload: {
-      //     show: false
-      //   }
-      // })
 
       store.dispatch({
         type: "SHOW_MODAL",
@@ -85,11 +79,7 @@ class ChoiceForm extends React.Component {
           questionNumber: 0
         }
       })
-      // store.dispatch({
-      //   type: "ASK_QUESTION",
-      //   payload: {
-      //   }
-      // })
+
 
     } else {
       store.dispatch({
