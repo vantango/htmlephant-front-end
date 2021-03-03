@@ -7,7 +7,6 @@ import store from '../../config/store'
 
 import './style.css'
 
-
 function Player(props) {
 
 

@@ -2,7 +2,7 @@ import React from "react";
 import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
-import "./pages.css";
+import "./winscreen.css";
 
 function WinScreen() {
 
@@ -47,13 +47,13 @@ function WinScreen() {
   };
   return (
     <div className="game-wrapper">
-      <div className="menu-select">
+      <div className="menu-select rpgui-container framed">
         <label>Wizards and Whiteboards</label>
         <h1> Congratulations!</h1>
         <h2>
           Nice work! Snaps to you, and good luck on the next challenge!
         </h2>
-        <input type="submit" value="Save Game" onClick={handleSubmit} />
+        <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Submit</button>
       </div>
     </div>
   );

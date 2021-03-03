@@ -4,21 +4,15 @@
 
 .modal {
     /* position: relative; */
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: Column;
 }
 
- .center {
-     margin: 0 auto;
-    /* margin: 0; */
-    /* position: absolute; */
-    /* top: 50%; */
-    /* left: 50%; */
-    /* top: 100%; */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* -ms-transform: translate(-50%, -50%); */
-    /* transform: translate(-50%, -50%); */
-  } 
+.modal-wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
