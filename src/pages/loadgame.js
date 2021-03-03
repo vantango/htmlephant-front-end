@@ -28,6 +28,7 @@ function LoadGame() {
   let history = useHistory();
   // Set initial user state
   const [userState, setUserState] = useState({
+    character: "Cat",
     username: "",
     password: "",
     token: "",
@@ -39,7 +40,8 @@ function LoadGame() {
   // Set initial login state
   const [loginState, setLoginState] = useState({
     username: "",
-    password: ""
+    password: "",
+    character: "Cat"
   })
 
   // Set new login state with change in input form
@@ -58,6 +60,7 @@ function LoadGame() {
       console.log(`Congrats! ${JSON.stringify(res.data)}`)
       localStorage.setItem("token", res.data.token);
       setUserState({
+        character: res.data.user.character,
         username: res.data.user.username,
         password: res.data.user.password,
         token: res.data.token,
@@ -73,6 +76,7 @@ function LoadGame() {
         type: "USER_ACTION",
         payload: {
           ...store.getState().user,
+          character: res.data.user.character,
           username: res.data.user.username,
           password: res.data.user.password,
           token: res.data.token,
@@ -91,6 +95,7 @@ function LoadGame() {
       store.dispatch({
         type: "USER_ACTION",
         payload: {
+          character: "Cat",
           username: "",
           password: "",
           token: "",
