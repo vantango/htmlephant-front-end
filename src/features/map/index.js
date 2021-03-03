@@ -16,6 +16,7 @@ import fire2 from './tiles/fire2.png'
 
 
 
+
 import './styles.css'
 
 function getTileSprite(type) {
