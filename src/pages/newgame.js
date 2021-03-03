@@ -34,7 +34,7 @@ function NewGame() {
   let history = useHistory();
   // Set initial user state
   const [userState, setUserState] = useState({
-    character: "Cat",
+    character: "",
     username: "",
     password: "",
     token: "",
@@ -47,7 +47,7 @@ function NewGame() {
   const [signupState, setSignupState] = useState({
     username: "",
     password: "",
-    character: "Cat"
+    character: ""
   })
 
   // Set signup state on input change
@@ -99,7 +99,7 @@ function NewGame() {
         store.dispatch({
           type: "USER_ACTION",
           payload: {
-            character: "Cat",
+            character: "",
             username: "",
             password: "",
             token: "",

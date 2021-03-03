@@ -28,7 +28,7 @@ function LoadGame() {
   let history = useHistory();
   // Set initial user state
   const [userState, setUserState] = useState({
-    character: "Cat",
+    character: "",
     username: "",
     password: "",
     token: "",
@@ -41,7 +41,7 @@ function LoadGame() {
   const [loginState, setLoginState] = useState({
     username: "",
     password: "",
-    character: "Cat"
+    character: ""
   })
 
   // Set new login state with change in input form
@@ -56,7 +56,7 @@ function LoadGame() {
   // Switch player to cat
   const catMe = e => {
     e.preventDefault();
-    setLoginState({...loginState, character: "Cat"});
+    setLoginState({ ...loginState, character: "Cat" });
     API.playAsCat(loginState.username).then(data => {
       data ? console.log(data) : console.log("IDIOT")
     }).catch(err => {
@@ -67,7 +67,7 @@ function LoadGame() {
   // Switch player to manatee
   const manatMee = e => {
     e.preventDefault();
-    setLoginState({...loginState, character: "Manatee"});
+    setLoginState({ ...loginState, character: "Manatee" });
     API.playAsManatee(loginState.username).then(data => {
       data ? console.log(data) : console.log("IDIOT")
     }).catch(err => {
@@ -118,7 +118,7 @@ function LoadGame() {
       store.dispatch({
         type: "USER_ACTION",
         payload: {
-          character: "Cat",
+          character: "",
           username: "",
           password: "",
           token: "",
