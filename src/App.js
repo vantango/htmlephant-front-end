@@ -8,6 +8,8 @@ import LoadGame from "./pages/loadgame"
 import NewGame from "./pages/newgame"
 import Game from "./pages/game"
 import WinScreen from "./pages/winscreen"
+import Endscreen from "./pages/endscreen"
+// import "./styles.css";
 import store from "./config/store";
 
 
@@ -42,8 +44,11 @@ function App() {
           <Route exact path={["/new"]}>
             <NewGame />
           </Route>
-            <Route exact path={["/winscreen"]}>
+          <Route exact path={["/winscreen"]}>
             <WinScreen />
+          </Route>
+          <Route exact path={["/endscreen"]}>
+            <Endscreen />
           </Route>
         </Switch>
       </div>

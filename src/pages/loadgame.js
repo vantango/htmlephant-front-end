@@ -3,6 +3,10 @@ import store from "../config/store";
 import { useHistory, useLocation } from "react-router-dom";
 import API from "../utils/API";
 import "./pages.css"
+import { ToastContainer, toast } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
+
 function LoadGame() {
 
   let location = useLocation();
@@ -13,6 +17,13 @@ function LoadGame() {
           location: location.pathname
       }
   })
+
+  const wrongLogin = () => {
+    toast.error("Wrong Username or Password", 
+    {
+      position: toast.POSITION.TOP_CENTER
+    })
+  }
 
   let history = useHistory();
   // Set initial user state
@@ -89,7 +100,8 @@ function LoadGame() {
         }
       })
       localStorage.removeItem("token");
-      alert("Wrong login information")
+      // alert("Wrong login information")
+      wrongLogin()
       // history.push("/");
     });
   }
@@ -109,6 +121,7 @@ function LoadGame() {
           <input type="submit" value="Submit" onClick={handleSubmit} />
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }
