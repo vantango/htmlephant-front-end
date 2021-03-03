@@ -21,7 +21,8 @@ function World(props) {
 
 
     return (
-        <div style={{
+        <div         
+        style={{
             position: 'relative',
             width: '650px',
             height: '400px',
@@ -31,9 +32,10 @@ function World(props) {
 
             <Map />
             <Player />
-            {/* <Modal /> */}
+            <div style={{display:"flex", justifyContent: "space-between"}}>
             <Dpad />
             <Keys />
+            </div>
             <Modal onClose={props.showModal} show="false" />
         </div>
     )

@@ -112,7 +112,7 @@ function LoadGame() {
   return (
 
     <div className="game-wrapper ">
-      <div className="signin-select rpgui-container framed-golden">
+      <div className="signin-select rpgui-container framed">
         <h1 style={{fontSize: '250%'}}>Login</h1>
         <form autoComplete="off">
           <label>User:

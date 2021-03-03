@@ -119,13 +119,12 @@ export default function handleMovement(direction) {
                     show: true,
                     name: `${res.data[0].name}`,
                     dialogue: `${res.data[0].usefulDialogue[level][0]}`,
-                    // questionNumber: 0
+                    questionNumber: 0
                   },
                 })
               });
             }
             else if (store.getState().key.amount < 3) {
-              // alert("Must have three keys to answer my question")
               API.allNPC().then(res => {
                 store.dispatch({
                   type: "SHOW_MODAL",
@@ -133,7 +132,7 @@ export default function handleMovement(direction) {
                     show: true,
                     name: `${res.data[0].name}`,
                     dialogue: `${res.data[0].usefulDialogue[level][1]}`,
-                    // questionNumber: 0
+                    questionNumber: 0
                   },
                 })
               });

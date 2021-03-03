@@ -1,4 +1,7 @@
 .ace-editor {
     background-color: salmon;
     line-height: 200%;
+    font-family: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+    
+    /*  all: unset; */
 }

@@ -106,61 +106,58 @@ export default function handleMovement(player) {
     // console.log(tiles[y][x]);
     switch (nextTile) {
       // Joe
-      case 18:
-        const level = store.getState().user.level - 1
-        if (store.getState().key.amount >= 3) {
-
-          API.allNPC().then(res => {
-            store.dispatch({
-              type: "SHOW_MODAL",
-              payload: {
-                show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
-                form: "editor",
-                questionNumber: "algorithm",
-                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
-                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
-              },
-            })
-          });
-
-        }
-        else if (store.getState().user.encounter === 1 ) {
-          // alert("Must have three keys to answer my question")
-          API.allNPC().then(res => {
-            store.dispatch({
-              type: "SHOW_MODAL",
-              payload: {
-                show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
-                questionNumber: 0
-              },
-            })
-          });
-        }
-        else {
-          store.dispatch({
-            type: "USER_ACTION",
-            payload: {
-              ...store.getState().user,
-              encounter: +1
+          case 18:
+            const level = store.getState().user.level - 1
+            if (store.getState().user.encounter === 0) {
+              store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                  ...store.getState().user,
+                  encounter: 1
+                }
+              })
+              API.allNPC().then(res => {
+                store.dispatch({
+                  type: "SHOW_MODAL",
+                  payload: {
+                    show: true,
+                    name: `${res.data[0].name}`,
+                    dialogue: `${res.data[0].usefulDialogue[level][0]}`,
+                    questionNumber: 0
+                  },
+                })
+              });
             }
-          })
-          API.allNPC().then(res => {
-            store.dispatch({
-              type: "SHOW_MODAL",
-              payload: {
-                show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
-                questionNumber: 0
-              },
-            })
-          });
-        }
-        return true;
+            else if (store.getState().key.amount < 3) {
+              API.allNPC().then(res => {
+                store.dispatch({
+                  type: "SHOW_MODAL",
+                  payload: {
+                    show: true,
+                    name: `${res.data[0].name}`,
+                    dialogue: `${res.data[0].usefulDialogue[level][1]}`,
+                    questionNumber: 0
+                  },
+                })
+              });
+            }
+            else {
+              API.allNPC().then(res => {
+                store.dispatch({
+                  type: "SHOW_MODAL",
+                  payload: {
+                    show: true,
+                    name: `${res.data[0].name}`,
+                    dialogue: `${res.data[0].usefulDialogue[level][2]}`,
+                    form: "editor",
+                    questionNumber: "algorithm",
+                    winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
+                    wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
+                  },
+                })
+              });
+            }
+            return true;
         // Denis
       case 15:
         if (store.getState().user.question3 === false) {

@@ -1,3 +1,24 @@
 .question{
     display:none
 }
+
+.modal {
+    /* position: relative; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+ .center {
+     margin: 0 auto;
+    /* margin: 0; */
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* top: 100%; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* -ms-transform: translate(-50%, -50%); */
+    /* transform: translate(-50%, -50%); */
+  } 
