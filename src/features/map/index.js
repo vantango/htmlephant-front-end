@@ -7,11 +7,11 @@ import rock from './tiles/rock.png'
 import tree from './tiles/tree4.png'
 import chest from './tiles/chest.png'
 import denis from './tiles/denisv4.png'
-import zac from './tiles/f2.png'
+import zac from './tiles/zac.png'
 import aslan from './tiles/aslanv4.png'
-import joe from './tiles/joe1.png'
+import joe from './tiles/joefinalv2.png'
 import path3 from './tiles/path.png'
-import fire2 from './tiles/fire2.png'
+import fire2 from './tiles/fire.png'
 import doortop from './tiles/doortop.png'
 import doorbottom from './tiles/doorbottom.png'
 import doorbottom2 from './tiles/doorbottom2.png'
@@ -23,6 +23,8 @@ import rocks from './tiles/rocks2.png'
 import stars1 from './tiles/stars1.png'
 import stars2 from './tiles/stars2.png'
 import stars3 from './tiles/stars3.png'
+import drums from './tiles/drums.png'
+import skeleton from './tiles/skelegrass.png'
 
 
 
@@ -92,6 +94,10 @@ function getTileSprite(type) {
             return stars3
         case 36:
             return wall2
+        case 37:
+            return drums
+        case 38:
+            return skeleton
         default:
             break;
     }

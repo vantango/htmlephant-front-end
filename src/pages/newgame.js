@@ -34,6 +34,7 @@ function NewGame() {
   let history = useHistory();
   // Set initial user state
   const [userState, setUserState] = useState({
+    character: "",
     username: "",
     password: "",
     token: "",
@@ -68,6 +69,7 @@ function NewGame() {
         console.log(`Congrats! ${JSON.stringify(res.data)}`);
         localStorage.setItem("token", res.data.token)
         setUserState({
+          character: res.data.user.character,
           username: res.data.user.username,
           password: res.data.user.password,
           token: res.data.token,
@@ -78,6 +80,7 @@ function NewGame() {
         store.dispatch({
           type: "USER_ACTION",
           payload: {
+            character: res.data.user.character,
             username: res.data.user.username,
             password: res.data.user.password,
             token: res.data.token,
@@ -96,6 +99,7 @@ function NewGame() {
         store.dispatch({
           type: "USER_ACTION",
           payload: {
+            character: "",
             username: "",
             password: "",
             token: "",

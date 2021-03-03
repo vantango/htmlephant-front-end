@@ -1,15 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import walkSprite from './codecatspritesheet.png'
+import catSprite from './codecatspritesheet.png'
+import manateeSprite from './codemanatee.png'
 import handleMovement from './movement'
-
 import store from '../../config/store'
-
 import './style.css'
 
+
 function Player(props) {
+    let walkSprite
 
-
+    if (store.getState().user.character === "Cat") {
+        walkSprite = catSprite
+    } else {
+        walkSprite = manateeSprite
+    }
     return (
         <div className={'player_animation'}
             style={{
@@ -27,9 +32,9 @@ function Player(props) {
 
 function mapStateToProps(state) {
     return {
-        ...state.player, 
+        ...state.player,
 
     }
-} 
+}
 
 export default connect(mapStateToProps)(handleMovement(Player))
