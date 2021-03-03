@@ -6,13 +6,24 @@ import grass from './tiles/grassy.png'
 import rock from './tiles/rock.png'
 import tree from './tiles/tree4.png'
 import chest from './tiles/chest.png'
-import door from './tiles/door.jpg'
 import denis from './tiles/denisv4.png'
 import zac from './tiles/f2.png'
 import aslan from './tiles/aslanv4.png'
-import joe from './tiles/e1.png'
+import joe from './tiles/joe1.png'
 import path3 from './tiles/path.png'
 import fire2 from './tiles/fire2.png'
+import doortop from './tiles/doortop.png'
+import doorbottom from './tiles/doorbottom.png'
+import doorbottom2 from './tiles/doorbottom2.png'
+import wall from './tiles/wall1.png'
+import wall2 from './tiles/wall2.png'
+import water from './tiles/water2.png'
+import lava from './tiles/lava.png'
+import rocks from './tiles/rocks2.png'
+import stars1 from './tiles/stars1.png'
+import stars2 from './tiles/stars2.png'
+import stars3 from './tiles/stars3.png'
+
 
 
 
@@ -45,24 +56,42 @@ function getTileSprite(type) {
             return joe
         case 21:
             // east door
-            return door
+            return doorbottom
         case 22:
             // north door
-            return door
+            return doorbottom
         case 23:
             // west door
-            return door
+            return doorbottom
         case 24:
             // main door in west room
-            return door
+            return doorbottom
         case 25:
             // main door in north room
-            return door
+            return doorbottom2
         case 26:
             // main door in east room
-            return door
+            return doorbottom
         case 27:
             return fire2
+        case 28:
+            return doortop
+        case 29:
+            return wall
+        case 30:
+            return water
+        case 31:
+            return lava
+        case 32:
+            return rocks
+        case 33:
+            return stars1
+        case 34:
+            return stars2
+        case 35:
+            return stars3
+        case 36:
+            return wall2
         default:
             break;
     }
