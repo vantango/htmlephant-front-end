@@ -45,7 +45,8 @@ function NewGame() {
   // Set initial signup state
   const [signupState, setSignupState] = useState({
     username: "",
-    password: ""
+    password: "",
+    character: ""
   })
 
   // Set signup state on input change
@@ -123,6 +124,10 @@ function NewGame() {
             Password:
           <input name="password" type="password" onChange={handleInputChange} />
           </label>
+          <input type="radio" id="cat" name="character" value="cat" onChange={handleInputChange} />
+          <label for="male">Cat</label><br />
+          <input type="radio" id="manatee" name="character" value="manatee" onChange={handleInputChange} />
+          <label for="female">Manatee</label><br />
           {/* <input type="submit" value="Submit" onClick={handleSubmit} /> */}
           <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
 
