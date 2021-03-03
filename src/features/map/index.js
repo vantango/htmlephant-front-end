@@ -2,15 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { SPRITE_SIZE } from '../../config/constants'
 import { v4 as uuidv4 } from 'uuid'
-
+import grass from './tiles/grassy.png'
 import rock from './tiles/rock.png'
-import tree from './tiles/tree.png'
+import tree from './tiles/tree4.png'
 import chest from './tiles/chest.png'
 import door from './tiles/door.jpg'
-import denis from './tiles/m2.png'
+import denis from './tiles/denisv4.png'
 import zac from './tiles/f2.png'
-import aslan from './tiles/f1.png'
+import aslan from './tiles/aslanv4.png'
 import joe from './tiles/e1.png'
+import path3 from './tiles/path.png'
+import fire2 from './tiles/fire2.png'
+
 
 
 
@@ -19,11 +22,13 @@ import './styles.css'
 function getTileSprite(type) {
     switch (type) {
         case 0:
-            return 'ground'
+            return grass
         case 1:
             return 'grass'
         case 2:
             return 'gravel'
+        case 3:
+            return path3
         case 10:
             return rock
         case 11:
@@ -56,30 +61,32 @@ function getTileSprite(type) {
         case 26:
             // main door in east room
             return door
+        case 27:
+            return fire2
         default:
             break;
     }
 }
 
 function MapTile(props) {
-    if(props.tile === 15 || props.tile === 16 || props.tile === 17 || props.tile === 18 ) {
+    if (props.tile === 15 || props.tile === 16 || props.tile === 17 || props.tile === 18) {
         return <div
-        className={`tile`}
+            className={`tile`}
         >
-            <div className = {`Character tile`} style={{height: SPRITE_SIZE, width:SPRITE_SIZE}}>
-             <img className = {`Character_spritesheet`} src={`${getTileSprite(props.tile)}`} alt={`Character`} />
+            <div className={`Character tile`} style={{ height: SPRITE_SIZE, width: SPRITE_SIZE }}>
+                <img className={`Character_spritesheet`} src={`${getTileSprite(props.tile)}`} alt={`Character`} />
             </div>
-            
+
         </div>
     } else {
         return <div
-        className={`tile`}
-        style={{
-            backgroundImage: `url(${getTileSprite(props.tile)})`,
-            height: SPRITE_SIZE,
-            width: SPRITE_SIZE,
-            
-        }}
+            className={`tile`}
+            style={{
+                backgroundImage: `url(${getTileSprite(props.tile)})`,
+                height: SPRITE_SIZE,
+                width: SPRITE_SIZE,
+
+            }}
         />
     }
 
@@ -99,7 +106,7 @@ function MapRow(props) {
 function Map(props) {
     return (
         <div
-        name ="map"
+            name="map"
             style={{
                 position: 'relative',
                 top: '0px',

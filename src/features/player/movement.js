@@ -103,6 +103,7 @@ export default function handleMovement(player) {
     const nextTile = tiles[y][x];
     // console.log(tiles[y][x]);
     switch (nextTile) {
+      // Joe
       case 18:
         const level = store.getState().user.level - 1
         if (store.getState().user.encounter === 0) {
@@ -110,7 +111,7 @@ export default function handleMovement(player) {
             type: "USER_ACTION",
             payload: {
               ...store.getState().user,
-              encounter: 1
+              encounter: +1
             }
           })
           API.allNPC().then(res => {
@@ -156,6 +157,7 @@ export default function handleMovement(player) {
           });
         }
         return true;
+        // Denis
       case 15:
         if (store.getState().user.question3 === false) {
           sendQuestion(1, 3)
@@ -164,6 +166,7 @@ export default function handleMovement(player) {
           sendMessage(1)
         }
         return true;
+        // Zac
       case 16:
         if (store.getState().user.question2 === false) {
           sendQuestion(3, 2)
@@ -172,6 +175,7 @@ export default function handleMovement(player) {
           sendMessage(3)
         }
         return true;
+        // Aslan
       case 17:
         if (store.getState().user.question1 === false) {
           sendQuestion(2, 1)

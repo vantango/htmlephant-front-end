@@ -7,6 +7,7 @@
       href="https://fonts.googleapis.com/css?family=Press+Start+2P"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./assets/audio.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -50,5 +51,48 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <div class="player">
+      <!--Display song info   -->
+      <div class="details">
+        <div class="now-playing">Song x OF y</div>
+        <div class="song-name">Song Name</div>
+        <div class="song-artist">Song Artist</div>
+      </div>
+
+      <!-- Audio player buttons-->
+      <div class="buttons">
+        <div class="prev-song" onClick="prevSong()">
+          <!-- <i class="fa fa-step-backward fa-2x"></i> -->
+          <h3>Prev</h3>
+        </div>
+        <div class="playpause-song" onClick="playpauseSong()">
+          <!-- <i class="fa fa-play-circle fa-5x"></i> -->
+          <h3>Play</h3>
+        </div>
+        <div class="next-song" onClick="nextSong()">
+          <h3>Next</h3>
+          <!-- <i class="fa fa-step-forward fa-2x"></i> -->
+        </div>
+      </div>
+
+      <div class="slider_container">
+        Vol -
+        <!-- <i class="fa fa-volume-down"></i>  -->
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="99"
+          class="volume_slider"
+          onchange="setVolume()"
+        />
+         Vol +
+        <!-- <i class="fa fa-volume-up"></i>  -->
+      </div>
+    </div>
+
+ 
+    <script src="./assets/audio.js"></script>
   </body>
 </html>
