@@ -90,6 +90,8 @@ export default function handleMovement(player) {
           show: true,
           name: `${res.data[npc].name}`,
           dialogue: `${res.data[npc].flavorDialogue[level][Math.floor(Math.random()*3)]}`,
+          questionNumber: 0
+
         },
       })
     });
@@ -106,7 +108,39 @@ export default function handleMovement(player) {
       // Joe
       case 18:
         const level = store.getState().user.level - 1
-        if (store.getState().user.encounter === 0) {
+        if (store.getState().key.amount >= 3) {
+
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
+                form: "editor",
+                questionNumber: "algorithm",
+                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
+                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
+              },
+            })
+          });
+
+        }
+        else if (store.getState().user.encounter === 1 ) {
+          // alert("Must have three keys to answer my question")
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
+                questionNumber: 0
+              },
+            })
+          });
+        }
+        else {
           store.dispatch({
             type: "USER_ACTION",
             payload: {
@@ -121,37 +155,7 @@ export default function handleMovement(player) {
                 show: true,
                 name: `${res.data[0].name}`,
                 dialogue: `${res.data[0].usefulDialogue[level][0]}`,
-                // questionNumber: 0
-              },
-            })
-          });
-        }
-        else if (store.getState().key.amount < 3) {
-          // alert("Must have three keys to answer my question")
-          API.allNPC().then(res => {
-            store.dispatch({
-              type: "SHOW_MODAL",
-              payload: {
-                show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
-                // questionNumber: 0
-              },
-            })
-          });
-        }
-        else {
-          API.allNPC().then(res => {
-            store.dispatch({
-              type: "SHOW_MODAL",
-              payload: {
-                show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
-                form: "editor",
-                questionNumber: "algorithm",
-                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
-                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
+                questionNumber: 0
               },
             })
           });

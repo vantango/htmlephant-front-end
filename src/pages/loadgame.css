@@ -1,0 +1,82 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+    background: #6d6d6d;
+    color: white;
+    font-family: "Press Start 2P", sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .menu-select {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: Column;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #6c6eb2 0%, #181870 64%, #000028 100%);
+    border-radius: 8px;
+    border: 1px solid #424542;
+  
+    box-shadow: 4px 4px #e7dfe7, -4px -4px #e7dfe7, 4px -4px #e7dfe7,
+      -4px 4px #e7dfe7, 0 -2px #9c9a9c, -2px 0 #7b757b, 0 2px #424542;
+  }
+  .signin-select {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: Column;
+      /* padding: 20px; */
+      /* margin:20px; */
+      width: 70%;
+      height: 70%;
+      background: linear-gradient(to bottom, #6c6eb2 0%, #181870 64%, #000028 100%);
+      border-radius: 8px;
+      border: 1px solid #424542;
+    
+      box-shadow: 4px 4px #e7dfe7, -4px -4px #e7dfe7, 4px -4px #e7dfe7,
+        -4px 4px #e7dfe7, 0 -2px #9c9a9c, -2px 0 #7b757b, 0 2px #424542;
+    }
+    
+  .menu-button {
+    font-family: "Press Start 2P", sans-serif;
+  }
+
+input:-internal-autofill-selected {
+    background-color: #4e4a4e !important;
+    appearance: menulist-button;
+    color: black !important;
+}
+
+.rpgui-content input {
+    text-shadow: none;
+}
+
+input {
+    font: 'Press Start 2P', cursive !important;
+}
+
+.submitBtn {
+    align-items: center
+}
+
+  .game-wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    background-color: gray
+  }
+  
