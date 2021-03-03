@@ -11,8 +11,8 @@
 }
 
 .Character_spritesheet {
-    animation: moveSpritesheet 1s steps(3) infinite;
-    width: 96px;
+    animation: moveSpritesheet 1s steps(1) infinite;
+    width: 32px;
     position: absolute;
 }
 
@@ -27,7 +27,7 @@
 
 .tile {
     display: inline-flex;
-    background-color: rgb(68, 187, 68);
+    /* background-color: rgb(68, 187, 68); */
 }
 
 .grass {
