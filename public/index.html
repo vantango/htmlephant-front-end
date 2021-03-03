@@ -35,7 +35,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div class="rpgui-content rpgui-cursor-default" style="overflow-y:scroll;" id="root"></div>
+    <div class="rpgui-content rpgui-cursor-default" style="overflow-y:scroll; overflow-x: scroll;" id="root"></div>
     <!-- <div class= "modal" style = "display:none">
       <section class="modal-main">
           <button type="button">
@@ -54,15 +54,15 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <div class="player">
-      <!--Display song info   -->
-      <div class="details">
+    <div id="player" class="player" style="display: block">
+      <!-- Display song info   -->
+      <div id="details" class="details">
         <div class="now-playing">Song x Of y</div>
         <div class="song-name">Song Name</div>
         <div class="song-artist">Song Artist</div>
       </div>
 
-      <!-- Audio player buttons-->
+      <!-- Audio player buttons -->
       <div class="buttons">
         <div class="prev-song" onClick="prevSong()">
           <!-- <i class="fa fa-step-backward fa-2x"></i> -->
@@ -79,7 +79,7 @@
       </div>
 
       <div class="slider_container">
-        Vol -
+        <!-- Vol - -->
         <!-- <i class="fa fa-volume-down"></i>  -->
         <input
           type="range"
@@ -89,7 +89,7 @@
           class="volume_slider"
           onchange="setVolume()"
         />
-         Vol +
+         <!-- Vol + -->
         <!-- <i class="fa fa-volume-up"></i>  -->
       </div>
     </div>
