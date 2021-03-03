@@ -27,7 +27,7 @@
 
 .tile {
     display: inline-flex;
-    background-color: rgb(68, 187, 68);
+    /* background-color: rgb(68, 187, 68); */
 }
 
 .grass {

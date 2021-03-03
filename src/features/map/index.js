@@ -7,12 +7,12 @@ import rock from './tiles/rock.png'
 import tree from './tiles/tree4.png'
 import chest from './tiles/chest.png'
 import door from './tiles/door.jpg'
-import denis from './tiles/denisv3.png'
+import denis from './tiles/denisv4.png'
 import zac from './tiles/f2.png'
-import aslan from './tiles/aslanv3.png'
+import aslan from './tiles/aslanv4.png'
 import joe from './tiles/e1.png'
-import path3 from './tiles/path3.png'
-import path2 from './tiles/path2.png'
+import path3 from './tiles/path.png'
+import fire2 from './tiles/fire2.png'
 
 
 
@@ -26,6 +26,8 @@ function getTileSprite(type) {
             return 'grass'
         case 2:
             return 'gravel'
+        case 3:
+            return path3
         case 10:
             return rock
         case 11:
@@ -59,9 +61,7 @@ function getTileSprite(type) {
             // main door in east room
             return door
         case 27:
-            return path3
-        case 28:
-            return path2
+            return fire2
         default:
             break;
     }
