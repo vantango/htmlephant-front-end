@@ -1,5 +1,6 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { useLocation, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import World from "./features/world";
 import API from "./utils/API"
 import Menu from "./pages/menu"
@@ -9,15 +10,22 @@ import Game from "./pages/game"
 import WinScreen from "./pages/winscreen"
 import Endscreen from "./pages/endscreen"
 // import "./styles.css";
+import store from "./config/store";
 
-
-const apiCall = () => {
-  API.allAlgo().then(data => {
-    console.log(data);
-  })
-}
 
 function App() {
+
+    // let location = useLocation();
+    // console.log(location.pathname)
+    // React.useEffect(() => {
+    //   console.log(location.pathname)
+    //   store.dispatch({
+    //     type: 'CHANGE_LOCATION',
+    //     payload: {
+    //       location: location.pathname
+    //     }
+    //   })
+    // }, [location])
 
   return (
     <Router>

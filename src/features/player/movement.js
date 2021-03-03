@@ -3,6 +3,7 @@ import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from "../../config/constants";
 import Modal from "../../components/Modal/index";
 import _debounce from 'lodash.debounce';
 import API from "../../utils/API"
+
 import { tiles1 } from "../../data/maps/1";
 import { tiles2 } from "../../data/maps/2";
 import { tiles3 } from "../../data/maps/3";
@@ -62,15 +63,6 @@ export default function handleMovement(player) {
     return nextTile < 10;
   }
 
-  // function showModal() {
-  //   store.dispatch({
-  //     type: "SHOW_MODAL",
-  //     payload: {
-  //       show: true,
-  //     },
-  //   });
-  // }
-
   function sendQuestion(npc, questionNumber) {
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
@@ -97,7 +89,7 @@ export default function handleMovement(player) {
         payload: {
           show: true,
           name: `${res.data[npc].name}`,
-          dialogue: `${res.data[npc].flavorDialogue[level][2]}`,
+          dialogue: `${res.data[npc].flavorDialogue[level][Math.floor(Math.random()*3)]}`,
         },
       })
     });
@@ -128,7 +120,7 @@ export default function handleMovement(player) {
                 show: true,
                 name: `${res.data[0].name}`,
                 dialogue: `${res.data[0].usefulDialogue[level][0]}`,
-                questionNumber: 0
+                // questionNumber: 0
               },
             })
           });
@@ -142,8 +134,7 @@ export default function handleMovement(player) {
                 show: true,
                 name: `${res.data[0].name}`,
                 dialogue: `${res.data[0].usefulDialogue[level][1]}`,
-                form: "mc",
-                questionNumber: 0
+                // questionNumber: 0
               },
             })
           });
@@ -288,6 +279,12 @@ export default function handleMovement(player) {
   }
 
   const dispatchMove = _debounce((direction, newPos) => {
+    store.dispatch({
+      type: "SHOW_MODAL",
+      payload: {
+        show: false
+      }
+    })
     document.querySelector('.player_animation').classList.remove('notransition')
     const walkIndex = getWalkIndex();
     store.dispatch({
@@ -351,13 +348,18 @@ export default function handleMovement(player) {
       }
     }
   })
-  // console.log(usePathname)
 
-  // if(window.location.pathname === "/game") {
+  
+  
+  // only adds an event listener when url path is '/game/
   window.addEventListener("keydown", (e) => {
-    handleKeyDown(e);
-  });
-  // }
+    const location = store.getState().world.location
+    console.log("this is the location from state" + location)
+    
+      if (location === "/game") {
+      handleKeyDown(e);
+    };
+  }) 
 
   return player;
 }
