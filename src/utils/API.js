@@ -49,6 +49,12 @@ const API = {
                 authorization: `Bearer: ${token}`
             }
         })
+    },
+    playAsCat: id => {
+        return axios.put(`${URL_PREFIX}/switchtocat/${id}`, id)
+    },
+    playAsManatee: id => {
+        return axios.put(`${URL_PREFIX}/switchtomanatee/${id}`, id)
     }
 }
 

@@ -12,7 +12,8 @@ const intitialState = {
     // is question 2 answered
     question2: false,
     // is question 3 answered
-    question3: false
+    question3: false,
+    character: "Cat"
 }
 const userReducer = (state=intitialState, action) => {
     switch(action.type) {

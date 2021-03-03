@@ -121,6 +121,8 @@ function LoadGame() {
           <label>Password:
           <input name="password" type="password" placeholder="password" onChange={handleInputChange} />
           </label>
+          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={}>Play as Cat</button>
+          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={}>Play as Manatee</button>
           <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
           {/* <input id="submitBtn" type="submit" value="Submit" onClick={handleSubmit} /> */}
         </form>
