@@ -50,11 +50,11 @@ const API = {
             }
         })
     },
-    playAsCat: id => {
-        return axios.put(`${URL_PREFIX}/switchtocat/${id}`, id)
+    playAsCat: username => {
+        return axios.put(`${URL_PREFIX}/switchtocat/${username}`)
     },
-    playAsManatee: id => {
-        return axios.put(`${URL_PREFIX}/switchtomanatee/${id}`, id)
+    playAsManatee: username => {
+        return axios.put(`${URL_PREFIX}/switchtomanatee/${username}`)
     }
 }
 
