@@ -76,12 +76,12 @@ function playpauseSong() {
   function nextSong() { 
     // Go back to the first song if the 
     // current one is the last in the Song list 
-    if (Song_index < playlist.length - 1) 
-      Song_index += 1; 
-    else Song_index = 0; 
+    if (song_index < playlist.length - 1) 
+      song_index += 1; 
+    else song_index = 0; 
     
     // Load and play the new song 
-    loadSong(Song_index); 
+    loadSong(song_index); 
     playSong(); 
   } 
     
