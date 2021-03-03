@@ -6,12 +6,20 @@ import store from '../../config/store'
 // import './style.css'
 
 
-export default function Level() {
-    const level = store.getState().user.level
-    console.log(level)
+function Level(props) {
+    
     return (
         <div className="level">
-            <h2 id="level">Level: {level}</h2>
+            <h2 id="level">Level: {props.level}</h2>
         </div>
     )
 }
+
+function mapStateToProps(state) {
+    return {
+        ...state.user, 
+
+    }
+} 
+
+export default connect(mapStateToProps)(Level)
