@@ -119,7 +119,7 @@ function Editor() {
                         if (result === info.output) {
                             resetKeys()
                             showWinDialogue()
-                            history.push("/winscreen")
+                            history.push("/endscreen")
                         }
                         else {
                             showWrongDialogue()
