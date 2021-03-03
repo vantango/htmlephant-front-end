@@ -239,6 +239,7 @@ export default function handleMovement(player) {
         });
         return true;
       case 25:
+        
         // alert ("Leaving NORTH Room")
         changeRoom(tiles1);
         store.dispatch({
