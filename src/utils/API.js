@@ -43,12 +43,12 @@ const API = {
             }
         })
     },
-    resetLevel: (id, token) => {
-        return axios.put(`${URL_PREFIX}/reset/${id}`), {
+    levelDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/reset/${id}`, {
             headers: {
                 authorization: `Bearer: ${token}`
             }
-        }
+        })
     }
 }
 
