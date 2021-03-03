@@ -27,22 +27,22 @@ function Endscreen() {
         API.levelDown(id, token).then((res) => {
             console.log(`Here's what we get back: ${JSON.stringify(res)}`)
             console.log("===================================")
-            // store.dispatch({
-            //     type: "USER_ACTION",
-            //     payload: {
-            //         ...store.getState().user,
-            //         key: 0,
-            //         level: 1,
-            //         question1: false,
-            //         question2: false,
-            //         question3: false,
-            //         encounter: 0
-            //     },
-            // });
+            store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                    ...store.getState().user,
+                    key: 0,
+                    level: 1,
+                    question1: false,
+                    question2: false,
+                    question3: false,
+                    encounter: 0
+                },
+            });
         }).catch(err => {
             err ? console.log(`Due to your idiocy, ${err}`) : console.log("Success!")
         })
-        // history.push("/");
+        history.push("/");
     };
 
     const handleExit = (e) => {
