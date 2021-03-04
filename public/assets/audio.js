@@ -26,12 +26,6 @@ let playlist = [
     artist: "Tyler Baldwin", 
     path: "./assets/battle_theme_2.wav"
   }
-//   { 
-//     name: "Shipping Lanes", 
-//     artist: "Chad Crouch", 
-//     image: "Image URL", 
-//     path: "Shipping_Lanes.mp3", 
-//   }, 
 ]; 
 
 function loadSong(song_index) { 
