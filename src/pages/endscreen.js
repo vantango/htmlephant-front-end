@@ -101,6 +101,15 @@ function Endscreen() {
           final challenge, I present you with the ultimate gift: A joe.joe email
           address. Go forth and always be coding.
         </h2>
+        <div className="music-plug">
+        <a href={link} target="blank">
+          <img
+            className="bass-clef"
+            src={bass_clef_black}
+            alt="Link to music by Tyler Baldwin"
+          />
+        </a>
+      </div>
         <button
           type="submit"
           className="rpgui-button"
@@ -118,15 +127,7 @@ function Endscreen() {
           Exit
         </button>
       </div>
-      <div className="music-plug">
-        <a href={link} target="blank">
-          <img
-            className="bass-clef"
-            src={bass_clef_black}
-            alt="Link to music by Tyler Baldwin"
-          />
-        </a>
-      </div>
+
     </div>
   );
 }
