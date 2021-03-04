@@ -79,7 +79,6 @@ function LoadGame() {
 
   // Send user state to store and set token to local storage on successful login
   const handleSubmit = () => {
-    // e.preventDefault();
     API.login(loginState).then(res => {
       console.log(`Congrats! ${JSON.stringify(res.data)}`)
       localStorage.setItem("token", res.data.token);
