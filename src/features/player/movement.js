@@ -302,7 +302,7 @@ export default function handleMovement(player) {
   }
 
   const dispatchMove = _debounce((direction, newPos) => {
-    document.querySelector('#player').style.display = "block"
+    // document.querySelector('#player').style.display = "block"
 
     store.dispatch({
       type: "SHOW_MODAL",
