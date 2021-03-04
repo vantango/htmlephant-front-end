@@ -59,6 +59,28 @@ function NewGame() {
     })
   }
 
+    // Switch player to cat
+    const catMe = e => {
+      e.preventDefault();
+      setSignupState({ ...signupState, character: "Cat" });
+      API.playAsCat(signupState.username).then(data => {
+        data ? console.log(data) : console.log("IDIOT")
+      }).catch(err => {
+        err ? console.log(`FOOL! ${err}`) : console.log("Success!")
+      });
+    }
+  
+    // Switch player to manatee
+    const manatMee = e => {
+      e.preventDefault();
+      setSignupState({ ...signupState, character: "Manatee" });
+      API.playAsManatee(signupState.username).then(data => {
+        data ? console.log(data) : console.log("IDIOT")
+      }).catch(err => {
+        err ? console.log(`FOOL! ${err}`) : console.log("Success!")
+      });
+    }
+
   const handleSubmit = e => {
     e.preventDefault();
     if (!signupState.username || !signupState.password) {
@@ -92,6 +114,7 @@ function NewGame() {
         setSignupState({
           username: "",
           password: "",
+          character: ""
         });
         history.push("/game");
       }).catch(err => {
@@ -128,13 +151,10 @@ function NewGame() {
             Password:
           <input name="password" type="password" onChange={handleInputChange} />
           </label>
-          <input className="rpgui-radio" type="radio" id="cat" name="character" value="cat" onChange={handleInputChange} />
-          <label for="male">Cat</label><br />
-          <input className="rpgui-radio" type="radio" id="manatee" name="character" value="manatee" onChange={handleInputChange} />
-          <label for="female">Manatee</label><br />
-          {/* <input type="submit" value="Submit" onClick={handleSubmit} /> */}
+          <button id="catBtn" type="submit" value="Cat" className="rpgui-button" onClick={catMe}>Play as Cat</button>
+          <button id="manateeBtn" type="submit" value="Manatee" className="rpgui-button" onClick={manatMee}>Play as Manatee</button>
+          <input type="submit" value="Submit" onClick={handleSubmit} />
           <div className="float:right">
-          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
           </div>
 
         </form>
