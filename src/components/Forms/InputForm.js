@@ -12,7 +12,6 @@ class InputForm extends React.Component {
   
     handleChange(event) {
        let inputVal = event.target.value
-       console.log(inputVal)
       this.setState({value: inputVal});
     }
   
