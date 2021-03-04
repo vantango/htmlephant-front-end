@@ -154,12 +154,6 @@ function LoadGame() {
           </label>
           <button id="catBtn" type="submit" value="Cat" className="rpgui-button" onClick={catMe}>Play as Cat</button>
           <button id="manateeBtn" type="submit" value="Manatee" className="rpgui-button" onClick={manatMee}>Play as Manatee</button>
-<<<<<<< HEAD
-          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
-=======
-          {/* <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button> */}
-          {/* <input id="submitBtn" type="submit" value="Submit" onClick={handleSubmit} /> */}
->>>>>>> dev
         </form>
       </div>
       <ToastContainer />

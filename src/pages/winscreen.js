@@ -4,6 +4,8 @@ import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./winscreen.css";
 import Sound from '../features/sound'
+import bass_clef_black from "./imgs/bass_clef_black.png"
+import bass_clef_blue from "./imgs/bass_clef_blue.png"
 
 
 function WinScreen() {
@@ -53,12 +55,10 @@ function WinScreen() {
       "https://mutemusic64.bandcamp.com/album/h-xan"
     ]
 
-   const linkSites= function() {
-      const randomSite = Math.random() * links.length;
-      let index = parseInt(index, 10);
-      let link = 'http://' + links[index];
-      return link
-   }
+      var randomSite = Math.random() * links.length;
+      randomSite = parseInt(randomSite, 10);
+      let link = links[randomSite];
+
   return (
     <div className="game-wrapper">
       <Sound />
@@ -68,11 +68,12 @@ function WinScreen() {
         <h2>
           Nice work! Snaps to you, and good luck on the next challenge!
         </h2>
+        <div className="music-plug">
+      <a href={link} target="blank"><img className="bass-clef" src={bass_clef_black} alt="Link to music by Tyler Baldwin" /></a>
+      </div>
         <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Submit</button>
       </div>
-      <div className="music-plug">
-      <a href="javascript:linkSites()"><img className="bass-clef" src="./imgs/bass_clef_black.png" alt="Link to music by Tyler Baldwin" onClick={linkSites} /></a>
-      </div>
+     
     </div>
   );
 }
