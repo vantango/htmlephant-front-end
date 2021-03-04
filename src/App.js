@@ -9,6 +9,7 @@ import NewGame from "./pages/newgame"
 import Game from "./pages/game"
 import WinScreen from "./pages/winscreen"
 import Endscreen from "./pages/endscreen"
+
 // import "./styles.css";
 import store from "./config/store";
 

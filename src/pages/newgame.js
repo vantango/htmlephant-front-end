@@ -4,6 +4,8 @@ import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./newgame.css"
 import { ToastContainer, toast } from 'react-toastify'
+import Sound from '../features/sound'
+
 
 
 function NewGame() {
@@ -59,34 +61,18 @@ function NewGame() {
     })
   }
 
-    // Switch player to cat
-    const catMe = e => {
-      e.preventDefault();
-      setSignupState({ ...signupState, character: "Cat" });
-      API.playAsCat(signupState.username).then(data => {
-        data ? console.log(data) : console.log("IDIOT")
-      }).catch(err => {
-        err ? console.log(`FOOL! ${err}`) : console.log("Success!")
-      });
-    }
-  
-    // Switch player to manatee
-    const manatMee = e => {
-      e.preventDefault();
-      setSignupState({ ...signupState, character: "Manatee" });
-      API.playAsManatee(signupState.username).then(data => {
-        data ? console.log(data) : console.log("IDIOT")
-      }).catch(err => {
-        err ? console.log(`FOOL! ${err}`) : console.log("Success!")
-      });
-    }
-
   const handleSubmit = e => {
+    setSignupState({
+      ...signupState,
+      character: e.target.value
+    })
+
     e.preventDefault();
     if (!signupState.username || !signupState.password) {
       console.log("username and password required")
       emptyUsernameOrPassword()
     } else {
+
       API.signup(signupState).then(res => {
         console.log(`Congrats! ${JSON.stringify(res.data)}`);
         localStorage.setItem("token", res.data.token)
@@ -114,7 +100,6 @@ function NewGame() {
         setSignupState({
           username: "",
           password: "",
-          character: ""
         });
         history.push("/game");
       }).catch(err => {
@@ -140,6 +125,7 @@ function NewGame() {
 
   return (
     <div className="game-wrapper">
+      <Sound />
       <div className="signin-select rpgui-container framed">
         <h1 style={{ fontSize: '250%' }}>Signup</h1>
         <form>
@@ -151,11 +137,8 @@ function NewGame() {
             Password:
           <input name="password" type="password" onChange={handleInputChange} />
           </label>
-          <button id="catBtn" type="submit" value="Cat" className="rpgui-button" onClick={catMe}>Play as Cat</button>
-          <button id="manateeBtn" type="submit" value="Manatee" className="rpgui-button" onClick={manatMee}>Play as Manatee</button>
-          <input type="submit" value="Submit" onClick={handleSubmit} />
-          <div className="float:right">
-          </div>
+          <button className="rpgui-button"  id="cat" name="character" value="cat" onClick={handleSubmit}>Play as Cat</button>
+          <button className="rpgui-button"  id="manatee" name="character" value="manatee" onClick={handleSubmit}>Play as Manatee</button>
 
         </form>
       </div>

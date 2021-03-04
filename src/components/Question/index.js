@@ -6,7 +6,6 @@ import Editor from "../Forms/CodeEditor"
 
 
 function Question(props) {
-  console.log(props.form)
   switch (props.form) {
     case "dialogue":
       return (

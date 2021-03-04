@@ -3,6 +3,10 @@ import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./winscreen.css";
+import Sound from '../features/sound'
+import bass_clef_black from "./imgs/bass_clef_black.png"
+import bass_clef_blue from "./imgs/bass_clef_blue.png"
+
 
 function WinScreen() {
 
@@ -45,16 +49,31 @@ function WinScreen() {
 
     history.push("/game");
   };
+    let links = [
+      "https://instagram.com/mutemusic64?igshid=ybongwu1z9kh",
+      "https://youtube.com/channel/UCWmvXyNvEgJneHaQLco6a3Q",
+      "https://mutemusic64.bandcamp.com/album/h-xan"
+    ]
+
+      var randomSite = Math.random() * links.length;
+      randomSite = parseInt(randomSite, 10);
+      let link = links[randomSite];
+
   return (
     <div className="game-wrapper">
+      <Sound />
       <div className="menu-select rpgui-container framed">
-        <label>Wizards and Whiteboards</label>
-        <h1> Congratulations!</h1>
+        <h1>Wizards and Whiteboards</h1>
+        <h1 style={{ fontSize: '250%'}}> Congratulations!</h1>
         <h2>
           Nice work! Snaps to you, and good luck on the next challenge!
         </h2>
+        <div className="music-plug">
+      <a href={link} target="blank"><img className="bass-clef" src={bass_clef_black} alt="Link to music by Tyler Baldwin" /></a>
+      </div>
         <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Submit</button>
       </div>
+     
     </div>
   );
 }

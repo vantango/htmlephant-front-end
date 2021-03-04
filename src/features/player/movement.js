@@ -13,7 +13,6 @@ import { ANIMATION_SPEED } from '../../config/constants'
 const ANIMATION_WITH_PADDING = ANIMATION_SPEED * 1.25
 
 export default function handleMovement(player) {
-  // const stepSize =
   function getNewPosition(oldPos, direction) {
     switch (direction) {
       case "WEST":
@@ -46,7 +45,6 @@ export default function handleMovement(player) {
   }
 
   function observeBoundaries(oldPos, newPos) {
-    // console.log(newPos)
     return (
       newPos[0] >= 0 &&
       newPos[0] <= MAP_WIDTH - SPRITE_SIZE &&
@@ -66,8 +64,7 @@ export default function handleMovement(player) {
   function sendQuestion(npc, questionNumber) {
 
     document.querySelector('#player').style.display = "none"
-    // const volume = document.getElementsByTagName('audio').volume / .5
-    // document.getElementsByTagName('audio').volume = volume
+
 
 
 
@@ -110,9 +107,7 @@ export default function handleMovement(player) {
     const tiles = store.getState().map.tiles;
     const y = newPos[1] / SPRITE_SIZE;
     const x = newPos[0] / SPRITE_SIZE;
-    // console.log(x, y);
     const nextTile = tiles[y][x];
-    // console.log(tiles[y][x]);
     switch (nextTile) {
       // Joe
       case 18:
@@ -138,8 +133,6 @@ export default function handleMovement(player) {
         }
         else if (store.getState().user.encounter === 1 ) {
     document.querySelector('#player').style.display = "none"
-
-          // alert("Must have three keys to answer my question")
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
@@ -292,7 +285,6 @@ export default function handleMovement(player) {
   function changeRoom(tiles) {
     // take out player animation transition
     document.querySelector('.player_animation').classList.add('notransition')
-    // console.log(room)
     store.dispatch({
       type: "ADD_TILES",
       payload: {
@@ -302,7 +294,7 @@ export default function handleMovement(player) {
   }
 
   const dispatchMove = _debounce((direction, newPos) => {
-    document.querySelector('#player').style.display = "block"
+    // document.querySelector('#player').style.display = "block"
 
     store.dispatch({
       type: "SHOW_MODAL",
@@ -342,34 +334,32 @@ export default function handleMovement(player) {
   }
 
   const handleKeyDown = (e => {
-    // console.log(e.target)
     if (e.target !== "userAns") {
       switch (e.keyCode) {
         case 37:
-          // case 65:
+        
           e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-          // case 87:
-
+       
           e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-          // case 68:
+         
 
           e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-          // case 83:
+       
 
           e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-        // console.log(e.keyCode);
+      
       }
     }
   })

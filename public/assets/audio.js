@@ -7,14 +7,14 @@ let next_btn = document.querySelector(".next-song");
 let prev_btn = document.querySelector(".prev-song"); 
 let volume_slider = document.querySelector(".volume_slider"); 
   
-// global  js variables
+// global variables
 let song_index = 0; 
 let isPlaying = false; 
   
 // Creates the audio element in HTML
 let selectedSong = document.createElement('audio'); 
   
-// Songs in playlist
+// Songs
 let playlist = [ 
   { 
     name: "Title Screen Music", 
@@ -26,12 +26,6 @@ let playlist = [
     artist: "Tyler Baldwin", 
     path: "./assets/battle_theme_2.wav"
   }
-//   { 
-//     name: "Shipping Lanes", 
-//     artist: "Chad Crouch", 
-//     image: "Image URL", 
-//     path: "Shipping_Lanes.mp3", 
-//   }, 
 ]; 
 
 function loadSong(song_index) { 
@@ -39,7 +33,7 @@ function loadSong(song_index) {
     // Load a new song 
     selectedSong.src = playlist[song_index].path; 
     selectedSong.load();
-    // selectedSong.autoplay=true
+ 
 
     
     // Update song info
@@ -49,8 +43,7 @@ function loadSong(song_index) {
     selectedSong.addEventListener("ended", nextSong); 
 }
 function playpauseSong() { 
-    // Switch between playing and pausing 
-    // depending on the current state 
+    // Toggle playing and pausing depending on the current state 
     if (!isPlaying) playSong(); 
     else pauseSong(); 
   } 
@@ -60,8 +53,8 @@ function playpauseSong() {
     selectedSong.play(); 
     isPlaying = true; 
     
-    // Replace icon with the pause icon 
-    playpause_btn.innerHTML = '<h2>Pause<h2>'; 
+    // Replace icon w/ pause icon
+    playpause_btn.innerHTML = '<img src="./assets/imgs/WW_Shield.png" alt="Previous Track">'; 
   } 
     
   function pauseSong() { 
@@ -69,8 +62,8 @@ function playpauseSong() {
     selectedSong.pause(); 
     isPlaying = false; 
     
-    // Replace icon with the play icon 
-    playpause_btn.innerHTML = '<h2>Play</h2>';; 
+    // Replace icon w/ play icon 
+    playpause_btn.innerHTML = '<img src="./assets/imgs/WW_Sword.png" alt="Previous Track" >';; 
   } 
     
   function nextSong() { 

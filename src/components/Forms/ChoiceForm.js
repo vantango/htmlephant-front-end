@@ -15,15 +15,13 @@ class ChoiceForm extends React.Component {
   }
 
   handleChange(event) {
-    console.log(event.target.value)
+
     this.setState({ value: event.target.value });
-    // console.log(this.state.value)
   }
 
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.value === this.props.correct) {
-      console.log("yay!")
 
 
       const newAmount = store.getState().key.amount + 1
@@ -94,12 +92,6 @@ class ChoiceForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        {/* <select value={this.state.value} onChange={this.handleChange}>
-          {this.props.answers.map(answer => (
-            
-            <option key={uuidv4()} value={answer}>{answer}</option>))
-          }
-        </select> */}
         {this.props.answers.map(answer => (
           <div key={uuidv4()}>
           <input className="rpgui-radio" type="radio" id={answer} name={answer}
