@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LoadGame from "./loadgame";
-import NewGame from "./newgame";
+
 import Sound from '../features/sound'
 
-import "./pages.css";
+import "./menu.css";
 import { useLocation } from "react-router-dom";
 import store from "../config/store";
 
@@ -25,15 +24,15 @@ function Menu() {
     <div className= "game-wrapper">
         <Sound />
 
-        <div className="menu-select">
-            <label>Wizards and Whiteboards</label>
+        <div className="menu-select rpgui-container framed">
+            <h1 style={{ fontSize: '250%' }}>Wizards and Whiteboards</h1>
         <Link to={"/load"}>
-            <button id="load-game" className="menu-button"  style={{ color: "white" }}>
+            <button id="load-game" className="menu-button rpgui-button"  style={{ color: "white" }}>
             Load Game
             </button>
         </Link>
         <Link to={"/new"}>
-            <button id="new-game" className="menu-button" style={{ color: "white" }}>
+            <button id="new-game" className="menu-button rpgui-button" style={{ color: "white" }}>
             New Game
             </button>{" "}
         </Link>
