@@ -159,8 +159,6 @@ function Modal(props) {
             break;
         }
       }
-      // const answers = res.data.answers + question
-      // console.log(answers)
       function dispatchQuestion() {
 
         store.dispatch({
@@ -169,13 +167,11 @@ function Modal(props) {
             answers: answers,
             question: `${question}`,
             correct: `${correct}`,
-            // dialogue: `${res.data[0].dialogue}`,
             form: "mc",
           },
         })
         document.querySelector(".question").style.display = "block";
       }
-    console.log(store.getState().question.answers)
   }
 
   function closeModal() {
@@ -209,9 +205,6 @@ function Modal(props) {
         <hr className="golden"/>
         <Question />
         <div className={"actions"}>
-          {/* <button class="toggle-button" onClick={this.onClose}>
-            close
-          </button> */}
         </div>
       </div>
     );
@@ -224,8 +217,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Modal);
-
-// Modal.propTypes = {
-//   onClose: PropTypes.func.isRequired,
-//   show: PropTypes.bool.isRequired
-// };

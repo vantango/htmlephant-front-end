@@ -47,6 +47,18 @@ function WinScreen() {
 
     history.push("/game");
   };
+    let links = [
+      "https://instagram.com/mutemusic64?igshid=ybongwu1z9kh",
+      "https://youtube.com/channel/UCWmvXyNvEgJneHaQLco6a3Q",
+      "https://mutemusic64.bandcamp.com/album/h-xan"
+    ]
+
+   const linkSites= function() {
+      const randomSite = Math.random() * links.length;
+      let index = parseInt(index, 10);
+      let link = 'http://' + links[index];
+      return link
+   }
   return (
     <div className="game-wrapper">
       <Sound />
@@ -57,6 +69,9 @@ function WinScreen() {
           Nice work! Snaps to you, and good luck on the next challenge!
         </h2>
         <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Submit</button>
+      </div>
+      <div className="music-plug">
+      <a href="javascript:linkSites()"><img className="bass-clef" src="./imgs/bass_clef_black.png" alt="Link to music by Tyler Baldwin" onClick={linkSites} /></a>
       </div>
     </div>
   );

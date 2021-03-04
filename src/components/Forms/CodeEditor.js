@@ -100,7 +100,7 @@ function Editor() {
                         }
                 }).catch(err => {
                     showWrongDialogue()
-                    console.log(`Due to your idiocy, ${err}`);
+
                 })
                 break;
             case 3:
@@ -110,8 +110,6 @@ function Editor() {
                     // Create and call a new function to run the code written into the editor
                     const testFunction = new Function("str", editorState.editorText);
                     const result = testFunction(info.args)
-                    console.log(`Here's what we get back: ${result}`);
-                    console.log(`Here's what we expect: ${info.output}`);
 
                     // API call for NPCs
                     API.allNPC().then(data => {
@@ -143,7 +141,6 @@ function Editor() {
             <AceEditor
                 className="ace-editor"
                 mode="javascript"
-                // theme="solarized-dark"
                 onChange={onChange}
                 name="test"
                 width="100%"
