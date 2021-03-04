@@ -4,6 +4,8 @@ import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./newgame.css"
 import { ToastContainer, toast } from 'react-toastify'
+import Sound from '../features/sound'
+
 
 
 function NewGame() {
@@ -117,6 +119,7 @@ function NewGame() {
 
   return (
     <div className="game-wrapper">
+      <Sound />
       <div className="signin-select rpgui-container framed">
         <h1 style={{ fontSize: '250%' }}>Signup</h1>
         <form>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LoadGame from "./loadgame";
 import NewGame from "./newgame";
+import Sound from '../features/sound'
+
 import "./pages.css";
 import { useLocation } from "react-router-dom";
 import store from "../config/store";
@@ -21,6 +23,8 @@ function Menu() {
 
   return (
     <div className= "game-wrapper">
+        <Sound />
+
         <div className="menu-select">
             <label>Wizards and Whiteboards</label>
         <Link to={"/load"}>

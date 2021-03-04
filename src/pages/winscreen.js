@@ -3,6 +3,8 @@ import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./winscreen.css";
+import Sound from '../features/sound'
+
 
 function WinScreen() {
 
@@ -47,6 +49,7 @@ function WinScreen() {
   };
   return (
     <div className="game-wrapper">
+      <Sound />
       <div className="menu-select rpgui-container framed">
         <label>Wizards and Whiteboards</label>
         <h1> Congratulations!</h1>
