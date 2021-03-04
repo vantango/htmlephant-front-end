@@ -191,19 +191,22 @@ function Modal(props) {
     return null;
   } else if (props.questionNumber === 0) {
     return (
-      <div className={"modal"} id={"modal"} style={{ color: "Salmon" }}>
+      <div className="modal-wrapper">
+      <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
         <h3>{props.name} says:</h3>
         <h2>{props.dialogue}</h2>
-        <button onClick={closeModal}>Close</button>
+        <button onClick={closeModal} className="rpgui-button" style={{color: "white"}}>Close</button>
+      </div>
       </div>
     )
   }
   else {
     return (
-      <div className={"modal"} id={"modal"} style={{ color: "Salmon" }}>
+      <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
         <h3>{props.name} says:</h3>
         <h2>{props.dialogue}</h2>
-        <button onClick={showQuestion}>Next</button>
+        <button onClick={showQuestion} className="rpgui-button" style={{color: "white"}}>Next</button>
+        <hr className="golden"/>
         <Question />
         <div className={"actions"}>
           {/* <button class="toggle-button" onClick={this.onClose}>

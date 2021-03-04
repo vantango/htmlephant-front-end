@@ -42,7 +42,13 @@ function Endscreen() {
         }).catch(err => {
             err ? console.log(`Due to your idiocy, ${err}`) : console.log("Success!")
         })
-        history.push("/");
+        store.dispatch({
+            type: "SHOW_MODAL",
+            payload: {
+              show: false
+            }
+          })
+        history.push("/game");
     };
 
     const handleExit = (e) => {
@@ -71,14 +77,14 @@ function Endscreen() {
 
     return (
         <div className="game-wrapper">
-            <div className="menu-select">
+            <div className="menu-select rpgui-container framed">
                 <label>Wizards and Whiteboards</label>
                 <h1> Congratulations!</h1>
                 <h2>
                     Hey, nice job! Just think, three months ago you'd never even see an HTML tag, and just look at you now! As a prize for completing the final challenge, I present you with the ultimate gift: A joe.joe email address. Go forth and always be coding.
         </h2>
-                <input type="submit" value="New Game" onClick={handleSubmit} />
-                <input type="submit" value="Exit" onClick={handleExit} />
+                <button type="submit" className="rpgui-button" value="New Game" onClick={handleSubmit} >New Game</button>
+                <button type="submit" className="rpgui-button" value="Exit" onClick={handleExit} >Exit</button>
             </div>
         </div>
     )

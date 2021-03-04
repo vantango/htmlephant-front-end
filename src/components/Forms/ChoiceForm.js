@@ -102,17 +102,15 @@ class ChoiceForm extends React.Component {
         </select> */}
         {this.props.answers.map(answer => (
           <div key={uuidv4()}>
-          <label>
-          <input type="radio" id="male" name="gender" 
+          <input className="rpgui-radio" type="radio" id={answer} name={answer}
             checked={this.state.value === `${answer}`}
             onChange={this.handleChange}
-          value={answer} />
-            {answer}
-          </label>
+            value={answer} />
+            <label htmlFor={answer}>{answer}</label>
           </div>
 
         ))}
-        <input type="submit" value="Submit" />
+          <button id="submitBtn" style={{color: "white"}}type="submit" value="Submit" className="rpgui-button" onClick={this.handleSubmit}>Submit</button>
       </form>
     );
   }

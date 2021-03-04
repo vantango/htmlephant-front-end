@@ -26,13 +26,12 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>React App</title>
-</head>
-
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div class="rpgui-content rpgui-cursor-default" style="overflow-y:scroll;" id="root"></div>
-  <!-- <div class= "modal" style = "display:none">
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="rpgui-content rpgui-cursor-default" style="overflow-y:scroll; overflow-x: scroll;" id="root"></div>
+    <!-- <div class= "modal" style = "display:none">
       <section class="modal-main">
           <button type="button">
           Close
@@ -50,40 +49,51 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-  <div class="player">
-    <!--Display song info   -->
-    <div class="details">
-      <div class="now-playing">Song x Of y</div>
-      <div class="song-name">Song Name</div>
-      <div class="song-artist">Song Artist</div>
+    <div id="player" class="player" style="display: block">
+      <!-- Display song info   -->
+      <div id="details" class="details">
+        <div class="now-playing">Song x Of y</div>
+        <div class="song-name">Song Name</div>
+        <div class="song-artist">Song Artist</div>
+      </div>
+
+      <!-- Audio player buttons -->
+      <div class="buttons">
+        <div class="prev-song" onClick="prevSong()">
+          <!-- <i class="fa fa-step-backward fa-2x"></i> -->
+          <h3>Prev</h3>
+        </div>
+        <div class="playpause-song" onClick="playpauseSong()">
+          <!-- <i class="fa fa-play-circle fa-5x"></i> -->
+          <h3>Play</h3>
+        </div>
+        <div class="next-song" onClick="nextSong()">
+          <h3>Next</h3>
+          <!-- <i class="fa fa-step-forward fa-2x"></i> -->
+        </div>
+      </div>
+
+      <div class="slider_container">
+        <!-- Vol - -->
+        <!-- <i class="fa fa-volume-down"></i>  -->
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="99"
+          class="volume_slider"
+          onchange="setVolume()"
+        />
+         <!-- Vol + -->
+        <!-- <i class="fa fa-volume-up"></i>  -->
+      </div>
     </div>
 
-    <!-- Audio player buttons-->
-    <div class="buttons">
-      <div class="prev-song" onClick="prevSong()">
-        <!-- <i class="fa fa-step-backward fa-2x"></i> -->
-        <h3>Prev</h3>
-      </div>
-      <div class="playpause-song" onClick="playpauseSong()">
-        <!-- <i class="fa fa-play-circle fa-5x"></i> -->
-        <h3>Play</h3>
-      </div>
-      <div class="next-song" onClick="nextSong()">
-        <h3>Next</h3>
-        <!-- <i class="fa fa-step-forward fa-2x"></i> -->
-      </div>
-    </div>
-
-    <div class="slider_container">
-      Vol -
-      <!-- <i class="fa fa-volume-down"></i>  -->
-      <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()" />
-      Vol +
-      <!-- <i class="fa fa-volume-up"></i>  -->
-    </div>
-  </div>
-
-  <script src="dist/rpgui.js"></script>
+    <script src="dist/rpgui.js"></script>
+<!-- 
+     <div id="root"></div>
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page. -->
 
   <script src="./assets/audio.js"></script>
 </body>

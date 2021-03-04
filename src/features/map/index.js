@@ -142,6 +142,7 @@ function Map(props) {
     return (
         <div
             name="map"
+            // className="rpgui-container framed"
             style={{
                 position: 'relative',
                 top: '0px',

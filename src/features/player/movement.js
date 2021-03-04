@@ -64,6 +64,13 @@ export default function handleMovement(player) {
   }
 
   function sendQuestion(npc, questionNumber) {
+
+    document.querySelector('#player').style.display = "none"
+    // const volume = document.getElementsByTagName('audio').volume / .5
+    // document.getElementsByTagName('audio').volume = volume
+
+
+
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
       store.dispatch({
@@ -82,6 +89,8 @@ export default function handleMovement(player) {
   }
 
   function sendMessage(npc) {
+    document.querySelector('#player').style.display = "none"
+
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
       store.dispatch({
@@ -109,6 +118,7 @@ export default function handleMovement(player) {
       case 18:
         const level = store.getState().user.level - 1
         if (store.getState().key.amount >= 3) {
+          document.querySelector('#player').style.display = "none"
 
           API.allNPC().then(res => {
             store.dispatch({
@@ -127,6 +137,8 @@ export default function handleMovement(player) {
 
         }
         else if (store.getState().user.encounter === 1 ) {
+    document.querySelector('#player').style.display = "none"
+
           // alert("Must have three keys to answer my question")
           API.allNPC().then(res => {
             store.dispatch({
@@ -141,6 +153,8 @@ export default function handleMovement(player) {
           });
         }
         else {
+    document.querySelector('#player').style.display = "none"
+
           store.dispatch({
             type: "USER_ACTION",
             payload: {
@@ -288,6 +302,8 @@ export default function handleMovement(player) {
   }
 
   const dispatchMove = _debounce((direction, newPos) => {
+    document.querySelector('#player').style.display = "block"
+
     store.dispatch({
       type: "SHOW_MODAL",
       payload: {

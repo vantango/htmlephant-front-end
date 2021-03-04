@@ -143,10 +143,10 @@ function Editor() {
             <AceEditor
                 className="ace-editor"
                 mode="javascript"
-                theme="solarized-dark"
+                // theme="solarized-dark"
                 onChange={onChange}
                 name="test"
-                width="50vw"
+                width="100%"
                 height="50vh"
                 fontSize="20"
                 editorProps={{ $blockScrolling: true }}
