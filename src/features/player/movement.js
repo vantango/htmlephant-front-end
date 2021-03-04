@@ -3,6 +3,7 @@ import { SPRITE_SIZE, MAP_WIDTH, MAP_HEIGHT } from "../../config/constants";
 import Modal from "../../components/Modal/index";
 import _debounce from 'lodash.debounce';
 import API from "../../utils/API"
+
 import { tiles1 } from "../../data/maps/1";
 import { tiles2 } from "../../data/maps/2";
 import { tiles3 } from "../../data/maps/3";
@@ -62,16 +63,14 @@ export default function handleMovement(player) {
     return nextTile < 10;
   }
 
-  // function showModal() {
-  //   store.dispatch({
-  //     type: "SHOW_MODAL",
-  //     payload: {
-  //       show: true,
-  //     },
-  //   });
-  // }
-
   function sendQuestion(npc, questionNumber) {
+
+    document.querySelector('#player').style.display = "none"
+    // const volume = document.getElementsByTagName('audio').volume / .5
+    // document.getElementsByTagName('audio').volume = volume
+
+
+
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
       store.dispatch({
@@ -90,6 +89,8 @@ export default function handleMovement(player) {
   }
 
   function sendMessage(npc) {
+    document.querySelector('#player').style.display = "none"
+
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
       store.dispatch({
@@ -97,7 +98,9 @@ export default function handleMovement(player) {
         payload: {
           show: true,
           name: `${res.data[npc].name}`,
-          dialogue: `${res.data[npc].flavorDialogue[level][2]}`,
+          dialogue: `${res.data[npc].flavorDialogue[level][Math.floor(Math.random()*3)]}`,
+          questionNumber: 0
+
         },
       })
     });
@@ -111,44 +114,12 @@ export default function handleMovement(player) {
     const nextTile = tiles[y][x];
     // console.log(tiles[y][x]);
     switch (nextTile) {
+      // Joe
       case 18:
         const level = store.getState().user.level - 1
-        if (store.getState().user.encounter === 0) {
-          store.dispatch({
-            type: "USER_ACTION",
-            payload: {
-              ...store.getState().user,
-              encounter: 1
-            }
-          })
-          API.allNPC().then(res => {
-            store.dispatch({
-              type: "SHOW_MODAL",
-              payload: {
-                show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
-                questionNumber: 0
-              },
-            })
-          });
-        }
-        else if (store.getState().key.amount < 3) {
-          // alert("Must have three keys to answer my question")
-          API.allNPC().then(res => {
-            store.dispatch({
-              type: "SHOW_MODAL",
-              payload: {
-                show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
-                form: "mc",
-                questionNumber: 0
-              },
-            })
-          });
-        }
-        else {
+        if (store.getState().key.amount >= 3) {
+          document.querySelector('#player').style.display = "none"
+
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
@@ -163,8 +134,48 @@ export default function handleMovement(player) {
               },
             })
           });
+
+        }
+        else if (store.getState().user.encounter === 1 ) {
+    document.querySelector('#player').style.display = "none"
+
+          // alert("Must have three keys to answer my question")
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
+                questionNumber: 0
+              },
+            })
+          });
+        }
+        else {
+    document.querySelector('#player').style.display = "none"
+
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {
+              ...store.getState().user,
+              encounter: +1
+            }
+          })
+          API.allNPC().then(res => {
+            store.dispatch({
+              type: "SHOW_MODAL",
+              payload: {
+                show: true,
+                name: `${res.data[0].name}`,
+                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
+                questionNumber: 0
+              },
+            })
+          });
         }
         return true;
+        // Denis
       case 15:
         if (store.getState().user.question3 === false) {
           sendQuestion(1, 3)
@@ -173,6 +184,7 @@ export default function handleMovement(player) {
           sendMessage(1)
         }
         return true;
+        // Zac
       case 16:
         if (store.getState().user.question2 === false) {
           sendQuestion(3, 2)
@@ -181,6 +193,7 @@ export default function handleMovement(player) {
           sendMessage(3)
         }
         return true;
+        // Aslan
       case 17:
         if (store.getState().user.question1 === false) {
           sendQuestion(2, 1)
@@ -244,6 +257,7 @@ export default function handleMovement(player) {
         });
         return true;
       case 25:
+        
         // alert ("Leaving NORTH Room")
         changeRoom(tiles1);
         store.dispatch({
@@ -288,6 +302,14 @@ export default function handleMovement(player) {
   }
 
   const dispatchMove = _debounce((direction, newPos) => {
+    document.querySelector('#player').style.display = "block"
+
+    store.dispatch({
+      type: "SHOW_MODAL",
+      payload: {
+        show: false
+      }
+    })
     document.querySelector('.player_animation').classList.remove('notransition')
     const walkIndex = getWalkIndex();
     store.dispatch({
@@ -351,13 +373,18 @@ export default function handleMovement(player) {
       }
     }
   })
-  // console.log(usePathname)
 
-  // if(window.location.pathname === "/game") {
+  
+  
+  // only adds an event listener when url path is '/game/
   window.addEventListener("keydown", (e) => {
-    handleKeyDown(e);
-  });
-  // }
+    const location = store.getState().world.location
+    console.log("this is the location from state" + location)
+    
+      if (location === "/game") {
+      handleKeyDown(e);
+    };
+  }) 
 
   return player;
 }

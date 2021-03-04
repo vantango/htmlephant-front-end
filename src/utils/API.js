@@ -43,6 +43,19 @@ const API = {
             }
         })
     },
+    levelDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/reset/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    playAsCat: username => {
+        return axios.put(`${URL_PREFIX}/switchtocat/${username}`)
+    },
+    playAsManatee: username => {
+        return axios.put(`${URL_PREFIX}/switchtomanatee/${username}`)
+    }
 }
 
 export default API;

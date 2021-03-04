@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import store from "../../config/store"
 import filled from '../../features/keys/filled.png'
+import { v4 as uuidv4 } from 'uuid'
+
 
 class ChoiceForm extends React.Component {
   constructor(props) {
@@ -13,7 +15,9 @@ class ChoiceForm extends React.Component {
   }
 
   handleChange(event) {
+    console.log(event.target.value)
     this.setState({ value: event.target.value });
+    // console.log(this.state.value)
   }
 
   handleSubmit(event) {
@@ -62,13 +66,21 @@ class ChoiceForm extends React.Component {
           break;
       }
 
+      const rightDialogue = store.getState().modal.rightDialogue
+      const name = store.getState().modal.name
+
 
       store.dispatch({
         type: "SHOW_MODAL",
         payload: {
-          show: false,
+          show: true,
+          dialogue: rightDialogue,
+          name: name,
+          questionNumber: 0
         }
       })
+
+
     } else {
       store.dispatch({
         type: "SHOW_MODAL",
@@ -82,12 +94,23 @@ class ChoiceForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <select value={this.state.value} onChange={this.handleChange}>
+        {/* <select value={this.state.value} onChange={this.handleChange}>
           {this.props.answers.map(answer => (
-            <option value={answer}>{answer}</option>))
+            
+            <option key={uuidv4()} value={answer}>{answer}</option>))
           }
-        </select>
-        <input type="submit" value="Submit" />
+        </select> */}
+        {this.props.answers.map(answer => (
+          <div key={uuidv4()}>
+          <input className="rpgui-radio" type="radio" id={answer} name={answer}
+            checked={this.state.value === `${answer}`}
+            onChange={this.handleChange}
+            value={answer} />
+            <label htmlFor={answer}>{answer}</label>
+          </div>
+
+        ))}
+          <button id="submitBtn" style={{color: "white"}}type="submit" value="Submit" className="rpgui-button" onClick={this.handleSubmit}>Submit</button>
       </form>
     );
   }

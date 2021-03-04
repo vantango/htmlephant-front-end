@@ -1,11 +1,22 @@
 import React from "react";
 import store from "../config/store";
 import API from "../utils/API";
-import { useHistory } from "react-router-dom";
-import "./pages.css";
+import { useHistory, useLocation } from "react-router-dom";
+import "./winscreen.css";
 
 function WinScreen() {
+
+  let location = useLocation();
+  console.log(location.pathname)
+  store.dispatch({
+      type: 'CHANGE_LOCATION',
+      payload: {
+          location: location.pathname
+      }
+  })
+
   let history = useHistory()
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const id = store.getState().user.id;
@@ -25,17 +36,24 @@ function WinScreen() {
       });
     });
 
+    store.dispatch({
+      type: "SHOW_MODAL",
+      payload: {
+        show: false
+      }
+    })
+
     history.push("/game");
   };
   return (
     <div className="game-wrapper">
-      <div className="menu-select">
+      <div className="menu-select rpgui-container framed">
         <label>Wizards and Whiteboards</label>
         <h1> Congratulations!</h1>
         <h2>
-          Despite your idiocy, you have conquered all my challenges. You live to walk another day, and for the love of god, don't waste it.
+          Nice work! Snaps to you, and good luck on the next challenge!
         </h2>
-        <input type="submit" value="Save Game" onClick={handleSubmit} />
+        <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Submit</button>
       </div>
     </div>
   );

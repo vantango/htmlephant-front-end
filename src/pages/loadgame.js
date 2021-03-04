@@ -1,12 +1,34 @@
 import React, { useState } from "react";
 import store from "../config/store";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import API from "../utils/API";
-import "./pages.css"
+import "./loadgame.css"
+import { ToastContainer, toast } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
+
 function LoadGame() {
+
+  let location = useLocation();
+  console.log(location.pathname)
+  store.dispatch({
+    type: 'CHANGE_LOCATION',
+    payload: {
+      location: location.pathname
+    }
+  })
+
+  const wrongLogin = () => {
+    toast.error("Wrong Username or Password",
+      {
+        position: toast.POSITION.TOP_CENTER
+      })
+  }
+
   let history = useHistory();
   // Set initial user state
   const [userState, setUserState] = useState({
+    character: "",
     username: "",
     password: "",
     token: "",
@@ -18,7 +40,8 @@ function LoadGame() {
   // Set initial login state
   const [loginState, setLoginState] = useState({
     username: "",
-    password: ""
+    password: "",
+    character: ""
   })
 
   // Set new login state with change in input form
@@ -30,6 +53,28 @@ function LoadGame() {
     })
   }
 
+  // Switch player to cat
+  const catMe = e => {
+    e.preventDefault();
+    setLoginState({ ...loginState, character: "Cat" });
+    API.playAsCat(loginState.username).then(data => {
+      data ? console.log(data) : console.log("IDIOT")
+    }).catch(err => {
+      err ? console.log(`FOOL! ${err}`) : console.log("Success!")
+    });
+  }
+
+  // Switch player to manatee
+  const manatMee = e => {
+    e.preventDefault();
+    setLoginState({ ...loginState, character: "Manatee" });
+    API.playAsManatee(loginState.username).then(data => {
+      data ? console.log(data) : console.log("IDIOT")
+    }).catch(err => {
+      err ? console.log(`FOOL! ${err}`) : console.log("Success!")
+    });
+  }
+
   // Send user state to store and set token to local storage on successful login
   const handleSubmit = e => {
     e.preventDefault();
@@ -37,6 +82,7 @@ function LoadGame() {
       console.log(`Congrats! ${JSON.stringify(res.data)}`)
       localStorage.setItem("token", res.data.token);
       setUserState({
+        character: res.data.user.character,
         username: res.data.user.username,
         password: res.data.user.password,
         token: res.data.token,
@@ -52,6 +98,7 @@ function LoadGame() {
         type: "USER_ACTION",
         payload: {
           ...store.getState().user,
+          character: res.data.user.character,
           username: res.data.user.username,
           password: res.data.user.password,
           token: res.data.token,
@@ -62,7 +109,8 @@ function LoadGame() {
       });
       setLoginState({
         username: "",
-        password: ""
+        password: "",
+        character: "Cat"
       });
       history.push("/game");
     }).catch(err => {
@@ -70,6 +118,7 @@ function LoadGame() {
       store.dispatch({
         type: "USER_ACTION",
         payload: {
+          character: "",
           username: "",
           password: "",
           token: "",
@@ -79,7 +128,8 @@ function LoadGame() {
         }
       })
       localStorage.removeItem("token");
-      alert("Wrong login information")
+      // alert("Wrong login information")
+      wrongLogin()
       // history.push("/");
     });
   }
@@ -89,16 +139,23 @@ function LoadGame() {
   // Render form component
   return (
 
-    <div className="game-wrapper">
-      <div className="signin-select">
-        <form>
-          <label>User:</label>
-          <input name="username" type="text" onChange={handleInputChange} />
-          <label>Password:</label>
-          <input name="password" type="password" onChange={handleInputChange} />
-          <input type="submit" value="Submit" onClick={handleSubmit} />
+    <div className="game-wrapper ">
+      <div className="signin-select rpgui-container framed-golden">
+        <h1 style={{ fontSize: '250%' }}>Login</h1>
+        <form autoComplete="off">
+          <label>User:
+          <input name="username" type="text" placeholder="username" onChange={handleInputChange} />
+          </label>
+          <label>Password:
+          <input name="password" type="password" placeholder="password" onChange={handleInputChange} />
+          </label>
+          <button id="catBtn" type="submit" value="Cat" className="rpgui-button" onClick={catMe}>Play as Cat</button>
+          <button id="manateeBtn" type="submit" value="Manatee" className="rpgui-button" onClick={manatMee}>Play as Manatee</button>
+          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
+          {/* <input id="submitBtn" type="submit" value="Submit" onClick={handleSubmit} /> */}
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }

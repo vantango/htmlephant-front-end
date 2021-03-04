@@ -1,7 +1,7 @@
 import React from "react";
 import World from "../features/world/index"
 import API from "../utils/API";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import store from "../config/store";
 
 
@@ -9,10 +9,20 @@ import store from "../config/store";
 function Game() {
     let history = useHistory();
 
+    let location = useLocation();
+    console.log(location.pathname)
+    store.dispatch({
+        type: 'CHANGE_LOCATION',
+        payload: {
+            location: location.pathname
+        }
+    })
+
+
     console.log("loaded")
     const token = localStorage.getItem('token')
     API.getVip(token).then((res) => {
-        if(res) {
+        if (res) {
             console.log(res.data)
             store.dispatch({
                 type: "USER_ACTION",
@@ -20,6 +30,7 @@ function Game() {
                     level: res.data.level,
                     name: res.data.username,
                     password: res.data.password,
+                    character: res.data.character,
                     question1: false,
                     question2: false,
                     question3: false,
@@ -31,13 +42,10 @@ function Game() {
         }
     }).catch(() => {
         console.log("not signed in")
-            history.push('/')
+        history.push('/')
     })
-    
 
-    window.addEventListener('onload', e => {
-        console.log(e)
-    })
+
 
     return (
         <World />

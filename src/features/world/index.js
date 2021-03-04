@@ -3,6 +3,7 @@ import Map from '../map'
 import Player from '../player'
 import Dpad from '../dpad'
 import Keys from '../keys'
+import Level from '../level'
 import Modal, {showModal} from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
 
@@ -21,7 +22,8 @@ function World(props) {
 
 
     return (
-        <div style={{
+        <div         
+        style={{
             position: 'relative',
             width: '650px',
             height: '400px',
@@ -31,9 +33,11 @@ function World(props) {
 
             <Map />
             <Player />
-            {/* <Modal /> */}
+            <div style={{display:"flex", justifyContent: "space-between"}}>
             <Dpad />
+            <Level />
             <Keys />
+            </div>
             <Modal onClose={props.showModal} show="false" />
         </div>
     )

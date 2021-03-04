@@ -1,18 +1,18 @@
 /* :root {
-    --pixel-size: 6;
+    --pixel-size: 1;
 } */
 
 .Character {
-    /* width: 32;
-    height: 32; */
+    /* width: 64;
+    height: 64;  */
     overflow: hidden;
     position: relative;
     /* margin: 4em auto; */
 }
 
 .Character_spritesheet {
-    animation: moveSpritesheet 1s steps(3) infinite;
-    width: 96px;
+    animation: moveSpritesheet 1s steps(1) infinite;
+    width: 32px;
     position: absolute;
 }
 
@@ -27,7 +27,7 @@
 
 .tile {
     display: inline-flex;
-    background-color: rgb(68, 187, 68);
+    /* background-color: rgb(68, 187, 68); */
 }
 
 .grass {
