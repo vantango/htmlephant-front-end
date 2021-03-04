@@ -137,8 +137,8 @@ function NewGame() {
             Password:
           <input name="password" type="password" onChange={handleInputChange} />
           </label>
-          <button className="rpgui-button"  id="cat" name="character" value="cat" onClick={handleSubmit}>Play as Cat</button>
-          <button className="rpgui-button"  id="manatee" name="character" value="manatee" onClick={handleSubmit}>Play as Manatee</button>
+          <button className="rpgui-button" id="cat" name="character" value="Cat" onClick={handleSubmit}>Play as Cat</button>
+          <button className="rpgui-button" id="manatee" name="character" value="Manatee" onClick={handleSubmit}>Play as Manatee</button>
 
         </form>
       </div>
