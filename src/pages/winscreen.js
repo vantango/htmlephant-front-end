@@ -3,6 +3,8 @@ import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./winscreen.css";
+import Sound from '../features/sound'
+
 
 function WinScreen() {
 
@@ -59,9 +61,10 @@ function WinScreen() {
    }
   return (
     <div className="game-wrapper">
+      <Sound />
       <div className="menu-select rpgui-container framed">
-        <label>Wizards and Whiteboards</label>
-        <h1> Congratulations!</h1>
+        <h1>Wizards and Whiteboards</h1>
+        <h1 style={{ fontSize: '250%'}}> Congratulations!</h1>
         <h2>
           Nice work! Snaps to you, and good luck on the next challenge!
         </h2>

@@ -4,6 +4,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import API from "../utils/API";
 import "./loadgame.css"
 import { ToastContainer, toast } from 'react-toastify'
+import Sound from '../features/sound'
+
 
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -58,7 +60,7 @@ function LoadGame() {
     e.preventDefault();
     setLoginState({ ...loginState, character: "Cat" });
     API.playAsCat(loginState.username).then(data => {
-      data ? console.log(data) : console.log("IDIOT")
+      data ? handleSubmit() : console.log("IDIOT")
     }).catch(err => {
       err ? console.log(`FOOL! ${err}`) : console.log("Success!")
     });
@@ -69,15 +71,15 @@ function LoadGame() {
     e.preventDefault();
     setLoginState({ ...loginState, character: "Manatee" });
     API.playAsManatee(loginState.username).then(data => {
-      data ? console.log(data) : console.log("IDIOT")
+      data ? handleSubmit() : console.log("IDIOT")
     }).catch(err => {
       err ? console.log(`FOOL! ${err}`) : console.log("Success!")
     });
   }
 
   // Send user state to store and set token to local storage on successful login
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    // e.preventDefault();
     API.login(loginState).then(res => {
       console.log(`Congrats! ${JSON.stringify(res.data)}`)
       localStorage.setItem("token", res.data.token);
@@ -140,7 +142,8 @@ function LoadGame() {
   return (
 
     <div className="game-wrapper ">
-      <div className="signin-select rpgui-container framed-golden">
+      <Sound />
+      <div className="signin-select rpgui-container framed">
         <h1 style={{ fontSize: '250%' }}>Login</h1>
         <form autoComplete="off">
           <label>User:
@@ -151,7 +154,12 @@ function LoadGame() {
           </label>
           <button id="catBtn" type="submit" value="Cat" className="rpgui-button" onClick={catMe}>Play as Cat</button>
           <button id="manateeBtn" type="submit" value="Manatee" className="rpgui-button" onClick={manatMee}>Play as Manatee</button>
+<<<<<<< HEAD
           <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
+=======
+          {/* <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button> */}
+          {/* <input id="submitBtn" type="submit" value="Submit" onClick={handleSubmit} /> */}
+>>>>>>> dev
         </form>
       </div>
       <ToastContainer />

@@ -4,6 +4,8 @@ import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./newgame.css"
 import { ToastContainer, toast } from 'react-toastify'
+import Sound from '../features/sound'
+
 
 
 function NewGame() {
@@ -60,11 +62,17 @@ function NewGame() {
   }
 
   const handleSubmit = e => {
+    setSignupState({
+      ...signupState,
+      character: e.target.value
+    })
+
     e.preventDefault();
     if (!signupState.username || !signupState.password) {
       console.log("username and password required")
       emptyUsernameOrPassword()
     } else {
+
       API.signup(signupState).then(res => {
         console.log(`Congrats! ${JSON.stringify(res.data)}`);
         localStorage.setItem("token", res.data.token)
@@ -117,6 +125,7 @@ function NewGame() {
 
   return (
     <div className="game-wrapper">
+      <Sound />
       <div className="signin-select rpgui-container framed">
         <h1 style={{ fontSize: '250%' }}>Signup</h1>
         <form>
@@ -128,14 +137,8 @@ function NewGame() {
             Password:
           <input name="password" type="password" onChange={handleInputChange} />
           </label>
-          <input className="rpgui-radio" type="radio" id="cat" name="character" value="cat" onChange={handleInputChange} />
-          <label for="male">Cat</label><br />
-          <input className="rpgui-radio" type="radio" id="manatee" name="character" value="manatee" onChange={handleInputChange} />
-          <label for="female">Manatee</label><br />
-          {/* <input type="submit" value="Submit" onClick={handleSubmit} /> */}
-          <div className="float:right">
-          <button id="submitBtn" type="submit" value="Submit" className="rpgui-button" onClick={handleSubmit}>Submit</button>
-          </div>
+          <button className="rpgui-button"  id="cat" name="character" value="cat" onClick={handleSubmit}>Play as Cat</button>
+          <button className="rpgui-button"  id="manatee" name="character" value="manatee" onClick={handleSubmit}>Play as Manatee</button>
 
         </form>
       </div>

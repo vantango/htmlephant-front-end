@@ -3,6 +3,8 @@ import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./pages.css";
+import Sound from '../features/sound'
+
 
 function Endscreen() {
     let history = useHistory();
@@ -77,9 +79,10 @@ function Endscreen() {
 
     return (
         <div className="game-wrapper">
+            <Sound />
             <div className="menu-select rpgui-container framed">
                 <label>Wizards and Whiteboards</label>
-                <h1> Congratulations!</h1>
+                <h1 style={{ fontSize: '250%'}}> Congratulations!</h1>
                 <h2>
                     Hey, nice job! Just think, three months ago you'd never even see an HTML tag, and just look at you now! As a prize for completing the final challenge, I present you with the ultimate gift: A joe.joe email address. Go forth and always be coding.
         </h2>

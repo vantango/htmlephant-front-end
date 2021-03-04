@@ -3,6 +3,8 @@ import World from "../features/world/index"
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import store from "../config/store";
+import Sound from '../features/sound'
+
 
 
 // Render world and export as Game
@@ -48,7 +50,11 @@ function Game() {
 
 
     return (
+        <div>
+
+        <Sound />
         <World />
+        </div>
     )
 }
 

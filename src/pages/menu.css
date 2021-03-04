@@ -1,8 +1,9 @@
 body {
-    width: 100vw;
-    height: 100vh;
+    width: 70%;
+    height: 70%;
     margin: 0;
     padding: 0;
+    /* overflow: hidden; */
     background: #6d6d6d;
     color: white;
     font-family: "Press Start 2P", sans-serif;
@@ -68,8 +69,8 @@ input {
 }
 
   .game-wrapper {
-    width: 100vw;
-    height: 100vh;
+    width: 70%;
+    height: 70%;
     overflow: hidden;
     margin: 0;
     padding: 10px;
