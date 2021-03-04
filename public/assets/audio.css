@@ -1,12 +1,14 @@
 .player {
   position: fixed;
-  bottom: 0;
-  height: 25vh;
+  bottom: 0%;
+  height: 180px;
+  width:230px;
   /* overflow: visible;   */
-  /* display: flex; */
+  display: flex;
   align-items: center;
-  flex-direction: column;
+  /* flex-direction:row; */
   justify-content: center;
+  /* margin-bottom: 2%; */
 }
 
 .details {
@@ -14,33 +16,38 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-top: 25px;
+  margin-top: 15px;
 }
 /* Changing the font sizes to suitable ones */
 .now-playing { 
-    font-size: 1rem; 
+  /* padding-top: 1%; */
+    font-size: 60%; 
   } 
     
   .song-name { 
-    font-size: 1 rem; 
+    padding-top: 1%;
+    font-size: 60%; 
   } 
     
   .song-artist { 
-    font-size: 1rem; 
+    padding-top: 1%;
+    font-size: 60%; 
   } 
     
   /* Using flex with the row direction to 
      align items in a horizontal direction */
   .buttons { 
     display: flex; 
-    flex-direction: row; 
-    align-items: center; 
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+    font-size: 50%; 
   } 
     
   .playpause-song, 
   .prev-song, 
-  .next-song { 
-    padding: 25px; 
+  .next-song {
+    padding: 10px; 
     opacity: 0.8; 
     
     /* Smoothly transition the opacity */
@@ -56,9 +63,10 @@
     
   /* Define the slider width so that it scales properly */
   .slider_container { 
-    width: 75%; 
-    max-width: 400px; 
+    width: 100%; 
+    /* max-width: 400px;  */
     display: flex; 
+    /* flex-direction: row; */
     justify-content: center; 
     align-items: center; 
   } 
@@ -69,7 +77,7 @@
     -moz-appearance: none; 
     appearance: none; 
     height: 5px; 
-    background: black; 
+    background: white; 
     opacity: 0.7; 
     -webkit-transition: .2s; 
     transition: opacity .2s; 
