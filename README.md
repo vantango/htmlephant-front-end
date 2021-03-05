@@ -17,10 +17,10 @@ Move around using the arrow keys, or click on the directional pad below the moni
 ![Win Page](public/screenshots/win.png?raw=true "Win Page")
 
 ## Built With
-[React.js](https://reactjs.org/) - Front-end framework
-[Redux](https://redux.js.org/) - Global state management
-[React Ace](https://www.npmjs.com/package/react-ace) - In-browser code editor
-[Lodash.debounce](https://www.npmjs.com/package/lodash.debounce) - Smooth sprite movement
+- [React.js](https://reactjs.org/) - Front-end framework
+- [Redux](https://redux.js.org/) - Global state management
+- [React Ace](https://www.npmjs.com/package/react-ace) - In-browser code editor
+- [Lodash.debounce](https://www.npmjs.com/package/lodash.debounce) - Smooth sprite movement
 
 ## Contact
 - [Aleks Kimball-Moreno:](https://github.com/vantango) Master World-Builder, Co-Sprite Hero, able to leap from back to front end in a single bound
