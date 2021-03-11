@@ -3,7 +3,7 @@
 ## Description
 A dungeon-crawler RPG built using React.js and Redux, designed to teach basic coding concepts and provide practice for algorithm challenges to new developers seeking a fun and interactive way to implement their skills. Explore the caverns of Castle Full Stack and gain wisdom from Zac, Aslan, and Denis before facing the ultimate challenge with Joe the Dev Wizard.
 
-[Deployed to Heroku](https://wizards-and-whiteboards.herokuapp.com/endscreen)
+[Deployed to Heroku](https://wizards-and-whiteboards.herokuapp.com)
 
 ## Usage
 Login using the following very secure credentials:
