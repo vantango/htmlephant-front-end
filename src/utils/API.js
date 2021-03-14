@@ -43,6 +43,13 @@ const API = {
             }
         })
     },
+    levelDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/leveldown/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
     resetLevel: (id, token) => {
         return axios.put(`${URL_PREFIX}/reset/${id}`, {
             headers: {
@@ -56,7 +63,14 @@ const API = {
     playAsManatee: username => {
         return axios.put(`${URL_PREFIX}/switchtomanatee/${username}`)
     },
-    
+    healthDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/healthdown/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    }
+
 }
 
 export default API;
