@@ -23,18 +23,18 @@ const API = {
     allNPC: () => {
         return axios.get(`${URL_PREFIX}/api/npc`)
     },
-    signup: userData => {
-        return axios.post(`${URL_PREFIX}/signup`, userData)
-    },
-    login: userData => {
-        return axios.post(`${URL_PREFIX}/login`, userData)
-    },
     getVip: token => {
         return axios.get(`${URL_PREFIX}/vip`, {
             headers: {
                 authorization: `Bearer: ${token}`
             }
         })
+    },
+    signup: userData => {
+        return axios.post(`${URL_PREFIX}/signup`, userData)
+    },
+    login: userData => {
+        return axios.post(`${URL_PREFIX}/login`, userData)
     },
     levelUp: (id, token) => {
         return axios.put(`${URL_PREFIX}/levelup/${id}`, {
