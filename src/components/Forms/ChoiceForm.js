@@ -94,11 +94,17 @@ class ChoiceForm extends React.Component {
       API.healthDown(id, token).then(res => {
         console.log(`Success! ${JSON.stringify(res.data, null, 2)}`)
         store.dispatch({
-          type: "USER_ACTION", 
+          type: "USER_ACTION",
           payload: {
-            ...store.getState().user, 
+            ...store.getState().user,
+            key: 0,
+            question1: false,
+            question2: false,
+            question3: false,
+            encounter: 0,
+            health: store.getState().user.health-1
           }
-        })
+        });
       }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) })
     }
   }
