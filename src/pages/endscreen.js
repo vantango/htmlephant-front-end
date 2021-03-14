@@ -27,7 +27,7 @@ function Endscreen() {
     console.log("===================================");
     console.log(`Token: ${token}`);
     console.log("===================================");
-    API.levelDown(id, token)
+    API.resetLevel(id, token)
       .then((res) => {
         console.log(`Here's what we get back: ${JSON.stringify(res)}`);
         console.log("===================================");

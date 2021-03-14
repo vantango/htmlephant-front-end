@@ -43,7 +43,7 @@ const API = {
             }
         })
     },
-    levelDown: (id, token) => {
+    resetLevel: (id, token) => {
         return axios.put(`${URL_PREFIX}/reset/${id}`, {
             headers: {
                 authorization: `Bearer: ${token}`
@@ -55,7 +55,8 @@ const API = {
     },
     playAsManatee: username => {
         return axios.put(`${URL_PREFIX}/switchtomanatee/${username}`)
-    }
+    },
+    
 }
 
 export default API;
