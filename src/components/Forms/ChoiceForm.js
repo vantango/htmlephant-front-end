@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import store from "../../config/store"
 import filled from '../../features/keys/filled.png'
 import { v4 as uuidv4 } from 'uuid'
+import API from "../../utils/API";
 
 
 class ChoiceForm extends React.Component {
@@ -32,14 +33,14 @@ class ChoiceForm extends React.Component {
         }
       })
 
-      
+
       const number = store.getState().modal.questionNumber
       switch (number) {
         case 1:
           store.dispatch({
             type: "USER_ACTION",
             payload: {
-              ...store.getState().user, question1: true 
+              ...store.getState().user, question1: true
             }
           })
           break;
@@ -47,7 +48,7 @@ class ChoiceForm extends React.Component {
           store.dispatch({
             type: "USER_ACTION",
             payload: {
-              ...store.getState().user, question2: true 
+              ...store.getState().user, question2: true
             }
           })
           break;
@@ -55,11 +56,11 @@ class ChoiceForm extends React.Component {
           store.dispatch({
             type: "USER_ACTION",
             payload: {
-              ...store.getState().user, question3: true 
+              ...store.getState().user, question3: true
             }
           })
           break;
-      
+
         default:
           break;
       }
@@ -85,7 +86,26 @@ class ChoiceForm extends React.Component {
         payload: {
           ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
         }
-      })
+      });
+      const id = store.getState().user.id;
+      const token = store.getState().user.token;
+
+      // Decrement health by 1 when question is answered wrong
+      API.healthDown(id, token).then(res => {
+        console.log(`Success! ${JSON.stringify(res.data, null, 2)}`)
+        store.dispatch({
+          type: "USER_ACTION",
+          payload: {
+            ...store.getState().user,
+            key: 0,
+            question1: false,
+            question2: false,
+            question3: false,
+            encounter: 0,
+            health: store.getState().user.health-1
+          }
+        });
+      }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) })
     }
   }
   render() {
@@ -94,15 +114,15 @@ class ChoiceForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         {this.props.answers.map(answer => (
           <div key={uuidv4()}>
-          <input className="rpgui-radio" type="radio" id={answer} name={answer}
-            checked={this.state.value === `${answer}`}
-            onChange={this.handleChange}
-            value={answer} />
+            <input className="rpgui-radio" type="radio" id={answer} name={answer}
+              checked={this.state.value === `${answer}`}
+              onChange={this.handleChange}
+              value={answer} />
             <label htmlFor={answer}>{answer}</label>
           </div>
 
         ))}
-          <button id="submitBtn" style={{color: "white"}}type="submit" value="Submit" className="rpgui-button" onClick={this.handleSubmit}>Submit</button>
+        <button id="submitBtn" style={{ color: "white" }} type="submit" value="Submit" className="rpgui-button" onClick={this.handleSubmit}>Submit</button>
       </form>
     );
   }

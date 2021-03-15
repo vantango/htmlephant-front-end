@@ -33,6 +33,7 @@ function loadSong(song_index) {
     // Load a new song 
     selectedSong.src = playlist[song_index].path; 
     selectedSong.load();
+    // Tried selectedSong.play()
  
 
     
@@ -95,3 +96,6 @@ function playpauseSong() {
     selectedSong.volume = volume_slider.value / 100;
 }
 loadSong(song_index)
+// Tried playSong(),
+// Tried window.onload.playSong()
+// Tried window.onload = playSong()

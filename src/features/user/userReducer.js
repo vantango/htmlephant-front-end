@@ -4,6 +4,7 @@ const intitialState = {
     key: 0,
     token: "",
     level: 1,
+    health: 3,
     id: "",
     isLoggedIn: false,
     encounter: 0,

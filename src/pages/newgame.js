@@ -42,7 +42,8 @@ function NewGame() {
     token: "",
     level: 0,
     id: "",
-    isLoggedIn: false
+    isLoggedIn: false,
+    health: 0
   });
 
   // Set initial signup state
@@ -85,18 +86,21 @@ function NewGame() {
           token: res.data.token,
           level: res.data.user.level,
           id: res.data.user._id,
-          isLoggedIn: true
+          isLoggedIn: true,
+          health: res.data.user.health
         });
         store.dispatch({
           type: "USER_ACTION",
           payload: {
+            ...store.getState().user,
             character: res.data.user.character,
             username: res.data.user.username,
             password: res.data.user.password,
             token: res.data.token,
             level: res.data.user.level,
             id: res.data.user._id,
-            isLoggedIn: true
+            isLoggedIn: true,
+            health: res.data.user.health
           }
         });
         setSignupState({
@@ -115,7 +119,8 @@ function NewGame() {
             token: "",
             level: 0,
             id: "",
-            isLoggedIn: false
+            isLoggedIn: false,
+            health: 0
           }
         });
         userAlreadyExists()
@@ -146,18 +151,21 @@ function NewGame() {
           token: res.data.token,
           level: res.data.user.level,
           id: res.data.user._id,
-          isLoggedIn: true
+          isLoggedIn: true,
+          health: res.data.user.health
         });
         store.dispatch({
           type: "USER_ACTION",
           payload: {
+            ...store.getState().user,
             character: res.data.user.character,
             username: res.data.user.username,
             password: res.data.user.password,
             token: res.data.token,
             level: res.data.user.level,
             id: res.data.user._id,
-            isLoggedIn: true
+            isLoggedIn: true,
+            health: res.data.user.health
           }
         });
         setSignupState({
@@ -175,6 +183,7 @@ function NewGame() {
             password: "",
             token: "",
             level: 0,
+            health: 0,
             id: "",
             isLoggedIn: false
           }

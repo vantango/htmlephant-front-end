@@ -38,7 +38,8 @@ function Game() {
                     question3: false,
                     encounter: 0,
                     id: res.data._id,
-                    token: token
+                    token: token,
+                    health: res.data.health
                 }
             })
         }

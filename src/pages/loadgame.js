@@ -37,6 +37,7 @@ function LoadGame() {
     isLoggedIn: false,
     level: 0,
     id: "",
+    health: 0
   })
 
   // Set initial login state
@@ -93,7 +94,8 @@ function LoadGame() {
         encounter: 0,
         question1: false,
         question2: false,
-        question3: false
+        question3: false,
+        health: res.data.user.health
       });
       store.dispatch({
         type: "USER_ACTION",
@@ -105,7 +107,8 @@ function LoadGame() {
           token: res.data.token,
           level: res.data.user.level,
           id: res.data.user._id,
-          isLoggedIn: true
+          isLoggedIn: true,
+          health: res.data.user.health
         }
       });
       setLoginState({
@@ -125,7 +128,8 @@ function LoadGame() {
           token: "",
           level: 1,
           id: "",
-          isLoggedIn: false
+          isLoggedIn: false,
+          health: 0
         }
       })
       localStorage.removeItem("token");

@@ -4,6 +4,7 @@ const axios = require("axios");
 // Deployed API URL
 const URL_PREFIX = "https://vast-oasis-70689.herokuapp.com"
 
+// API calls
 const API = {
     allAlgo: () => {
         return axios.get(`${URL_PREFIX}/api/algo`)
@@ -23,18 +24,18 @@ const API = {
     allNPC: () => {
         return axios.get(`${URL_PREFIX}/api/npc`)
     },
-    signup: userData => {
-        return axios.post(`${URL_PREFIX}/signup`, userData)
-    },
-    login: userData => {
-        return axios.post(`${URL_PREFIX}/login`, userData)
-    },
     getVip: token => {
         return axios.get(`${URL_PREFIX}/vip`, {
             headers: {
                 authorization: `Bearer: ${token}`
             }
         })
+    },
+    signup: userData => {
+        return axios.post(`${URL_PREFIX}/signup`, userData)
+    },
+    login: userData => {
+        return axios.post(`${URL_PREFIX}/login`, userData)
     },
     levelUp: (id, token) => {
         return axios.put(`${URL_PREFIX}/levelup/${id}`, {
@@ -44,6 +45,13 @@ const API = {
         })
     },
     levelDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/leveldown/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    resetLevel: (id, token) => {
         return axios.put(`${URL_PREFIX}/reset/${id}`, {
             headers: {
                 authorization: `Bearer: ${token}`
@@ -55,7 +63,15 @@ const API = {
     },
     playAsManatee: username => {
         return axios.put(`${URL_PREFIX}/switchtomanatee/${username}`)
+    },
+    healthDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/healthdown/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
     }
+
 }
 
 export default API;
