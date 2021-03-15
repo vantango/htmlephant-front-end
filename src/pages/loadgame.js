@@ -144,7 +144,7 @@ function LoadGame() {
       <Sound />
       <div className="signin-select rpgui-container framed">
         <h1 style={{ fontSize: '250%' }}>Login</h1>
-        <form autoComplete="off">
+        <form className="loginInput" autoComplete="off">
           <label>User:
           <input name="username" type="text" placeholder="username" onChange={handleInputChange} />
           </label>
