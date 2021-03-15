@@ -77,6 +77,17 @@ input {
     align-items: center;
     display: flex;
     justify-content: space-around;
-    background-color: gray
+    background-color: gray;
   }
-  
+
+  @media only screen and (min-width: 600px) {
+    .signupInput {
+      max-width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    .signupInput {
+      max-width: 100%;
+    }
+  }
