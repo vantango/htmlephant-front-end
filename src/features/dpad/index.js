@@ -15,7 +15,7 @@ export default function Dpad() {
 
     return (
         <div className={'dpad'}>
-            <div className={'row'} style={{textAlign: 'center'}}>
+            <div className={'row'} style={{ textAlign: 'center' }}>
                 <button onClick={() => handleMovement("NORTH")}>
                     <img className={'dpadButton'} src={uparrow}></img>
                 </button>
@@ -25,12 +25,12 @@ export default function Dpad() {
                 <button onClick={() => handleMovement("WEST")}>
                     <img className={'dpadButton'} src={leftarrow}></img>
                 </button>
-                <button style={{float: 'right'}} onClick={() => handleMovement("EAST")}>
+                <button style={{ float: 'right' }} onClick={() => handleMovement("EAST")}>
                     <img className={'dpadButton'} src={rightarrow}></img>
                 </button>
             </div>
 
-            <div className={'row'} style={{textAlign: 'center'}}>
+            <div className={'row'} style={{ textAlign: 'center' }}>
                 <button onClick={() => handleMovement("SOUTH")}>
                     <img className={'dpadButton'} src={downarrow}></img>
                 </button>

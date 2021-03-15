@@ -200,7 +200,7 @@ function NewGame() {
       <Sound />
       <div className="signin-select rpgui-container framed">
         <h1 style={{ fontSize: '250%' }}>Signup</h1>
-        <form>
+        <form className="signupInput">
           <label>
             User:
           <input name="username" type="text" onChange={handleInputChange} />
