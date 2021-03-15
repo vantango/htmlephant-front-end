@@ -183,9 +183,9 @@ function NewGame() {
             password: "",
             token: "",
             level: 0,
+            health: 0,
             id: "",
-            isLoggedIn: false,
-            health: 0
+            isLoggedIn: false
           }
         });
         userAlreadyExists()

@@ -11,6 +11,7 @@ function Level(props) {
     return (
         <div className="level">
             <h2 id="level">Level: {props.level}</h2>
+            <h2 id= "health">Health: {props.health}</h2>
         </div>
     )
 }
