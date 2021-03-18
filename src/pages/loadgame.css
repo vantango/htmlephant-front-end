@@ -67,6 +67,12 @@ input {
     align-items: center
 }
 
+.back-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
   .game-wrapper {
     width: 100vw;
     height: 100vh;

@@ -4,7 +4,7 @@ import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import store from "../config/store";
 import Sound from '../features/sound'
-
+import Settings from '../features/settings'
 
 
 // Render world and export as Game
@@ -48,12 +48,16 @@ function Game() {
         history.push('/')
     })
 
-
+    function handleHomeButton() {
+        history.push("/")
+    }
 
     return (
         <div>
 
         <Sound />
+        <Settings />
+
         <World />
         </div>
     )

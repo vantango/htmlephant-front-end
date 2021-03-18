@@ -5,6 +5,7 @@ import API from "../utils/API";
 import "./loadgame.css"
 import { ToastContainer, toast } from 'react-toastify'
 import Sound from '../features/sound'
+import back_arrow from "./imgs/back_arrow.png"
 
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -139,7 +140,9 @@ function LoadGame() {
     });
   }
 
-
+  const handleBackButton = () => {
+    history.push("/")
+  }
 
   // Render form component
   return (
@@ -147,6 +150,7 @@ function LoadGame() {
     <div className="game-wrapper ">
       <Sound />
       <div className="signin-select rpgui-container framed">
+      <button onClick={handleBackButton}><img className="back-arrow" src={back_arrow}/></button>
         <h1 style={{ fontSize: '250%' }}>Login</h1>
         <form className="loginInput" autoComplete="off">
           <label>User:
