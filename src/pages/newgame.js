@@ -5,6 +5,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import "./newgame.css"
 import { ToastContainer, toast } from 'react-toastify'
 import Sound from '../features/sound'
+import back_arrow from "./imgs/back_arrow.png"
+
 
 
 
@@ -195,10 +197,15 @@ function NewGame() {
     }
   }
 
+  const handleBackButton = () => {
+    history.push("/")
+  }
+
   return (
     <div className="game-wrapper">
       <Sound />
       <div className="signin-select rpgui-container framed">
+        <button onClick={handleBackButton}><img className="back-arrow" src={back_arrow}/></button>
         <h1 style={{ fontSize: '250%' }}>Signup</h1>
         <form className="signupInput">
           <label>

@@ -49,6 +49,11 @@ function WinScreen() {
 
     history.push("/game");
   };
+
+  const handleHome = () => {
+    history.push("/")
+  }
+
     let links = [
       "https://instagram.com/mutemusic64?igshid=ybongwu1z9kh",
       "https://youtube.com/channel/UCWmvXyNvEgJneHaQLco6a3Q",
@@ -71,7 +76,8 @@ function WinScreen() {
         <div className="music-plug">
       <a href={link} target="blank"><img className="bass-clef" src={bass_clef_black} alt="Link to music by Tyler Baldwin" /></a>
       </div>
-        <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Submit</button>
+        <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Next Level</button>
+        <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleHome} >Go Home</button>
       </div>
      
     </div>
