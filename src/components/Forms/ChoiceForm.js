@@ -97,26 +97,34 @@ class ChoiceForm extends React.Component {
         API.getVip(token).then(res => {
           console.log(`Here's your user data: ${JSON.stringify(res.data, null, 2)}`)
           switch (res.data.health) {
-            case 0: 
-            store.dispatch({
-              type: "USER_ACTION",
-              payload: {
-                ...store.getState().user,
-                question1: false,
-                question2: false,
-                question3: false,
-                health: 3
-              }
-            })
-            break;
-            default: 
-            store.dispatch({
-              type: "USER_ACTION",
-              payload: {
-                ...store.getState().user, 
-                health: res.data.health
-              }
-            })
+            case 0:
+              store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                  ...store.getState().user,
+                  question1: false,
+                  question2: false,
+                  question3: false,
+                  health: 3,
+                  key: 0
+                }
+              });
+              store.dispatch({
+                type: "ADD_KEY",
+                payload: {
+                  ...store.getState().key,
+                  amount: 0
+                }
+              })
+              break;
+            default:
+              store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                  ...store.getState().user,
+                  health: res.data.health
+                }
+              })
 
           }
         })
