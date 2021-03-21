@@ -8,8 +8,6 @@ import Sound from '../features/sound'
 import back_arrow from "./imgs/back_arrow.png"
 
 
-
-
 function NewGame() {
 
   let location = useLocation();
@@ -63,8 +61,6 @@ function NewGame() {
       [name]: value
     })
   }
-
-
 
 
   const handleCatSubmit = e => {

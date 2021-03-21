@@ -93,18 +93,33 @@ class ChoiceForm extends React.Component {
       // Decrement health by 1 when question is answered wrong
       API.healthDown(id, token).then(res => {
         console.log(`Success! ${JSON.stringify(res.data, null, 2)}`)
-        store.dispatch({
-          type: "USER_ACTION",
-          payload: {
-            ...store.getState().user,
-            key: 0,
-            question1: false,
-            question2: false,
-            question3: false,
-            encounter: 0,
-            health: store.getState().user.health-1
+        const token = store.getState().user.token;
+        API.getVip(token).then(res => {
+          console.log(`Here's your user data: ${JSON.stringify(res.data, null, 2)}`)
+          switch (res.data.health) {
+            case 0: 
+            store.dispatch({
+              type: "USER_ACTION",
+              payload: {
+                ...store.getState().user,
+                question1: false,
+                question2: false,
+                question3: false,
+                health: 3
+              }
+            })
+            break;
+            default: 
+            store.dispatch({
+              type: "USER_ACTION",
+              payload: {
+                ...store.getState().user, 
+                health: res.data.health
+              }
+            })
+
           }
-        });
+        })
       }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) })
     }
   }
