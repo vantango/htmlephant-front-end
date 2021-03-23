@@ -81,12 +81,7 @@ class ChoiceForm extends React.Component {
 
 
     } else {
-      store.dispatch({
-        type: "SHOW_MODAL",
-        payload: {
-          ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
-        }
-      });
+
       const id = store.getState().user.id;
       const token = store.getState().user.token;
 
@@ -96,37 +91,30 @@ class ChoiceForm extends React.Component {
         const token = store.getState().user.token;
         API.getVip(token).then(res => {
           console.log(`Here's your user data: ${JSON.stringify(res.data, null, 2)}`)
-          switch (res.data.health) {
-            case 0:
-              store.dispatch({
-                type: "USER_ACTION",
-                payload: {
-                  ...store.getState().user,
-                  question1: false,
-                  question2: false,
-                  question3: false,
-                  health: 3,
-                  key: 0
-                }
-              });
-              store.dispatch({
-                type: "ADD_KEY",
-                payload: {
-                  ...store.getState().key,
-                  amount: 0
-                }
-              })
-              break;
-            default:
-              store.dispatch({
-                type: "USER_ACTION",
-                payload: {
-                  ...store.getState().user,
-                  health: res.data.health
-                }
-              })
-
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {
+              ...store.getState().user,
+              health: res.data.health
+            }
+          })
+          console.log(res.data.health);
+          if (res.data.health === 0) {
+            store.dispatch({
+              type: "ADD_KEY",
+              payload: {
+                ...store.getState().key,
+                amount: 0
+              }
+            })
           }
+
+          store.dispatch({
+            type: "SHOW_MODAL",
+            payload: {
+              ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
+            }
+          });
         })
       }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) })
     }
