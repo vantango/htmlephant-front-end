@@ -106,6 +106,15 @@ class ChoiceForm extends React.Component {
                 ...store.getState().key,
                 amount: 0
               }
+            });
+            store.dispatch({
+              type: "USER_ACTION",
+              payload: {
+                ...store.getState().user,
+                question1: false,
+                question2: false,
+                question3: false
+              }
             })
           }
 
