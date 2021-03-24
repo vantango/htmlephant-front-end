@@ -3,8 +3,9 @@ import Map from '../map'
 import Player from '../player'
 import Dpad from '../dpad'
 import Keys from '../keys'
+import Health from '../health'
 import Level from '../level'
-import Modal, {showModal} from "../../components/Modal/index";
+import Modal, { showModal } from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
 
 import { tiles1 } from '../../data/maps/1'
@@ -22,21 +23,22 @@ function World(props) {
 
 
     return (
-        <div         
-        style={{
-            position: 'relative',
-            width: '650px',
-            height: '400px',
-            margin: '20px auto',
-        }}
+        <div
+            style={{
+                position: 'relative',
+                width: '650px',
+                height: '400px',
+                margin: '20px auto',
+            }}
         >
 
             <Map />
             <Player />
-            <div style={{display:"flex", justifyContent: "space-between"}}>
-            <Dpad />
-            <Level />
-            <Keys />
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <Dpad />
+                <Level />
+                <Keys />
+                <Health />
             </div>
             <Modal onClose={props.showModal} show="false" />
         </div>
