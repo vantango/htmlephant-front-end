@@ -55,10 +55,9 @@ function Game() {
     return (
         <div>
 
-        <Sound />
-        <Settings />
-
-        <World />
+            <Sound />
+            <Settings />
+            <World />
         </div>
     )
 }
