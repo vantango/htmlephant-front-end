@@ -81,30 +81,50 @@ class ChoiceForm extends React.Component {
 
 
     } else {
-      store.dispatch({
-        type: "SHOW_MODAL",
-        payload: {
-          ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
-        }
-      });
+
       const id = store.getState().user.id;
       const token = store.getState().user.token;
 
       // Decrement health by 1 when question is answered wrong
       API.healthDown(id, token).then(res => {
         console.log(`Success! ${JSON.stringify(res.data, null, 2)}`)
-        store.dispatch({
-          type: "USER_ACTION",
-          payload: {
-            ...store.getState().user,
-            key: 0,
-            question1: false,
-            question2: false,
-            question3: false,
-            encounter: 0,
-            health: store.getState().user.health-1
+        const token = store.getState().user.token;
+        API.getVip(token).then(res => {
+          console.log(`Here's your user data: ${JSON.stringify(res.data, null, 2)}`)
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {
+              ...store.getState().user,
+              health: res.data.health
+            }
+          })
+          console.log(res.data.health);
+          if (res.data.health === 0) {
+            store.dispatch({
+              type: "ADD_KEY",
+              payload: {
+                ...store.getState().key,
+                amount: 0
+              }
+            });
+            store.dispatch({
+              type: "USER_ACTION",
+              payload: {
+                ...store.getState().user,
+                question1: false,
+                question2: false,
+                question3: false
+              }
+            })
           }
-        });
+
+          store.dispatch({
+            type: "SHOW_MODAL",
+            payload: {
+              ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
+            }
+          });
+        })
       }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) })
     }
   }
