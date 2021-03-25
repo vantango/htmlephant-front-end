@@ -3,7 +3,6 @@ import Map from '../map'
 import Player from '../player'
 import Dpad from '../dpad'
 import Keys from '../keys'
-import Health from '../health'
 import Level from '../level'
 import Modal, { showModal } from "../../components/Modal/index";
 import { tiles } from '../../data/maps/1'
@@ -41,7 +40,6 @@ function World(props) {
                 <Dpad />
                 <Level />
                 <Keys />
-                <Health />
             </div>
             <Modal onClose={props.showModal} show="false" />
         </div>
