@@ -21,6 +21,9 @@ function World(props) {
         }
     })
 
+    const health = store.getState().user.health;
+    console.log(health)
+
 
     return (
         <div
