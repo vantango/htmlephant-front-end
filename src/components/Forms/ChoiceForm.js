@@ -108,11 +108,15 @@ class ChoiceForm extends React.Component {
       }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) })
     }
   }
+
+  
   render() {
+    // randomizes answers from database
+    const shuffled = this.props.answers.sort(() => Math.random() - 0.5)
 
     return (
       <form onSubmit={this.handleSubmit}>
-        {this.props.answers.map(answer => (
+        {shuffled.map(answer => (
           <div key={uuidv4()}>
             <input className="rpgui-radio" type="radio" id={answer} name={answer}
               checked={this.state.value === `${answer}`}
