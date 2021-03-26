@@ -1,14 +1,13 @@
+// Dependencies
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import store from '../../config/store';
 import empty from './empty.png'
 import filled from './filled.png'
 
-function Health(props) {
-
+const Health = (props) => {
+    // Fill and empty hearts based on user health state
     useEffect(() => {
         const health = props.health;
-        console.log(health);
         switch (health) {
             case 0:
                 document.querySelector('.health1').src = empty
@@ -29,8 +28,7 @@ function Health(props) {
             default:
                 break;
         }
-
-    })
+    });
 
 
     return (
@@ -43,6 +41,7 @@ function Health(props) {
 
 }
 
+// Grab props from Redux state
 function mapStateToProps(state) {
     return {
         ...state.user
