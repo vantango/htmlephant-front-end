@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import store from '../../config/store'
-import icon from './icon2.png'
+import icon from './icon.png'
 
 
 export default function Sound() {
@@ -21,8 +21,8 @@ export default function Sound() {
             src={icon}
             style={{
                 // backgroundImage: `url('${icon}')`,
-                height: '5vh',
-                width: '5vh',
+                // height: '5vh',
+                // width: '5vh',
                 zIndex: '6',
                 position: 'fixed',
                 top: '0',

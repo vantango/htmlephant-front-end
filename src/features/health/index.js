@@ -4,6 +4,8 @@ import store from '../../config/store';
 import empty from './empty.png'
 import filled from './filled.png'
 
+import './style.css'
+
 function Health(props) {
 
     useEffect(() => {
@@ -34,7 +36,7 @@ function Health(props) {
 
 
     return (
-        <div className={'health'}>
+        <div className={'healthContainer'}>
             <img className='health health1' src={filled} />
             <img className='health health2' src={filled} />
             <img className='health health3' src={filled} />

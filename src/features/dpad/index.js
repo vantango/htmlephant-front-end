@@ -14,7 +14,7 @@ export default function Dpad() {
 
 
     return (
-        <div className={'dpad'}>
+        <div className={'dpad'} style={{position: 'absolute', bottom: '5px', left: '5px'}}>
             <div className={'row'} style={{ textAlign: 'center' }}>
                 <button onClick={() => handleMovement("NORTH")}>
                     <img className={'dpadButton'} src={uparrow}></img>

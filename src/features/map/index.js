@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { SPRITE_SIZE } from '../../config/constants'
 import { v4 as uuidv4 } from 'uuid'
+import Dpad from '../dpad'
+
+
 import grass from './tiles/grassy.png'
 import rock from './tiles/rock.png'
 import tree from './tiles/tree4.png'
@@ -140,7 +143,9 @@ function MapRow(props) {
 
 function Map(props) {
     return (
+        <div>
         <div
+            id = "map"
             name="map"
             style={{
                 position: 'relative',
@@ -149,11 +154,13 @@ function Map(props) {
                 width: '640px',
                 height: '320px',
             }}
-        >
+            >
             {
                 props.tiles.map(row => <MapRow key={uuidv4()} tiles={row} />)
             }
+        <Dpad />
         </div>
+            </div>
     )
 }
 

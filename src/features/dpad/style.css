@@ -1,11 +1,17 @@
 .dpadButton {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
+}
+
+.dpadButton:active {
+    background-color: rgb(190, 190, 190)
+    
 }
 
 .dpad {
-    height: 150px;
-    width: 150px;
+    height: 93px;
+    width: 90px;
+    background-color: rgb(3, 3, 3, .5);
     border-color: white;
     border-style: solid
 }
