@@ -9,29 +9,33 @@ import store from "../../config/store"
 function Modal(props) {
   console.log(props.show);
   const number = props.questionNumber
-  let answers, question, correct
+  let answers, question, correct, random
 
   function showQuestion() {
     const level = store.getState().user.level
+    // document.querySelector('.nextButton').style.display = 'none'
 
     switch (level) {
       case 1:
         API.easyAlgo().then(res => {
           switch (number) {
             case 1:
-              answers = res.data.answers1
+              random = res.data.answers1.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question1
               correct = res.data.correctAnswer1
               dispatchQuestion()
               break;
             case 2:
-              answers = res.data.answers2
+              random = res.data.answers2.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question2
               correct = res.data.correctAnswer2
               dispatchQuestion()
               break;
             case 3:
-              answers = res.data.answers3
+              random = res.data.answers3.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question3
               correct = res.data.correctAnswer3
               dispatchQuestion()
@@ -49,19 +53,22 @@ function Modal(props) {
         API.medAlgo().then(res => {
           switch (number) {
             case 1:
-              answers = res.data.answers1
+              random = res.data.answers1.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question1
               correct = res.data.correctAnswer1
               dispatchQuestion()
               break;
             case 2:
-              answers = res.data.answers2
+              random = res.data.answers2.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question2
               correct = res.data.correctAnswer2
               dispatchQuestion()
               break;
             case 3:
-              answers = res.data.answers3
+              random = res.data.answers3.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question3
               correct = res.data.correctAnswer3
               dispatchQuestion()
@@ -79,19 +86,22 @@ function Modal(props) {
         API.hardAlgo().then(res => {
           switch (number) {
             case 1:
-              answers = res.data.answers1
+              random = res.data.answers1.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question1
               correct = res.data.correctAnswer1
               dispatchQuestion()
               break;
             case 2:
-              answers = res.data.answers2
+              random = res.data.answers2.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question2
               correct = res.data.correctAnswer2
               dispatchQuestion()
               break;
             case 3:
-              answers = res.data.answers3
+              random = res.data.answers3.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question3
               correct = res.data.correctAnswer3
               dispatchQuestion()
@@ -201,7 +211,7 @@ function Modal(props) {
       <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
         <h3>{props.name} says:</h3>
         <h2>{props.dialogue}</h2>
-        <button onClick={showQuestion} className="rpgui-button" style={{color: "white"}}>Next</button>
+        <button onClick={showQuestion} className="nextButton rpgui-button" style={{color: "white"}}>Next</button>
         <hr className="golden"/>
         <Question />
         <div className={"actions"}>
