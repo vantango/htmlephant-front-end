@@ -60,7 +60,7 @@ function Editor() {
             case 1:
                 // API call for easy algorithm, parse arguments and output
                 API.easyAlgo().then(res => {
-                    const info = JSON.parse(res.data.argsAndOutput);
+                    // const info = JSON.parse(res.data.argsAndOutput);
                     // Create and call a new function to run the code written into the editor
                     const testFunction = new Function("str", editorState.editorText);
                     const result = testFunction(info.args)

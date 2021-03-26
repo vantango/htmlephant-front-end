@@ -38,7 +38,7 @@ function Modal(props) {
               break;
             case "algorithm":
               dispatchAlgorithm()
-    
+
             default:
               break;
           }
@@ -68,7 +68,7 @@ function Modal(props) {
               break;
             case "algorithm":
               dispatchAlgorithm()
-    
+
             default:
               break;
           }
@@ -98,80 +98,81 @@ function Modal(props) {
               break;
             case "algorithm":
               dispatchAlgorithm()
-    
+
             default:
               break;
           }
         });
         break;
-        
-    
+
+
       default:
         break;
     }
 
-      function dispatchAlgorithm() {
-        const level = store.getState().user.level
-        switch (level) {
-          case 1:
-            API.easyAlgo().then(res => {
-              const algorithm = res.data.algorithm
-              store.dispatch({
-                type: "ASK_QUESTION",
-                payload: {
-                  question: algorithm,
-                  form: "editor",
-                }
-              });
-              document.querySelector(".question").style.display = "block";
-            })
-            break;
+    function dispatchAlgorithm() {
+      const level = store.getState().user.level
+      switch (level) {
+        case 1:
+          API.easyAlgo().then(res => {
+            const algorithm = res.data.algorithm
+            const info = JSON.parse(res.data.argsAndOutput);
+            store.dispatch({
+              type: "ASK_QUESTION",
+              payload: {
+                question: algorithm,
+                form: "editor",
+              }
+            });
+            document.querySelector(".question").style.display = "block";
+          })
+          break;
 
-          case 2:
-            API.medAlgo().then(res => {
-              const algorithm = res.data.algorithm
-              store.dispatch({
-                type: "ASK_QUESTION",
-                payload: {
-                  question: algorithm,
-                  form: "editor",
-                }
-              });
-              document.querySelector(".question").style.display = "block";
-            })
-            break;
+        case 2:
+          API.medAlgo().then(res => {
+            const algorithm = res.data.algorithm
+            store.dispatch({
+              type: "ASK_QUESTION",
+              payload: {
+                question: algorithm,
+                form: "editor",
+              }
+            });
+            document.querySelector(".question").style.display = "block";
+          })
+          break;
 
-          case 3:
-            API.hardAlgo().then(res => {
-              const algorithm = res.data.algorithm
-              store.dispatch({
-                type: "ASK_QUESTION",
-                payload: {
-                  question: algorithm,
-                  form: "editor",
-                }
-              });
-              document.querySelector(".question").style.display = "block";
-            })
-            break;
-        
-          default:
-            break;
-        }
+        case 3:
+          API.hardAlgo().then(res => {
+            const algorithm = res.data.algorithm
+            store.dispatch({
+              type: "ASK_QUESTION",
+              payload: {
+                question: algorithm,
+                form: "editor",
+              }
+            });
+            document.querySelector(".question").style.display = "block";
+          })
+          break;
+
+        default:
+          break;
       }
-      function dispatchQuestion() {
+    }
+    function dispatchQuestion() {
 
-        store.dispatch({
-          type: "ASK_QUESTION",
-          payload: {
-            answers: answers,
-            question: `${question}`,
-            correct: `${correct}`,
-            form: "mc",
-          },
-        })
-        document.querySelector(".question").style.display = "block";
-      }
+      store.dispatch({
+        type: "ASK_QUESTION",
+        payload: {
+          answers: answers,
+          question: `${question}`,
+          correct: `${correct}`,
+          form: "mc",
+        },
+      })
+      document.querySelector(".question").style.display = "block";
+    }
   }
 
   function closeModal() {
@@ -188,11 +189,11 @@ function Modal(props) {
   } else if (props.questionNumber === 0) {
     return (
       <div className="modal-wrapper">
-      <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
-        <h3>{props.name} says:</h3>
-        <h2>{props.dialogue}</h2>
-        <button onClick={closeModal} className="rpgui-button" style={{color: "white"}}>Close</button>
-      </div>
+        <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
+          <h3>{props.name} says:</h3>
+          <h2>{props.dialogue}</h2>
+          <button onClick={closeModal} className="rpgui-button" style={{ color: "white" }}>Close</button>
+        </div>
       </div>
     )
   }
@@ -201,8 +202,8 @@ function Modal(props) {
       <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
         <h3>{props.name} says:</h3>
         <h2>{props.dialogue}</h2>
-        <button onClick={showQuestion} className="rpgui-button" style={{color: "white"}}>Next</button>
-        <hr className="golden"/>
+        <button onClick={showQuestion} className="rpgui-button" style={{ color: "white" }}>Next</button>
+        <hr className="golden" />
         <Question />
         <div className={"actions"}>
         </div>
