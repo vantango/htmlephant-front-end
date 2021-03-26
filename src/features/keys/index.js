@@ -1,25 +1,20 @@
+// Dependencies
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import store from '../../config/store'
 import empty from './empty.png'
 import filled from './filled.png'
-
-
-
 import './style.css'
 
-
-function Keys(props) {
-
+const Keys = (props) => {
+    // Fill and empty keys based on key state
     useEffect(() => {
         const amount = props.amount
-        console.log(amount)
         switch (amount) {
             case 0:
                 document.querySelector('.key1').src = empty
                 document.querySelector('.key2').src = empty
                 document.querySelector('.key3').src = empty
-            break;
+                break;
             case 1:
                 document.querySelector('.key1').src = filled
                 break;
@@ -34,27 +29,26 @@ function Keys(props) {
                 document.querySelector('.key2').src = filled
                 document.querySelector('.key3').src = filled
                 break;
-
             default:
                 break;
         }
 
     })
 
+    // Key indicator
     return (
         <div className={'keys'}>
             <img className="key key1" src={empty} />
             <img className="key key2" src={empty} />
             <img className="key key3" src={empty} />
-
         </div>
     )
 }
 
+// Grab props from Redux state
 function mapStateToProps(state) {
     return {
         ...state.key,
-
     }
 }
 

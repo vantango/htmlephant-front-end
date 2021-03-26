@@ -30,7 +30,7 @@ const Health = (props) => {
         }
     });
 
-
+    // Health indicator
     return (
         <div className={'health'}>
             <img className='health health1' src={filled} />
