@@ -82,43 +82,43 @@ class ChoiceForm extends React.Component {
 
 
     } else {
-
       const id = store.getState().user.id;
       const token = store.getState().user.token;
 
       // Decrement health by 1 when question is answered wrong
       API.healthDown(id, token).then(res => {
-        console.log(`Success! ${JSON.stringify(res.data, null, 2)}`)
         const token = store.getState().user.token;
+        const id = store.getState().user.id;
         API.getVip(token).then(res => {
-          console.log(`Here's your user data: ${JSON.stringify(res.data, null, 2)}`)
-          store.dispatch({
-            type: "USER_ACTION",
-            payload: {
-              ...store.getState().user,
-              health: res.data.health
-            }
-          })
-          console.log(res.data.health);
-          if (res.data.health === 0) {
-            store.dispatch({
-              type: "ADD_KEY",
-              payload: {
-                ...store.getState().key,
-                amount: 0
-              }
-            });
+          if (res.data.health === -1) {
+            API.resetLevel(id, token).then(res => {
+              store.dispatch({
+                type: "ADD_KEY",
+                payload: {
+                  amount: 0
+                }
+              });
+              store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                  ...store.getState().user,
+                  question1: false,
+                  question2: false,
+                  question3: false,
+                  health: 3
+                }
+              })
+            })
+
+          } else {
             store.dispatch({
               type: "USER_ACTION",
               payload: {
                 ...store.getState().user,
-                question1: false,
-                question2: false,
-                question3: false
+                health: res.data.health
               }
             })
           }
-
           store.dispatch({
             type: "SHOW_MODAL",
             payload: {

@@ -23,6 +23,11 @@ function Health(props) {
             case 2:
                 document.querySelector('.health1').src = empty
                 break;
+            case 3:
+                document.querySelector('.health1').src = filled
+                document.querySelector('.health2').src = filled
+                document.querySelector('.health3').src = filled
+                break;
             default:
                 break;
         }
