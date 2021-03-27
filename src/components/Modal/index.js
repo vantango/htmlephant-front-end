@@ -116,12 +116,18 @@ function Modal(props) {
         case 1:
           API.easyAlgo().then(res => {
             const algorithm = res.data.algorithm
-            const info = JSON.parse(res.data.argsAndOutput);
             store.dispatch({
               type: "ASK_QUESTION",
               payload: {
                 question: algorithm,
                 form: "editor",
+              }
+            });
+            store.dispatch({
+              type: "EDITOR",
+              payload: {
+                ...store.getState().editor,
+                text: res.data.argsAndOutput
               }
             });
             document.querySelector(".question").style.display = "block";
@@ -138,6 +144,13 @@ function Modal(props) {
                 form: "editor",
               }
             });
+            store.dispatch({
+              type: "EDITOR",
+              payload: {
+                ...store.getState().editor,
+                text: res.data.argsAndOutput
+              }
+            });
             document.querySelector(".question").style.display = "block";
           })
           break;
@@ -150,6 +163,13 @@ function Modal(props) {
               payload: {
                 question: algorithm,
                 form: "editor",
+              }
+            });
+            store.dispatch({
+              type: "EDITOR",
+              payload: {
+                ...store.getState().editor,
+                text: res.data.argsAndOutput
               }
             });
             document.querySelector(".question").style.display = "block";
