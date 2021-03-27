@@ -1,7 +1,7 @@
+// Dependencies
 import React from "react";
 import { connect } from "react-redux";
 import store from "../../config/store"
-import filled from '../../features/keys/filled.png'
 import { v4 as uuidv4 } from 'uuid'
 import API from "../../utils/API";
 
@@ -10,31 +10,30 @@ class ChoiceForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: "" };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  };
 
 
   handleChange(event) {
-
     this.setState({ value: event.target.value });
-  }
+  };
 
   handleSubmit(event) {
     event.preventDefault();
+
+    // If question is answered correctly
     if (this.state.value === this.props.correct) {
-
-
+      // Add key when question is answered correctly
       const newAmount = store.getState().key.amount + 1
       store.dispatch({
         type: "ADD_KEY",
         payload: {
           amount: newAmount
         }
-      })
+      });
 
-
+      // Update user state with each correct question
       const number = store.getState().modal.questionNumber
       switch (number) {
         case 1:
@@ -43,7 +42,7 @@ class ChoiceForm extends React.Component {
             payload: {
               ...store.getState().user, question1: true
             }
-          })
+          });
           break;
         case 2:
           store.dispatch({
@@ -51,7 +50,7 @@ class ChoiceForm extends React.Component {
             payload: {
               ...store.getState().user, question2: true
             }
-          })
+          });
           break;
         case 3:
           store.dispatch({
@@ -59,17 +58,17 @@ class ChoiceForm extends React.Component {
             payload: {
               ...store.getState().user, question3: true
             }
-          })
+          });
           break;
 
         default:
           break;
-      }
+      };
 
       const rightDialogue = store.getState().modal.rightDialogue
       const name = store.getState().modal.name
 
-
+      // Show dialogue for correct answers
       store.dispatch({
         type: "SHOW_MODAL",
         payload: {
@@ -78,18 +77,19 @@ class ChoiceForm extends React.Component {
           name: name,
           questionNumber: 0
         }
-      })
+      });
+    }
 
-
-    } else {
+    // If question is answered incorrectly
+    else {
       const id = store.getState().user.id;
       const token = store.getState().user.token;
 
       // Decrement health by 1 when question is answered wrong
       API.healthDown(id, token).then(res => {
-        const token = store.getState().user.token;
-        const id = store.getState().user.id;
+        // Return updated user data
         API.getVip(token).then(res => {
+          // If health is below 0, remove keys and reset health to 3
           if (res.data.health === -1) {
             API.resetLevel(id, token).then(res => {
               store.dispatch({
@@ -107,9 +107,10 @@ class ChoiceForm extends React.Component {
                   question3: false,
                   health: 3
                 }
-              })
-            })
+              });
+            });
 
+            // If health is not below 0, update state with new user data
           } else {
             store.dispatch({
               type: "USER_ACTION",
@@ -117,16 +118,17 @@ class ChoiceForm extends React.Component {
                 ...store.getState().user,
                 health: res.data.health
               }
-            })
+            });
           }
+          // Display dialogue for wrong answer
           store.dispatch({
             type: "SHOW_MODAL",
             payload: {
               ...store.getState().modal, dialogue: store.getState().modal.wrongDialogue
             }
           });
-        })
-      }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) })
+        });
+      }).catch(err => { err ? console.log(`Due to your idiocy, ${err}`) : console.log(`Nah you're good`) });
     }
   }
 
@@ -152,6 +154,8 @@ class ChoiceForm extends React.Component {
     );
   }
 }
+
+// Grab props from Redux state
 function mapStateToProps(state) {
   return {
     ...state.question,
