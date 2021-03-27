@@ -1,0 +1,8 @@
+.health {
+    height: 50px;
+    width: 50px;
+}
+
+.healthContainer {
+    float: right;
+}

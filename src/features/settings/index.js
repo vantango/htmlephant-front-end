@@ -1,5 +1,5 @@
 import React from 'react'
-import home_button from './home_button.png'
+import home_button from './home_button1.png'
 import './style.css'
 import { useHistory } from "react-router-dom";
 
@@ -11,8 +11,6 @@ export default function Sound() {
         // show modal first to confirm
         document.querySelector(".settings_modal").style.display = "block"
         // log the user out
-
-        // history.push('/')
     }
 
     function handleClose() {

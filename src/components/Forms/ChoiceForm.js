@@ -14,6 +14,7 @@ class ChoiceForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   };
 
+
   handleChange(event) {
     this.setState({ value: event.target.value });
   };
@@ -131,13 +132,14 @@ class ChoiceForm extends React.Component {
     }
   }
 
+  
+  // const shuffled = this.props.answers.sort(() => Math.random() - 0.5)
   render() {
-    // Randomizes answers from database
-    const shuffled = this.props.answers.sort(() => Math.random() - 0.5)
+    // randomizes answers from database
 
     return (
       <form onSubmit={this.handleSubmit}>
-        {shuffled.map(answer => (
+        {this.props.answers.map(answer => (
           <div key={uuidv4()}>
             <input className="rpgui-radio" type="radio" id={answer} name={answer}
               checked={this.state.value === `${answer}`}

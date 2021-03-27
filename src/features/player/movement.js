@@ -13,6 +13,8 @@ import { ANIMATION_SPEED } from '../../config/constants'
 const ANIMATION_WITH_PADDING = ANIMATION_SPEED * 1.25
 
 export default function handleMovement(player) {
+
+  
   function getNewPosition(oldPos, direction) {
     switch (direction) {
       case "WEST":
@@ -64,9 +66,7 @@ export default function handleMovement(player) {
   function sendQuestion(npc, questionNumber) {
 
     document.querySelector('#player').style.display = "none"
-
-
-
+    // document.querySelector('#map').style.display = 'none'
 
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
