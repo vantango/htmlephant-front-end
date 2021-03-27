@@ -122,6 +122,8 @@ function Modal(props) {
 
     function dispatchAlgorithm() {
       const level = store.getState().user.level
+      document.querySelector("#joe").style.display = "none";
+      document.querySelector("#joe-talk").style.display = "none"
       switch (level) {
         case 1:
           API.easyAlgo().then(res => {
@@ -219,21 +221,34 @@ function Modal(props) {
   } else if (props.questionNumber === 0) {
     return (
       <div className="modal-wrapper">
-        <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
+        <div className={"modal rpgui-container framed"} id={"modal"} style={{ color: "salmon" }}>
           <h3>{props.name} says:</h3>
           <h2>{props.dialogue}</h2>
           <button onClick={closeModal} className="rpgui-button" style={{ color: "white" }}>Close</button>
         </div>
       </div>
     )
+  } else if (props.questionNumber === "algorithm") {
+    return (
+      <div className={"modal-algorithm rpgui-container framed"} id={"modal"} style={{ color: "salmon" }}>
+        <h3 id="joe">{props.name} says:</h3>
+        <h2 id="joe-talk">{props.dialogue}</h2>
+        <button onClick={showQuestion} className="nextButton rpgui-button" style={{ color: "white" }}>Next</button>
+        <hr className="golden" />
+        <Question />
+        <div className={"actions"}>
+        </div>
+      </div>
+    );
+
   }
   else {
     return (
-      <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
+      <div className={"modal-question rpgui-container framed"} id={"modal"} style={{ color: "salmon" }}>
         <h3>{props.name} says:</h3>
         <h2>{props.dialogue}</h2>
-        <button onClick={showQuestion} className="nextButton rpgui-button" style={{color: "white"}}>Next</button>
-        <hr className="golden"/>
+        <button onClick={showQuestion} className="nextButton rpgui-button" style={{ color: "white" }}>Next</button>
+        <hr className="golden" />
         <Question />
         <div className={"actions"}>
         </div>

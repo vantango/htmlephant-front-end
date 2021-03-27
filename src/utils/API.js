@@ -58,6 +58,13 @@ const API = {
             }
         })
     },
+    level1: (id, token) => {
+        return axios.put(`${URL_PREFIX}/level1/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
     playAsCat: username => {
         return axios.put(`${URL_PREFIX}/switchtocat/${username}`)
     },

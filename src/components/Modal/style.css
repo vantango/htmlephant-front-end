@@ -3,7 +3,31 @@
 }
 
 .modal {
-    /* position: relative; */
+    width: 75vw;
+    z-index: 50;
+    transform: translate(0%, -45%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: Column;
+}
+
+.modal-question {
+    width: 75vw;
+    z-index: 50;
+    transform: translate(-20%, -90%);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: Column;
+}
+
+.modal-algorithm {
+    width: 80vw;
+    z-index: 50;
+    transform: translate(-20%, -70%);
     display: flex;
     align-items: center;
     justify-content: space-around;
