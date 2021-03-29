@@ -8,8 +8,8 @@ import './style.css'
 const Keys = (props) => {
     // Fill and empty keys based on key state
     useEffect(() => {
-        const amount = props.amount
-        switch (amount) {
+        const keys = props.keys
+        switch (keys) {
             case 0:
                 document.querySelector('.key1').src = empty
                 document.querySelector('.key2').src = empty
@@ -48,7 +48,7 @@ const Keys = (props) => {
 // Grab props from Redux state
 function mapStateToProps(state) {
     return {
-        ...state.key,
+        ...state.user,
     }
 }
 

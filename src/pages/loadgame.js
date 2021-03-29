@@ -38,7 +38,8 @@ function LoadGame() {
     isLoggedIn: false,
     level: 0,
     id: "",
-    health: 0
+    health: 0,
+    keys: 0
   })
 
   // Set initial login state
@@ -96,7 +97,8 @@ function LoadGame() {
         question1: false,
         question2: false,
         question3: false,
-        health: res.data.user.health
+        health: res.data.user.health,
+        keys: res.data.user.keys
       });
       store.dispatch({
         type: "USER_ACTION",
@@ -109,7 +111,8 @@ function LoadGame() {
           level: res.data.user.level,
           id: res.data.user._id,
           isLoggedIn: true,
-          health: res.data.user.health
+          health: res.data.user.health,
+          keys: res.data.user.keys
         }
       });
       setLoginState({

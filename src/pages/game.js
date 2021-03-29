@@ -20,8 +20,6 @@ function Game() {
         }
     })
 
-
-    console.log("loaded")
     const token = localStorage.getItem('token')
     API.getVip(token).then((res) => {
         if (res) {
@@ -39,13 +37,13 @@ function Game() {
                     encounter: 0,
                     id: res.data._id,
                     token: token,
-                    health: res.data.health
+                    health: res.data.health,
+                    keys: res.data.keys
                 }
             })
         }
-    }).catch(() => {
-        console.log("not signed in")
-        history.push('/')
+    }).catch((err) => {
+        err ? console.log(`${err}`) : console.log("Success!")
     })
 
     function handleHomeButton() {

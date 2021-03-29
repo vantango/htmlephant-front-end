@@ -64,7 +64,7 @@ const Editor = () => {
             const result = testFunction(info.args)
             // Joe will evaluate your answer and judge you
             if (result === info.output) {
-                resetKeys()
+                // resetKeys()
                 showWinDialogue()
                 level = 3 ? history.push("/endscreen") : history.push("/winscreen")
             }
