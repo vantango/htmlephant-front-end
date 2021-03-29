@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import empty from './empty.png'
 import filled from './filled.png'
 
+import './style.css'
+
 const Health = (props) => {
     // Fill and empty hearts based on user health state
     useEffect(() => {
@@ -14,11 +16,11 @@ const Health = (props) => {
                 document.querySelector('.health2').src = empty
                 document.querySelector('.health3').src = empty
             case 1:
-                document.querySelector('.health1').src = empty
+                document.querySelector('.health3').src = empty
                 document.querySelector('.health2').src = empty
                 break;
             case 2:
-                document.querySelector('.health1').src = empty
+                document.querySelector('.health3').src = empty
                 break;
             case 3:
                 document.querySelector('.health1').src = filled

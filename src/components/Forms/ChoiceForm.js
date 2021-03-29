@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import store from "../../config/store"
 import { v4 as uuidv4 } from 'uuid'
 import API from "../../utils/API";
+import { tiles1 } from "../../data/maps/1";
 
 
 class ChoiceForm extends React.Component {
@@ -95,7 +96,7 @@ class ChoiceForm extends React.Component {
         // Return updated user data
         API.getVip(token).then(res => {
           // If health is below 0, remove keys and reset health to 3
-          if (res.data.health === -1) {
+          if (res.data.health <= 0) {
             API.resetLevel(id, token).then(res => {
               store.dispatch({
                 type: "USER_ACTION",
@@ -107,6 +108,31 @@ class ChoiceForm extends React.Component {
                   health: 3,
                   keys: 0
                 }
+              });
+              store.dispatch({
+                type: "SHOW_MODAL",
+                payload: {
+                  show: true,
+                  name: 'Joe',
+                  dialogue: "Uh-Oh! You ran out of health. I'm taking away your salmon!",
+                  questionNumber: 0
+                }
+              })
+              store.dispatch({
+                type: "MOVE_PLAYER",
+                payload: {
+                  position: [288, 128],
+                  direction: "EAST",
+                  walkIndex: 0,
+                  spriteLocation: '0px 0px',
+                },
+              });
+              document.querySelector('.player_animation').classList.add('notransition')
+              store.dispatch({
+                type: "ADD_TILES",
+                payload: {
+                  tiles: tiles1,
+                },
               });
             });
 
@@ -120,6 +146,7 @@ class ChoiceForm extends React.Component {
               }
             });
           }
+
           // Display dialogue for wrong answer
           store.dispatch({
             type: "SHOW_MODAL",

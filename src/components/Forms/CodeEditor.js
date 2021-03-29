@@ -55,7 +55,6 @@ const Editor = () => {
     // On submit, grab text from code editor
     const onSubmit = event => {
         event.preventDefault();
-        const level = store.getState().user.level
         // API call for NPCs
         API.allNPC().then(data => {
             // Create and call a new function to run the code written into the editor
@@ -66,13 +65,13 @@ const Editor = () => {
             if (result === info.output) {
                 // resetKeys()
                 showWinDialogue()
-                level = 3 ? history.push("/endscreen") : history.push("/winscreen")
+                store.getState().user.level === 3 ? history.push("/endscreen") : history.push("/winscreen")
             }
             else {
                 showWrongDialogue()
             }
         }).catch(err => {
-            err ? showWrongDialogue() : history.push("/endscreen")
+            err ? showWrongDialogue() : history.push("/winscreen")
         });
     }
 

@@ -98,9 +98,7 @@ export default function handleMovement(direction) {
     const tiles = store.getState().map.tiles
     const y = newPos[1] / SPRITE_SIZE
     const x = newPos[0] / SPRITE_SIZE
-    // console.log(x,y)
     const nextTile = tiles[y][x]
-    // console.log(tiles[y][x])
     switch (nextTile) {
       case 18:
         const level = store.getState().user.level - 1
@@ -271,7 +269,6 @@ export default function handleMovement(direction) {
   function changeRoom(tiles) {
     // take out player animation transition
     document.querySelector('.player_animation').classList.add('notransition')
-    // console.log(room)
     store.dispatch({
       type: 'ADD_TILES',
       payload: {

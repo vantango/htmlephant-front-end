@@ -12,7 +12,6 @@ function Game() {
     let history = useHistory();
 
     let location = useLocation();
-    console.log(location.pathname)
     store.dispatch({
         type: 'CHANGE_LOCATION',
         payload: {
@@ -23,7 +22,6 @@ function Game() {
     const token = localStorage.getItem('token')
     API.getVip(token).then((res) => {
         if (res) {
-            console.log(res.data)
             store.dispatch({
                 type: "USER_ACTION",
                 payload: {
