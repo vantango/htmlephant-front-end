@@ -11,7 +11,6 @@ import back_arrow from "./imgs/back_arrow.png"
 function NewGame() {
 
   let location = useLocation();
-  console.log(location.pathname)
   store.dispatch({
     type: 'CHANGE_LOCATION',
     payload: {
@@ -66,16 +65,15 @@ function NewGame() {
   const handleCatSubmit = e => {
     e.preventDefault();
     if (!signupState.username || !signupState.password) {
-      console.log("username and password required")
       emptyUsernameOrPassword()
     } else {
-      console.log(JSON.stringify(signupState, null, 2))
+      // console.log(JSON.stringify(signupState, null, 2))
       API.signup({
         username: signupState.username,
         password: signupState.password,
         character: "Cat"
       }).then(res => {
-        console.log(`Congrats! ${JSON.stringify(res.data)}`);
+        // console.log(`Congrats! ${JSON.stringify(res.data)}`);
         localStorage.setItem("token", res.data.token)
         setUserState({
           character: res.data.user.character,
@@ -107,7 +105,7 @@ function NewGame() {
         });
         history.push("/game");
       }).catch(err => {
-        console.log(`FOOL! Due to your stupidity, ${err}`);
+        // console.log(`FOOL! Due to your stupidity, ${err}`);
         store.dispatch({
           type: "USER_ACTION",
           payload: {
@@ -131,16 +129,15 @@ function NewGame() {
   const handleManateeSubmit = e => {
     e.preventDefault();
     if (!signupState.username || !signupState.password) {
-      console.log("username and password required")
       emptyUsernameOrPassword()
     } else {
-      console.log(JSON.stringify(signupState, null, 2))
+      // console.log(JSON.stringify(signupState, null, 2))
       API.signup({
         username: signupState.username,
         password: signupState.password,
         character: "Manatee"
       }).then(res => {
-        console.log(`Congrats! ${JSON.stringify(res.data)}`);
+        // console.log(`Congrats! ${JSON.stringify(res.data)}`);
         localStorage.setItem("token", res.data.token)
         setUserState({
           character: res.data.user.character,
@@ -172,7 +169,7 @@ function NewGame() {
         });
         history.push("/game");
       }).catch(err => {
-        console.log(`FOOL! Due to your stupidity, ${err}`);
+        // console.log(`FOOL! Due to your stupidity, ${err}`);
         store.dispatch({
           type: "USER_ACTION",
           payload: {

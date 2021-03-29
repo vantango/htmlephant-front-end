@@ -11,7 +11,6 @@ function Endscreen() {
   let history = useHistory();
 
   let location = useLocation();
-  console.log(location.pathname);
   store.dispatch({
     type: "CHANGE_LOCATION",
     payload: {

@@ -120,12 +120,12 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][2]}`,
                 form: "editor",
                 questionNumber: "algorithm",
-                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
-                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
+                winDialogue: `${res.data[1].usefulDialogue[level][3]}`,
+                wrongDialogue: `${res.data[1].usefulDialogue[level][4]}`
               },
             })
           });
@@ -138,8 +138,8 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][1]}`,
                 questionNumber: 0
               },
             })
@@ -160,8 +160,8 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][0]}`,
                 questionNumber: 0
               },
             })
@@ -171,10 +171,10 @@ export default function handleMovement(player) {
         // Denis
       case 15:
         if (store.getState().user.question3 === false) {
-          sendQuestion(1, 3)
+          sendQuestion(0, 3)
         }
         else {
-          sendMessage(1)
+          sendMessage(0)
         }
         return true;
         // Zac
@@ -369,7 +369,6 @@ export default function handleMovement(player) {
   // only adds an event listener when url path is '/game/
   window.addEventListener("keydown", (e) => {
     const location = store.getState().world.location
-    console.log("this is the location from state" + location)
     
       if (location === "/game") {
       handleKeyDown(e);

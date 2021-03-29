@@ -16,18 +16,6 @@ import store from "./config/store";
 
 function App() {
 
-    // let location = useLocation();
-    // console.log(location.pathname)
-    // React.useEffect(() => {
-    //   console.log(location.pathname)
-    //   store.dispatch({
-    //     type: 'CHANGE_LOCATION',
-    //     payload: {
-    //       location: location.pathname
-    //     }
-    //   })
-    // }, [location])
-
   return (
     <Router>
       <div>

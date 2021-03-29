@@ -11,7 +11,6 @@ import bass_clef_blue from "./imgs/bass_clef_blue.png"
 function WinScreen() {
 
   let location = useLocation();
-  console.log(location.pathname)
   store.dispatch({
       type: 'CHANGE_LOCATION',
       payload: {

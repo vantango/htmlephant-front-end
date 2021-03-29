@@ -25,7 +25,6 @@ function World(props) {
     })
 
     const health = store.getState().user.health;
-    console.log(health)
 
     window.onorientationchange = function() {
         window.location.reload()
@@ -39,13 +38,10 @@ function World(props) {
         orientation = 'landscape'
     }
     function handleOrientation(event) {
-        console.log(event)
         // check if device is landscape
         if (event.alpha>89 && event.alpha< 150) {
-            console.log("device is landscape")
             orientation = 'landscape'
         } else {
-            console.log("device is portrait")
             orientation = 'portrait'
         }
     }
@@ -53,8 +49,6 @@ function World(props) {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent
       );
-      console.log(isMobile)
-        console.log(orientation)
     if (!isMobile || orientation === 'landscape') {
     return (
         <div
