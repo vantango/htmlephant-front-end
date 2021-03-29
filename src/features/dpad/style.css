@@ -13,5 +13,6 @@
     width: 90px;
     background-color: rgb(3, 3, 3, .5);
     border-color: white;
-    border-style: solid
+    border-style: solid;
+    border-radius: 25px;
 }

@@ -11,7 +11,6 @@ function Endscreen() {
   let history = useHistory();
 
   let location = useLocation();
-  console.log(location.pathname);
   store.dispatch({
     type: "CHANGE_LOCATION",
     payload: {
@@ -23,14 +22,8 @@ function Endscreen() {
     e.preventDefault();
     const id = store.getState().user.id;
     const token = store.getState().user.token;
-    console.log(`ID: ${id}`);
-    console.log("===================================");
-    console.log(`Token: ${token}`);
-    console.log("===================================");
-    API.resetLevel(id, token)
+    API.level1(id, token)
       .then((res) => {
-        console.log(`Here's what we get back: ${JSON.stringify(res)}`);
-        console.log("===================================");
         store.dispatch({
           type: "USER_ACTION",
           payload: {
@@ -41,13 +34,12 @@ function Endscreen() {
             question2: false,
             question3: false,
             encounter: 0,
+            health: 3
           },
         });
       })
       .catch((err) => {
-        err
-          ? console.log(`Due to your idiocy, ${err}`)
-          : console.log("Success!");
+        err ? console.log(`Due to your idiocy, ${err}`) : console.log("Success!");
       });
     store.dispatch({
       type: "SHOW_MODAL",
@@ -86,9 +78,9 @@ function Endscreen() {
     "https://mutemusic64.bandcamp.com/album/h-xan"
   ]
 
-    var randomSite = Math.random() * links.length;
-    randomSite = parseInt(randomSite, 10);
-    let link = links[randomSite];
+  var randomSite = Math.random() * links.length;
+  randomSite = parseInt(randomSite, 10);
+  let link = links[randomSite];
   return (
     <div className="game-wrapper">
       <Sound />
@@ -102,14 +94,14 @@ function Endscreen() {
           address. Go forth and always be coding.
         </h2>
         <div className="music-plug">
-        <a href={link} target="blank">
-          <img
-            className="bass-clef"
-            src={bass_clef_black}
-            alt="Link to music by Tyler Baldwin"
-          />
-        </a>
-      </div>
+          <a href={link} target="blank">
+            <img
+              className="bass-clef"
+              src={bass_clef_black}
+              alt="Link to music by Tyler Baldwin"
+            />
+          </a>
+        </div>
         <button
           type="submit"
           className="rpgui-button"

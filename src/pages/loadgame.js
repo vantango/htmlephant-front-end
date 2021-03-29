@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css'
 function LoadGame() {
 
   let location = useLocation();
-  console.log(location.pathname)
   store.dispatch({
     type: 'CHANGE_LOCATION',
     payload: {
@@ -82,7 +81,6 @@ function LoadGame() {
   // Send user state to store and set token to local storage on successful login
   const handleSubmit = () => {
     API.login(loginState).then(res => {
-      console.log(`Congrats! ${JSON.stringify(res.data)}`)
       localStorage.setItem("token", res.data.token);
       setUserState({
         character: res.data.user.character,

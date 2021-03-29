@@ -149,8 +149,9 @@ function Map(props) {
             name="map"
             style={{
                 position: 'relative',
-                top: '0px',
-                left: '0px',
+                top: '0',
+                left: '0',
+                // transform: 'translate(-50%, -50%)',
                 width: '640px',
                 height: '320px',
             }}
