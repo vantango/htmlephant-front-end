@@ -29,7 +29,7 @@ function WinScreen() {
         type: "USER_ACTION",
         payload: {
           ...store.getState().user,
-          key: 0,
+          keys: 0,
           level: store.getState().user.level + 1,
           question1: false,
           question2: false,
