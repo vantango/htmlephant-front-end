@@ -25,24 +25,6 @@ const Editor = () => {
         });
     };
 
-    function resetKeys() {
-        store.dispatch({
-            type: "USER_ACTION",
-            payload: {
-                ...store.getState().user, keys: 0
-            }
-        })
-    }
-
-    function showWinDialogue() {
-        store.dispatch({
-            type: "SHOW_MODAL",
-            payload: {
-                ...store.getState().modal, dialogue: store.getState().modal.winDialogue
-            }
-        })
-    }
-
     function showWrongDialogue() {
         store.dispatch({
             type: "SHOW_MODAL",
@@ -63,8 +45,6 @@ const Editor = () => {
             const result = testFunction(info.args)
             // Joe will evaluate your answer and judge you
             if (result === info.output) {
-                resetKeys()
-                showWinDialogue()
                 store.getState().user.level === 3 ? history.push("/endscreen") : history.push("/winscreen")
             }
             else {
