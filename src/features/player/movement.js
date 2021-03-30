@@ -112,7 +112,7 @@ export default function handleMovement(player) {
       // Joe
       case 18:
         const level = store.getState().user.level - 1
-        if (store.getState().key.amount >= 3) {
+        if (store.getState().user.keys >= 3) {
           document.querySelector('#player').style.display = "none"
 
           API.allNPC().then(res => {
@@ -180,19 +180,19 @@ export default function handleMovement(player) {
         // Zac
       case 16:
         if (store.getState().user.question2 === false) {
-          sendQuestion(3, 2)
+          sendQuestion(2, 2)
         }
         else {
-          sendMessage(3)
+          sendMessage(2)
         }
         return true;
         // Aslan
       case 17:
         if (store.getState().user.question1 === false) {
-          sendQuestion(2, 1)
+          sendQuestion(3, 1)
         }
         else {
-          sendMessage(2)
+          sendMessage(3)
         }
         return true;
 
