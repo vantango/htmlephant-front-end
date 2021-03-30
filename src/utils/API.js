@@ -1,3 +1,5 @@
+import { bindActionCreators } from "redux";
+
 // Dependencies
 const axios = require("axios");
 
@@ -72,6 +74,14 @@ const API = {
     // Set keys to 0, keep existing health and level
     noKeys: (id, token) => {
         return axios.put(`${URL_PREFIX}/nokeys/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    // Reset player to level 1, health to 3, keys to 0
+    level1: (id, token) => {
+        return axios.put(`${URL_PREFIX}/level1/${id}`, {
             headers: {
                 authorization: `Bearer: ${token}`
             }
