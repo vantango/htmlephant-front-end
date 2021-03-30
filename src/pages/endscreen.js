@@ -102,7 +102,7 @@ function Endscreen() {
               />
             </a>
           </div>
-          <div className="buttons">
+          <div className="end-buttons">
             <button
               type="submit"
               className="rpgui-button"
