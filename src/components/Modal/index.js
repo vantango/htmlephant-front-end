@@ -122,6 +122,8 @@ function Modal(props) {
 
     function dispatchAlgorithm() {
       const level = store.getState().user.level
+      // document.querySelector("#joe").style.display = "none";
+      // document.querySelector("#joe-talk").style.display = "none"
       document.querySelector(".nextButton").style.display = 'none'
       switch (level) {
         case 1:
