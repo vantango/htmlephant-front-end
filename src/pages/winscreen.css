@@ -80,3 +80,36 @@ input {
     background-color: gray
   }
   
+  @media screen and (max-width: 1500px) {
+    #bass-clef {
+    width: 10vw;
+    }
+    #congrats{
+      font-size: medium !important;
+    }
+    #nice {
+      font-size: small !important;
+    }
+    #submitBtn{
+      font-size: x-small !important;
+      width: 1vw;
+      height: 10vh;
+      transform: translate(25%, -10%)
+    }
+    .stupid{
+      display: flex;
+      justify-content: space-around;
+    }
+    .buttons{
+      display: flex;
+      flex-direction: column;
+      align-items: vertical;
+    }
+    
+  }
+
+  @media screen and (max-width: 600px) {
+    .stupid{
+      transform: translate(0%, -15%);
+    }
+  }

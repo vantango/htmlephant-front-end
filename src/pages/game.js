@@ -4,7 +4,7 @@ import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import store from "../config/store";
 import Sound from '../features/sound'
-
+import Settings from '../features/settings'
 
 
 // Render world and export as Game
@@ -12,7 +12,6 @@ function Game() {
     let history = useHistory();
 
     let location = useLocation();
-    console.log(location.pathname)
     store.dispatch({
         type: 'CHANGE_LOCATION',
         payload: {
@@ -20,12 +19,9 @@ function Game() {
         }
     })
 
-
-    console.log("loaded")
     const token = localStorage.getItem('token')
     API.getVip(token).then((res) => {
         if (res) {
-            console.log(res.data)
             store.dispatch({
                 type: "USER_ACTION",
                 payload: {
@@ -38,22 +34,26 @@ function Game() {
                     question3: false,
                     encounter: 0,
                     id: res.data._id,
-                    token: token
+                    token: token,
+                    health: res.data.health,
+                    keys: res.data.keys
                 }
             })
         }
-    }).catch(() => {
-        console.log("not signed in")
-        history.push('/')
+    }).catch((err) => {
+        err ? console.log(`${err}`) : console.log("Success!")
     })
 
-
+    function handleHomeButton() {
+        history.push("/")
+    }
 
     return (
         <div>
 
-        <Sound />
-        <World />
+            <Sound />
+            <Settings />
+            <World />
         </div>
     )
 }

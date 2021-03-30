@@ -3,6 +3,7 @@ import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./pages.css";
+import "./endscreen.css";
 import Sound from "../features/sound";
 import bass_clef_black from "./imgs/bass_clef_black.png"
 import bass_clef_blue from "./imgs/bass_clef_blue.png"
@@ -11,7 +12,6 @@ function Endscreen() {
   let history = useHistory();
 
   let location = useLocation();
-  console.log(location.pathname);
   store.dispatch({
     type: "CHANGE_LOCATION",
     payload: {
@@ -23,31 +23,24 @@ function Endscreen() {
     e.preventDefault();
     const id = store.getState().user.id;
     const token = store.getState().user.token;
-    console.log(`ID: ${id}`);
-    console.log("===================================");
-    console.log(`Token: ${token}`);
-    console.log("===================================");
-    API.levelDown(id, token)
+    API.level1(id, token)
       .then((res) => {
-        console.log(`Here's what we get back: ${JSON.stringify(res)}`);
-        console.log("===================================");
         store.dispatch({
           type: "USER_ACTION",
           payload: {
             ...store.getState().user,
-            key: 0,
+            keys: 0,
             level: 1,
             question1: false,
             question2: false,
             question3: false,
             encounter: 0,
+            health: 3
           },
         });
       })
       .catch((err) => {
-        err
-          ? console.log(`Due to your idiocy, ${err}`)
-          : console.log("Success!");
+        err ? console.log(`Due to your idiocy, ${err}`) : console.log("Success!");
       });
     store.dispatch({
       type: "SHOW_MODAL",
@@ -86,46 +79,48 @@ function Endscreen() {
     "https://mutemusic64.bandcamp.com/album/h-xan"
   ]
 
-    var randomSite = Math.random() * links.length;
-    randomSite = parseInt(randomSite, 10);
-    let link = links[randomSite];
+  var randomSite = Math.random() * links.length;
+  randomSite = parseInt(randomSite, 10);
+  let link = links[randomSite];
   return (
     <div className="game-wrapper">
       <Sound />
       <div className="menu-select rpgui-container framed">
         <label>Wizards and Whiteboards</label>
-        <h1 style={{ fontSize: "250%" }}> Congratulations!</h1>
-        <h2>
+        <h1 id="congrats" style={{ fontSize: "250%" }}> Congratulations!</h1>
+        <h2 id="nice">
           Hey, nice job! Just think, three months ago you'd never even see an
-          HTML tag, and just look at you now! As a prize for completing the
-          final challenge, I present you with the ultimate gift: A joe.joe email
-          address. Go forth and always be coding.
+          HTML tag, and just look at you now! Go forth and always be coding.
         </h2>
-        <div className="music-plug">
-        <a href={link} target="blank">
-          <img
-            className="bass-clef"
-            src={bass_clef_black}
-            alt="Link to music by Tyler Baldwin"
-          />
-        </a>
-      </div>
-        <button
-          type="submit"
-          className="rpgui-button"
-          value="New Game"
-          onClick={handleSubmit}
-        >
-          New Game
-        </button>
-        <button
-          type="submit"
-          className="rpgui-button"
-          value="Exit"
-          onClick={handleExit}
-        >
-          Exit
-        </button>
+        <div className="stupid">
+          <div className="music-plug">
+            <a href={link} target="blank">
+              <img
+                className="bass-clef" id="bass-clef"
+                src={bass_clef_black}
+                alt="Link to music by Tyler Baldwin"
+              />
+            </a>
+          </div>
+          <div className="buttons">
+            <button
+              type="submit"
+              className="rpgui-button"
+              value="New Game"
+              onClick={handleSubmit}
+            >
+              New Game
+            </button>
+            <button
+              type="submit"
+              className="rpgui-button"
+              value="Exit"
+              onClick={handleExit}
+            >
+              Exit
+            </button>
+          </div>
+        </div>
       </div>
 
     </div>

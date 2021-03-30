@@ -1,9 +1,12 @@
+import { bindActionCreators } from "redux";
+
 // Dependencies
 const axios = require("axios");
 
 // Deployed API URL
 const URL_PREFIX = "https://vast-oasis-70689.herokuapp.com"
 
+// API calls
 const API = {
     allAlgo: () => {
         return axios.get(`${URL_PREFIX}/api/algo`)
@@ -23,12 +26,6 @@ const API = {
     allNPC: () => {
         return axios.get(`${URL_PREFIX}/api/npc`)
     },
-    signup: userData => {
-        return axios.post(`${URL_PREFIX}/signup`, userData)
-    },
-    login: userData => {
-        return axios.post(`${URL_PREFIX}/login`, userData)
-    },
     getVip: token => {
         return axios.get(`${URL_PREFIX}/vip`, {
             headers: {
@@ -36,6 +33,13 @@ const API = {
             }
         })
     },
+    signup: userData => {
+        return axios.post(`${URL_PREFIX}/signup`, userData)
+    },
+    login: userData => {
+        return axios.post(`${URL_PREFIX}/login`, userData)
+    },
+    // Increment level by 1, set health to 3 and keys to 0
     levelUp: (id, token) => {
         return axios.put(`${URL_PREFIX}/levelup/${id}`, {
             headers: {
@@ -43,19 +47,63 @@ const API = {
             }
         })
     },
+    // Decrement level by 1, set health to 3 and keys to 0
     levelDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/leveldown/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    // Set health to 3 and keys to 0, keep existing level
+    resetLevel: (id, token) => {
         return axios.put(`${URL_PREFIX}/reset/${id}`, {
             headers: {
                 authorization: `Bearer: ${token}`
             }
         })
     },
+    // Increment keys by 1, keep existing health and level
+    addKey: (id, token) => {
+        return axios.put(`${URL_PREFIX}/keyup/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    // Set keys to 0, keep existing health and level
+    noKeys: (id, token) => {
+        return axios.put(`${URL_PREFIX}/nokeys/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    // Reset player to level 1, health to 3, keys to 0
+    level1: (id, token) => {
+        return axios.put(`${URL_PREFIX}/level1/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
+    },
+    // Switch character to cat
     playAsCat: username => {
         return axios.put(`${URL_PREFIX}/switchtocat/${username}`)
     },
+    // Switch character to manatee
     playAsManatee: username => {
         return axios.put(`${URL_PREFIX}/switchtomanatee/${username}`)
+    },
+    // Decrement health by 1, keep existing keys and level
+    healthDown: (id, token) => {
+        return axios.put(`${URL_PREFIX}/healthdown/${id}`, {
+            headers: {
+                authorization: `Bearer: ${token}`
+            }
+        })
     }
+
 }
 
 export default API;

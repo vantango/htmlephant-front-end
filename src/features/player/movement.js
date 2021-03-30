@@ -13,6 +13,8 @@ import { ANIMATION_SPEED } from '../../config/constants'
 const ANIMATION_WITH_PADDING = ANIMATION_SPEED * 1.25
 
 export default function handleMovement(player) {
+
+  
   function getNewPosition(oldPos, direction) {
     switch (direction) {
       case "WEST":
@@ -64,9 +66,7 @@ export default function handleMovement(player) {
   function sendQuestion(npc, questionNumber) {
 
     document.querySelector('#player').style.display = "none"
-
-
-
+    // document.querySelector('#map').style.display = 'none'
 
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
@@ -112,41 +112,39 @@ export default function handleMovement(player) {
       // Joe
       case 18:
         const level = store.getState().user.level - 1
-        if (store.getState().key.amount >= 3) {
-          document.querySelector('#player').style.display = "none"
+        document.querySelector('#player').style.display = "none"
+        if (store.getState().user.keys >= 3) {
 
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][2]}`,
                 form: "editor",
                 questionNumber: "algorithm",
-                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
-                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
+                winDialogue: `${res.data[1].usefulDialogue[level][3]}`,
+                wrongDialogue: `${res.data[1].usefulDialogue[level][4]}`
               },
             })
           });
 
         }
         else if (store.getState().user.encounter === 1 ) {
-    document.querySelector('#player').style.display = "none"
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][1]}`,
                 questionNumber: 0
               },
             })
           });
         }
         else {
-    document.querySelector('#player').style.display = "none"
 
           store.dispatch({
             type: "USER_ACTION",
@@ -160,8 +158,8 @@ export default function handleMovement(player) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][0]}`,
                 questionNumber: 0
               },
             })
@@ -171,28 +169,28 @@ export default function handleMovement(player) {
         // Denis
       case 15:
         if (store.getState().user.question3 === false) {
-          sendQuestion(1, 3)
+          sendQuestion(0, 3)
         }
         else {
-          sendMessage(1)
+          sendMessage(0)
         }
         return true;
         // Zac
       case 16:
         if (store.getState().user.question2 === false) {
-          sendQuestion(3, 2)
+          sendQuestion(2, 2)
         }
         else {
-          sendMessage(3)
+          sendMessage(2)
         }
         return true;
         // Aslan
       case 17:
         if (store.getState().user.question1 === false) {
-          sendQuestion(2, 1)
+          sendQuestion(3, 1)
         }
         else {
-          sendMessage(2)
+          sendMessage(3)
         }
         return true;
 
@@ -333,33 +331,36 @@ export default function handleMovement(player) {
     }
   }
 
+  const reactAce = document.querySelector('.ace_text-input')
+
   const handleKeyDown = (e => {
-    if (e.target !== "userAns") {
+    console.log(e.keyCode)
+    console.log(e.target.classList)
+
+    if (e.target.classList[0] !== 'ace_text-input') {
       switch (e.keyCode) {
         case 37:
-        
+        case 65:
           e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-       
+        case 87:
           e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-         
-
+        case 68:
           e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-       
-
+        case 83:
           e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-      
+        
       }
     }
   })
@@ -369,7 +370,6 @@ export default function handleMovement(player) {
   // only adds an event listener when url path is '/game/
   window.addEventListener("keydown", (e) => {
     const location = store.getState().world.location
-    console.log("this is the location from state" + location)
     
       if (location === "/game") {
       handleKeyDown(e);

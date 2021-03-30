@@ -1,9 +1,10 @@
 const intitialState = {
     name: "",
     password: "",
-    key: 0,
+    keys: 0,
     token: "",
     level: 1,
+    health: 3,
     id: "",
     isLoggedIn: false,
     encounter: 0,

@@ -7,38 +7,42 @@ import store from "../../config/store"
 // import PropTypes from "prop-types";
 
 function Modal(props) {
-  console.log(props.show);
   const number = props.questionNumber
-  let answers, question, correct
+  let answers, question, correct, random
 
   function showQuestion() {
     const level = store.getState().user.level
+    // document.querySelector('.npc-dialogue').style.display = 'none'
+    document.querySelector('.nextButton').style.display = 'none'
 
     switch (level) {
       case 1:
         API.easyAlgo().then(res => {
           switch (number) {
             case 1:
-              answers = res.data.answers1
+              random = res.data.answers1.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question1
               correct = res.data.correctAnswer1
               dispatchQuestion()
               break;
             case 2:
-              answers = res.data.answers2
+              random = res.data.answers2.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question2
               correct = res.data.correctAnswer2
               dispatchQuestion()
               break;
             case 3:
-              answers = res.data.answers3
+              random = res.data.answers3.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question3
               correct = res.data.correctAnswer3
               dispatchQuestion()
               break;
             case "algorithm":
               dispatchAlgorithm()
-    
+
             default:
               break;
           }
@@ -49,26 +53,29 @@ function Modal(props) {
         API.medAlgo().then(res => {
           switch (number) {
             case 1:
-              answers = res.data.answers1
+              random = res.data.answers1.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question1
               correct = res.data.correctAnswer1
               dispatchQuestion()
               break;
             case 2:
-              answers = res.data.answers2
+              random = res.data.answers2.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question2
               correct = res.data.correctAnswer2
               dispatchQuestion()
               break;
             case 3:
-              answers = res.data.answers3
+              random = res.data.answers3.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question3
               correct = res.data.correctAnswer3
               dispatchQuestion()
               break;
             case "algorithm":
               dispatchAlgorithm()
-    
+
             default:
               break;
           }
@@ -79,99 +86,126 @@ function Modal(props) {
         API.hardAlgo().then(res => {
           switch (number) {
             case 1:
-              answers = res.data.answers1
+              random = res.data.answers1.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question1
               correct = res.data.correctAnswer1
               dispatchQuestion()
               break;
             case 2:
-              answers = res.data.answers2
+              random = res.data.answers2.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question2
               correct = res.data.correctAnswer2
               dispatchQuestion()
               break;
             case 3:
-              answers = res.data.answers3
+              random = res.data.answers3.sort(() => Math.random() - 0.5)
+              answers = random
               question = res.data.question3
               correct = res.data.correctAnswer3
               dispatchQuestion()
               break;
             case "algorithm":
               dispatchAlgorithm()
-    
+
             default:
               break;
           }
         });
         break;
-        
-    
+
+
       default:
         break;
     }
 
-      function dispatchAlgorithm() {
-        const level = store.getState().user.level
-        switch (level) {
-          case 1:
-            API.easyAlgo().then(res => {
-              const algorithm = res.data.algorithm
-              store.dispatch({
-                type: "ASK_QUESTION",
-                payload: {
-                  question: algorithm,
-                  form: "editor",
-                }
-              });
-              document.querySelector(".question").style.display = "block";
-            })
-            break;
+    function dispatchAlgorithm() {
+      const level = store.getState().user.level
+      // document.querySelector("#joe").style.display = "none";
+      // document.querySelector("#joe-talk").style.display = "none"
+      document.querySelector(".nextButton").style.display = 'none'
+      switch (level) {
+        case 1:
+          API.easyAlgo().then(res => {
+            const algorithm = res.data.algorithm
+            store.dispatch({
+              type: "ASK_QUESTION",
+              payload: {
+                question: algorithm,
+                form: "editor",
+              }
+            });
+            store.dispatch({
+              type: "EDITOR",
+              payload: {
+                ...store.getState().editor,
+                text: res.data.argsAndOutput
+              }
+            });
+            document.querySelector(".question").style.display = "block";
+          })
+          break;
 
-          case 2:
-            API.medAlgo().then(res => {
-              const algorithm = res.data.algorithm
-              store.dispatch({
-                type: "ASK_QUESTION",
-                payload: {
-                  question: algorithm,
-                  form: "editor",
-                }
-              });
-              document.querySelector(".question").style.display = "block";
-            })
-            break;
+        case 2:
+          API.medAlgo().then(res => {
+            const algorithm = res.data.algorithm
+            store.dispatch({
+              type: "ASK_QUESTION",
+              payload: {
+                question: algorithm,
+                form: "editor",
+              }
+            });
+            store.dispatch({
+              type: "EDITOR",
+              payload: {
+                ...store.getState().editor,
+                text: res.data.argsAndOutput
+              }
+            });
+            document.querySelector(".question").style.display = "block";
+          })
+          break;
 
-          case 3:
-            API.hardAlgo().then(res => {
-              const algorithm = res.data.algorithm
-              store.dispatch({
-                type: "ASK_QUESTION",
-                payload: {
-                  question: algorithm,
-                  form: "editor",
-                }
-              });
-              document.querySelector(".question").style.display = "block";
-            })
-            break;
-        
-          default:
-            break;
-        }
+        case 3:
+          API.hardAlgo().then(res => {
+            const algorithm = res.data.algorithm
+            store.dispatch({
+              type: "ASK_QUESTION",
+              payload: {
+                question: algorithm,
+                form: "editor",
+              }
+            });
+            store.dispatch({
+              type: "EDITOR",
+              payload: {
+                ...store.getState().editor,
+                text: res.data.argsAndOutput
+              }
+            });
+            document.querySelector(".question").style.display = "block";
+          })
+          break;
+
+        default:
+          break;
       }
-      function dispatchQuestion() {
+    }
+    function dispatchQuestion() {
 
-        store.dispatch({
-          type: "ASK_QUESTION",
-          payload: {
-            answers: answers,
-            question: `${question}`,
-            correct: `${correct}`,
-            form: "mc",
-          },
-        })
-        document.querySelector(".question").style.display = "block";
-      }
+      store.dispatch({
+        type: "ASK_QUESTION",
+        payload: {
+          answers: answers,
+          question: `${question}`,
+          correct: `${correct}`,
+          form: "mc",
+        },
+      })
+      document.querySelector(".question").style.display = "block";
+    }
   }
 
   function closeModal() {
@@ -188,21 +222,36 @@ function Modal(props) {
   } else if (props.questionNumber === 0) {
     return (
       <div className="modal-wrapper">
-      <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
-        <h3>{props.name} says:</h3>
-        <h2>{props.dialogue}</h2>
-        <button onClick={closeModal} className="rpgui-button" style={{color: "white"}}>Close</button>
-      </div>
+        <div className={"modal rpgui-container framed"} id={"modal"} style={{ color: "salmon" }}>
+          <h3>{props.name} says:</h3>
+          <h2>{props.dialogue}</h2>
+          <button onClick={closeModal} className="rpgui-button" style={{ color: "white" }}>Close</button>
+        </div>
       </div>
     )
+  } else if (props.questionNumber === "algorithm") {
+    return (
+      <div className={"modal-algorithm rpgui-container framed"} id={"modal"} style={{ color: "salmon" }}>
+        <button onClick={closeModal} className="x-button">X</button>
+        <h3 id="joe">{props.name} says:</h3>
+        <h2 id="joe-talk">{props.dialogue}</h2>
+        <button onClick={showQuestion} className="nextButton rpgui-button" style={{ color: "white" }}>Next</button>
+        <hr className="golden" />
+        <Question />
+        <div className={"actions"}>
+        </div>
+      </div>
+    );
+
   }
   else {
     return (
-      <div className={"modal rpgui-container framed-grey"} id={"modal"} style={{ color: "Salmon" }}>
+      <div className={"modal-question rpgui-container framed"} id={"modal"} style={{ color: "salmon" }}>
+        <button onClick={closeModal} className="x-button">X</button>
         <h3>{props.name} says:</h3>
-        <h2>{props.dialogue}</h2>
-        <button onClick={showQuestion} className="rpgui-button" style={{color: "white"}}>Next</button>
-        <hr className="golden"/>
+        <h2 className="npc-dialogue">{props.dialogue}</h2>
+        <button onClick={showQuestion} className="nextButton rpgui-button" style={{ color: "white" }}>Next</button>
+        <hr className="golden" />
         <Question />
         <div className={"actions"}>
         </div>

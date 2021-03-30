@@ -68,6 +68,12 @@ input {
     align-items: center
 }
 
+.back-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
   .game-wrapper {
     width: 100vw;
     height: 100vh;
@@ -77,6 +83,17 @@ input {
     align-items: center;
     display: flex;
     justify-content: space-around;
-    background-color: gray
+    background-color: gray;
   }
-  
+
+  @media only screen and (min-width: 600px) {
+    .signupInput {
+      max-width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 550px) {
+    .signupInput {
+      max-width: 100%;
+    }
+  }

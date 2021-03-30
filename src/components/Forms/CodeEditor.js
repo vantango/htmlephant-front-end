@@ -11,7 +11,7 @@ import "ace-builds/src-noconflict/ext-language_tools"
 
 
 
-function Editor() {
+const Editor = () => {
     let history = useHistory()
     // Create state for text in code editor
     const [editorState, setEditorState] = useState({
@@ -25,24 +25,6 @@ function Editor() {
         });
     };
 
-    function resetKeys() {
-        store.dispatch({
-            type: "ADD_KEY",
-            payload: {
-                ...store.getState().key, amount: 0
-            }
-        })
-    }
-
-    function showWinDialogue() {
-        store.dispatch({
-            type: "SHOW_MODAL",
-            payload: {
-                ...store.getState().modal, dialogue: store.getState().modal.winDialogue
-            }
-        })
-    }
-
     function showWrongDialogue() {
         store.dispatch({
             type: "SHOW_MODAL",
@@ -55,85 +37,23 @@ function Editor() {
     // On submit, grab text from code editor
     const onSubmit = event => {
         event.preventDefault();
-        const level = store.getState().user.level
-        switch (level) {
-            case 1:
-                // API call for easy algorithm, parse arguments and output
-                API.easyAlgo().then(res => {
-                    const info = JSON.parse(res.data.argsAndOutput);
-                    // Create and call a new function to run the code written into the editor
-                    const testFunction = new Function("str", editorState.editorText);
-                    const result = testFunction(info.args)
-                    console.log(`Here's what we get back: ${result}`);
-                    console.log(`Here's what we expect: ${info.output}`);
-
-                        if (result === info.output) {
-                            resetKeys()
-                            showWinDialogue()
-                            history.push("/winscreen")
-                        }
-                        else {
-                            showWrongDialogue()
-                        }
-                }).catch(err => {
-                    showWrongDialogue()
-                    console.log(`Due to your idiocy, ${err}`);
-                })
-                break;
-            case 2:
-                // API call for easy algorithm, parse arguments and output
-                API.medAlgo().then(res => {
-                    const info = JSON.parse(res.data.argsAndOutput);
-                    // Create and call a new function to run the code written into the editor
-                    const testFunction = new Function("str", editorState.editorText);
-                    const result = testFunction(info.args)
-                    console.log(`Here's what we get back: ${result}`);
-                    console.log(`Here's what we expect: ${info.output}`);
-
-                        if (result === info.output) {
-                            resetKeys()
-                            showWinDialogue()
-                            history.push("/winscreen")
-                        }
-                        else {
-                            showWrongDialogue()
-                        }
-                }).catch(err => {
-                    showWrongDialogue()
-
-                })
-                break;
-            case 3:
-                // API call for easy algorithm, parse arguments and output
-                API.hardAlgo().then(res => {
-                    const info = JSON.parse(res.data.argsAndOutput);
-                    // Create and call a new function to run the code written into the editor
-                    const testFunction = new Function("str", editorState.editorText);
-                    const result = testFunction(info.args)
-
-                    // API call for NPCs
-                    API.allNPC().then(data => {
-                        // Luther will evaluate your answer and judge you
-                        if (result === info.output) {
-                            resetKeys()
-                            showWinDialogue()
-                            history.push("/endscreen")
-                        }
-                        else {
-                            showWrongDialogue()
-                        }
-                    })
-                }).catch(err => {
-                    showWrongDialogue()
-                    console.log(`Due to your idiocy, ${err}`);
-                })
-                break;
-
-            default:
-                break;
-        }
+        // API call for NPCs
+        API.allNPC().then(data => {
+            // Create and call a new function to run the code written into the editor
+            const info = JSON.parse(store.getState().editor.text);
+            const testFunction = new Function("str", editorState.editorText);
+            const result = testFunction(info.args)
+            // Joe will evaluate your answer and judge you
+            if (result === info.output) {
+                store.getState().user.level === 3 ? history.push("/endscreen") : history.push("/winscreen")
+            }
+            else {
+                showWrongDialogue()
+            }
+        }).catch(err => {
+            err ? showWrongDialogue() : history.push("/winscreen")
+        });
     }
-
 
     // Ace editor component
     return (
