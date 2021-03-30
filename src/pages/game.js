@@ -20,8 +20,27 @@ function Game() {
     })
 
     const token = localStorage.getItem('token')
+    const oldState = JSON.parse(localStorage.getItem("state"))
     API.getVip(token).then((res) => {
-        if (res) {
+        if (res.data.username === oldState.name) {
+            store.dispatch({
+                type: "USER_ACTION",
+                payload: {
+                    level: res.data.level,
+                    name: res.data.username,
+                    password: res.data.password,
+                    character: res.data.character,
+                    question1: oldState.question1,
+                    question2: oldState.question2,
+                    question3: oldState.question3,
+                    encounter: oldState.encounter,
+                    id: res.data._id,
+                    token: token,
+                    health: res.data.health,
+                    keys: res.data.keys,
+                }
+            })
+        } else if (res) {
             store.dispatch({
                 type: "USER_ACTION",
                 payload: {
@@ -36,9 +55,11 @@ function Game() {
                     id: res.data._id,
                     token: token,
                     health: res.data.health,
-                    keys: res.data.keys
+                    keys: res.data.keys,
                 }
             })
+        } else {
+            console.log(`Failed to login`)
         }
     }).catch((err) => {
         err ? console.log(`${err}`) : console.log("Success!")

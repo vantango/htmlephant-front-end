@@ -1,5 +1,6 @@
 import React from 'react'
-import home_button from './home_button1.png'
+import home_button from './home_button1.png';
+import store from '../../config/store'
 import './style.css'
 import { useHistory } from "react-router-dom";
 
@@ -18,6 +19,7 @@ export default function Sound() {
     }
 
     function handleGoHome() {
+        localStorage.setItem("state", JSON.stringify(store.getState().user))
         history.push('/')
     }
 

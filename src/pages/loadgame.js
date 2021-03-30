@@ -81,8 +81,10 @@ function LoadGame() {
 
   // Send user state to store and set token to local storage on successful login
   const handleSubmit = () => {
+    const oldState = JSON.parse(localStorage.getItem("state"))
     API.login(loginState).then(res => {
       localStorage.setItem("token", res.data.token);
+      console.log(oldState)
       setUserState({
         character: res.data.user.character,
         username: res.data.user.username,
@@ -91,10 +93,10 @@ function LoadGame() {
         level: res.data.user.level,
         id: res.data.user._id,
         isLoggedIn: true,
-        encounter: 0,
-        question1: false,
-        question2: false,
-        question3: false,
+        encounter: oldState.encounter,
+        question1: oldState.question1,
+        question2: oldState.question2,
+        question3: oldState.question3,
         health: res.data.user.health,
         keys: res.data.user.keys
       });
@@ -110,7 +112,11 @@ function LoadGame() {
           id: res.data.user._id,
           isLoggedIn: true,
           health: res.data.user.health,
-          keys: res.data.user.keys
+          keys: res.data.user.keys,
+          encounter: oldState.encounter,
+          question1: oldState.question1,
+          question2: oldState.question2,
+          question3: oldState.question3,
         }
       });
       setLoginState({
@@ -151,7 +157,7 @@ function LoadGame() {
     <div className="game-wrapper ">
       <Sound />
       <div className="signin-select rpgui-container framed">
-      <button onClick={handleBackButton}><img className="back-arrow" src={back_arrow}/></button>
+        <button onClick={handleBackButton}><img className="back-arrow" src={back_arrow} /></button>
         <h1 style={{ fontSize: '250%' }}>Login</h1>
         <form className="loginInput" autoComplete="off">
           <label>User:

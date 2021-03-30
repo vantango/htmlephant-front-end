@@ -5,7 +5,6 @@ import { useHistory, useLocation } from "react-router-dom";
 import "./winscreen.css";
 import Sound from '../features/sound'
 import bass_clef_black from "./imgs/bass_clef_black.png"
-import bass_clef_blue from "./imgs/bass_clef_blue.png";
 
 
 function WinScreen() {
