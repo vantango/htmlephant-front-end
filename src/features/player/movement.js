@@ -112,8 +112,8 @@ export default function handleMovement(player) {
       // Joe
       case 18:
         const level = store.getState().user.level - 1
+        document.querySelector('#player').style.display = "none"
         if (store.getState().user.keys >= 3) {
-          document.querySelector('#player').style.display = "none"
 
           API.allNPC().then(res => {
             store.dispatch({
@@ -132,7 +132,6 @@ export default function handleMovement(player) {
 
         }
         else if (store.getState().user.encounter === 1 ) {
-    document.querySelector('#player').style.display = "none"
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
@@ -146,7 +145,6 @@ export default function handleMovement(player) {
           });
         }
         else {
-    document.querySelector('#player').style.display = "none"
 
           store.dispatch({
             type: "USER_ACTION",
