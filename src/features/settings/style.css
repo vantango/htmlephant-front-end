@@ -1,4 +1,5 @@
 .home_button {
+    z-index: 6;
     position: fixed;
     top: 0;
     right: 20px;

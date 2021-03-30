@@ -79,4 +79,50 @@ input {
     justify-content: space-around;
     background-color: gray
   }
+
+  @media screen and (max-width: 1500px) {
+    #bass-clef {
+    width: 7vw;
+    margin-right: 10vw;
+    transform: translate(0%, 50%)
+    }
+    #congrats{
+      font-size: x-small !important;
+    }
+    #nice {
+      font-size: x-small !important;
+    }
+    #submitBtn{
+      font-size: x-small !important;
+      width: 1vw;
+      transform: translate(25%, -10%)
+    }
+    .stupid{
+      display: flex;
+      justify-content: space-around;
+    }
+    .buttons{
+      display: flex;
+      flex-direction: column;
+      align-items: vertical;
+    }
+    
+  }
+
+  @media screen and (max-width: 600px) {
+    .stupid{
+      margin-top: 5vh;
+      transform: translate(0%, -15%);
+    }
+    #submitBtn{
+      width: 5vw !important;
+    }
+    .menu-select{
+      width: 85vw;
+      height: 90vh;
+    }
+    #bass-clef{
+      width: 10vw;
+    }
+  }
   

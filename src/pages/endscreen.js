@@ -3,6 +3,7 @@ import store from "../config/store";
 import API from "../utils/API";
 import { useHistory, useLocation } from "react-router-dom";
 import "./pages.css";
+import "./endscreen.css";
 import Sound from "../features/sound";
 import bass_clef_black from "./imgs/bass_clef_black.png"
 import bass_clef_blue from "./imgs/bass_clef_blue.png"
@@ -86,38 +87,40 @@ function Endscreen() {
       <Sound />
       <div className="menu-select rpgui-container framed">
         <label>Wizards and Whiteboards</label>
-        <h1 style={{ fontSize: "250%" }}> Congratulations!</h1>
-        <h2>
+        <h1 id="congrats" style={{ fontSize: "250%" }}> Congratulations!</h1>
+        <h2 id="nice">
           Hey, nice job! Just think, three months ago you'd never even see an
-          HTML tag, and just look at you now! As a prize for completing the
-          final challenge, I present you with the ultimate gift: A joe.joe email
-          address. Go forth and always be coding.
+          HTML tag, and just look at you now! Go forth and always be coding.
         </h2>
-        <div className="music-plug">
-          <a href={link} target="blank">
-            <img
-              className="bass-clef"
-              src={bass_clef_black}
-              alt="Link to music by Tyler Baldwin"
-            />
-          </a>
+        <div className="stupid">
+          <div className="music-plug">
+            <a href={link} target="blank">
+              <img
+                className="bass-clef" id="bass-clef"
+                src={bass_clef_black}
+                alt="Link to music by Tyler Baldwin"
+              />
+            </a>
+          </div>
+          <div className="buttons">
+            <button
+              type="submit"
+              className="rpgui-button"
+              value="New Game"
+              onClick={handleSubmit}
+            >
+              New Game
+            </button>
+            <button
+              type="submit"
+              className="rpgui-button"
+              value="Exit"
+              onClick={handleExit}
+            >
+              Exit
+            </button>
+          </div>
         </div>
-        <button
-          type="submit"
-          className="rpgui-button"
-          value="New Game"
-          onClick={handleSubmit}
-        >
-          New Game
-        </button>
-        <button
-          type="submit"
-          className="rpgui-button"
-          value="Exit"
-          onClick={handleExit}
-        >
-          Exit
-        </button>
       </div>
 
     </div>
