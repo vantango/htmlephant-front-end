@@ -102,7 +102,7 @@ export default function handleMovement(direction) {
     switch (nextTile) {
       case 18:
         const level = store.getState().user.level - 1
-        if (store.getState().key.amount >= 3) {
+        if (store.getState().user.keys >= 3) {
 
           API.allNPC().then(res => {
             store.dispatch({

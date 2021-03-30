@@ -23,17 +23,23 @@ class ChoiceForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    const id = store.getState().user.id;
+    const token = store.getState().user.token;
+
     // If question is answered correctly
     if (this.state.value === this.props.correct) {
-      // Add key when question is answered correctly
-      const newAmount = store.getState().key.amount + 1
-      store.dispatch({
-        type: "ADD_KEY",
-        payload: {
-          amount: newAmount
-        }
-      });
-
+      // Add key and update user state
+      API.addKey(id, token).then(res => {
+        API.getVip(token).then(res => {
+          store.dispatch({
+            type: "USER_ACTION",
+            payload: {
+              ...store.getState().user,
+              keys: res.data.keys
+            }
+          });
+        })
+      })
       // Update user state with each correct question
       const number = store.getState().modal.questionNumber
       switch (number) {
@@ -83,8 +89,7 @@ class ChoiceForm extends React.Component {
 
     // If question is answered incorrectly
     else {
-      const id = store.getState().user.id;
-      const token = store.getState().user.token;
+
 
       // Decrement health by 1 when question is answered wrong
       API.healthDown(id, token).then(res => {
@@ -94,19 +99,14 @@ class ChoiceForm extends React.Component {
           if (res.data.health <= 0) {
             API.resetLevel(id, token).then(res => {
               store.dispatch({
-                type: "ADD_KEY",
-                payload: {
-                  amount: 0
-                }
-              });
-              store.dispatch({
                 type: "USER_ACTION",
                 payload: {
                   ...store.getState().user,
                   question1: false,
                   question2: false,
                   question3: false,
-                  health: 3
+                  health: 3,
+                  keys: 0
                 }
               });
               store.dispatch({
@@ -159,7 +159,7 @@ class ChoiceForm extends React.Component {
     }
   }
 
-  
+
   // const shuffled = this.props.answers.sort(() => Math.random() - 0.5)
   render() {
     // randomizes answers from database
