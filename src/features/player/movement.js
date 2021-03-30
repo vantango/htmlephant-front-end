@@ -333,33 +333,36 @@ export default function handleMovement(player) {
     }
   }
 
+  const reactAce = document.querySelector('.ace_text-input')
+
   const handleKeyDown = (e => {
-    if (e.target !== "userAns") {
+    console.log(e.keyCode)
+    console.log(e.target.classList)
+
+    if (e.target.classList[0] !== 'ace_text-input') {
       switch (e.keyCode) {
         case 37:
-        
+        case 65:
           e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-       
+        case 87:
           e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-         
-
+        case 68:
           e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-       
-
+        case 83:
           e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-      
+        
       }
     }
   })
