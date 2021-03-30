@@ -28,7 +28,7 @@ function Endscreen() {
           type: "USER_ACTION",
           payload: {
             ...store.getState().user,
-            key: 0,
+            keys: 0,
             level: 1,
             question1: false,
             question2: false,
