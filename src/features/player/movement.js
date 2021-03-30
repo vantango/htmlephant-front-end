@@ -112,8 +112,8 @@ export default function handleMovement(player) {
       // Joe
       case 18:
         const level = store.getState().user.level - 1
+        document.querySelector('#player').style.display = "none"
         if (store.getState().user.keys >= 3) {
-          document.querySelector('#player').style.display = "none"
 
           API.allNPC().then(res => {
             store.dispatch({
@@ -132,7 +132,6 @@ export default function handleMovement(player) {
 
         }
         else if (store.getState().user.encounter === 1 ) {
-    document.querySelector('#player').style.display = "none"
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
@@ -146,7 +145,6 @@ export default function handleMovement(player) {
           });
         }
         else {
-    document.querySelector('#player').style.display = "none"
 
           store.dispatch({
             type: "USER_ACTION",
@@ -333,33 +331,36 @@ export default function handleMovement(player) {
     }
   }
 
+  const reactAce = document.querySelector('.ace_text-input')
+
   const handleKeyDown = (e => {
-    if (e.target !== "userAns") {
+    console.log(e.keyCode)
+    console.log(e.target.classList)
+
+    if (e.target.classList[0] !== 'ace_text-input') {
       switch (e.keyCode) {
         case 37:
-        
+        case 65:
           e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-       
+        case 87:
           e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-         
-
+        case 68:
           e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-       
-
+        case 83:
           e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-      
+        
       }
     }
   })

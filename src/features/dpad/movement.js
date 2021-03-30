@@ -63,6 +63,9 @@ export default function handleMovement(direction) {
   }
 
   function sendQuestion(npc, questionNumber) {
+
+    document.querySelector('#player').style.display = "none"
+
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
       store.dispatch({
@@ -81,6 +84,8 @@ export default function handleMovement(direction) {
   }
 
   function sendMessage(npc) {
+    document.querySelector('#player').style.display = "none"
+
     const level = store.getState().user.level - 1
     API.allNPC().then(res => {
       store.dispatch({
@@ -101,7 +106,9 @@ export default function handleMovement(direction) {
     const nextTile = tiles[y][x]
     switch (nextTile) {
       case 18:
-        const level = store.getState().user.level - 1
+        const level = store.getState().user.level - 1;
+        document.querySelector('#player').style.display = "none"
+
         if (store.getState().user.keys >= 3) {
 
           API.allNPC().then(res => {
@@ -109,12 +116,12 @@ export default function handleMovement(direction) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][2]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][2]}`,
                 form: "editor",
                 questionNumber: "algorithm",
-                winDialogue: `${res.data[0].usefulDialogue[level][3]}`,
-                wrongDialogue: `${res.data[0].usefulDialogue[level][4]}`
+                winDialogue: `${res.data[1].usefulDialogue[level][3]}`,
+                wrongDialogue: `${res.data[1].usefulDialogue[level][4]}`
               },
             })
           });
@@ -127,8 +134,8 @@ export default function handleMovement(direction) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][1]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][1]}`,
                 questionNumber: 0
               },
             })
@@ -147,8 +154,8 @@ export default function handleMovement(direction) {
               type: "SHOW_MODAL",
               payload: {
                 show: true,
-                name: `${res.data[0].name}`,
-                dialogue: `${res.data[0].usefulDialogue[level][0]}`,
+                name: `${res.data[1].name}`,
+                dialogue: `${res.data[1].usefulDialogue[level][0]}`,
                 questionNumber: 0
               },
             })
@@ -157,26 +164,26 @@ export default function handleMovement(direction) {
         return true;
       case 15:
         if (store.getState().user.question3 === false) {
-          sendQuestion(2, 3)
+          sendQuestion(0, 3)
+        }
+        else {
+          sendMessage(0)
+        }
+        return true;
+      case 16:
+        if (store.getState().user.question2 === false) {
+          sendQuestion(2, 2)
         }
         else {
           sendMessage(2)
         }
         return true;
-      case 16:
-        if (store.getState().user.question2 === false) {
-          sendQuestion(3, 2)
+      case 17:
+        if (store.getState().user.question1 === false) {
+          sendQuestion(3, 1)
         }
         else {
           sendMessage(3)
-        }
-        return true;
-      case 17:
-        if (store.getState().user.question1 === false) {
-          sendQuestion(1, 1)
-        }
-        else {
-          sendMessage(1)
         }
         return true;
 
