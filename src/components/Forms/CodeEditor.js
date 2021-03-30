@@ -27,9 +27,9 @@ const Editor = () => {
 
     function resetKeys() {
         store.dispatch({
-            type: "ADD_KEY",
+            type: "USER_ACTION",
             payload: {
-                ...store.getState().key, amount: 0
+                ...store.getState().user, keys: 0
             }
         })
     }
@@ -63,7 +63,7 @@ const Editor = () => {
             const result = testFunction(info.args)
             // Joe will evaluate your answer and judge you
             if (result === info.output) {
-                // resetKeys()
+                resetKeys()
                 showWinDialogue()
                 store.getState().user.level === 3 ? history.push("/endscreen") : history.push("/winscreen")
             }

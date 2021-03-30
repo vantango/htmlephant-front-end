@@ -102,7 +102,7 @@ export default function handleMovement(direction) {
     switch (nextTile) {
       case 18:
         const level = store.getState().user.level - 1
-        if (store.getState().key.amount >= 3) {
+        if (store.getState().user.keys >= 3) {
 
           API.allNPC().then(res => {
             store.dispatch({
@@ -165,18 +165,18 @@ export default function handleMovement(direction) {
         return true;
       case 16:
         if (store.getState().user.question2 === false) {
-          sendQuestion(3, 2)
+          sendQuestion(2, 2)
         }
         else {
-          sendMessage(3)
+          sendMessage(2)
         }
         return true;
       case 17:
         if (store.getState().user.question1 === false) {
-          sendQuestion(1, 1)
+          sendQuestion(3, 1)
         }
         else {
-          sendMessage(1)
+          sendMessage(3)
         }
         return true;
 

@@ -14,7 +14,7 @@ const ANIMATION_WITH_PADDING = ANIMATION_SPEED * 1.25
 
 export default function handleMovement(player) {
 
-  
+
   function getNewPosition(oldPos, direction) {
     switch (direction) {
       case "WEST":
@@ -95,7 +95,7 @@ export default function handleMovement(player) {
         payload: {
           show: true,
           name: `${res.data[npc].name}`,
-          dialogue: `${res.data[npc].flavorDialogue[level][Math.floor(Math.random()*3)]}`,
+          dialogue: `${res.data[npc].flavorDialogue[level][Math.floor(Math.random() * 3)]}`,
           questionNumber: 0
 
         },
@@ -112,7 +112,7 @@ export default function handleMovement(player) {
       // Joe
       case 18:
         const level = store.getState().user.level - 1
-        if (store.getState().key.amount >= 3) {
+        if (store.getState().user.keys >= 3) {
           document.querySelector('#player').style.display = "none"
 
           API.allNPC().then(res => {
@@ -131,8 +131,8 @@ export default function handleMovement(player) {
           });
 
         }
-        else if (store.getState().user.encounter === 1 ) {
-    document.querySelector('#player').style.display = "none"
+        else if (store.getState().user.encounter === 1) {
+          document.querySelector('#player').style.display = "none"
           API.allNPC().then(res => {
             store.dispatch({
               type: "SHOW_MODAL",
@@ -146,7 +146,7 @@ export default function handleMovement(player) {
           });
         }
         else {
-    document.querySelector('#player').style.display = "none"
+          document.querySelector('#player').style.display = "none"
 
           store.dispatch({
             type: "USER_ACTION",
@@ -168,7 +168,7 @@ export default function handleMovement(player) {
           });
         }
         return true;
-        // Denis
+      // Denis
       case 15:
         if (store.getState().user.question3 === false) {
           sendQuestion(0, 3)
@@ -177,7 +177,7 @@ export default function handleMovement(player) {
           sendMessage(0)
         }
         return true;
-        // Zac
+      // Zac
       case 16:
         if (store.getState().user.question2 === false) {
           sendQuestion(3, 2)
@@ -186,7 +186,7 @@ export default function handleMovement(player) {
           sendMessage(3)
         }
         return true;
-        // Aslan
+      // Aslan
       case 17:
         if (store.getState().user.question1 === false) {
           sendQuestion(2, 1)
@@ -250,7 +250,7 @@ export default function handleMovement(player) {
         });
         return true;
       case 25:
-        
+
         // alert ("Leaving NORTH Room")
         changeRoom(tiles1);
         store.dispatch({
@@ -337,43 +337,43 @@ export default function handleMovement(player) {
     if (e.target !== "userAns") {
       switch (e.keyCode) {
         case 37:
-        
+
           e.preventDefault();
           return attemptMove("WEST");
 
         case 38:
-       
+
           e.preventDefault();
           return attemptMove("NORTH");
 
         case 39:
-         
+
 
           e.preventDefault();
           return attemptMove("EAST");
 
         case 40:
-       
+
 
           e.preventDefault();
           return attemptMove("SOUTH");
 
         default:
-      
+
       }
     }
   })
 
-  
-  
+
+
   // only adds an event listener when url path is '/game/
   window.addEventListener("keydown", (e) => {
     const location = store.getState().world.location
-    
-      if (location === "/game") {
+
+    if (location === "/game") {
       handleKeyDown(e);
     };
-  }) 
+  })
 
   return player;
 }
