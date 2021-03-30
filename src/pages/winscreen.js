@@ -76,7 +76,7 @@ function WinScreen() {
           <div className="music-plug">
             <a href={link} target="blank"><img className="bass-clef" id="bass-clef" src={bass_clef_black} alt="Link to music by Tyler Baldwin" /></a>
           </div>
-          <div className="buttons">
+          <div className="win-buttons">
             <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleSubmit} >Next Level</button>
             <button id="submitBtn" type="submit" value="Save Game" className="rpgui-button" onClick={handleHome} >Go Home</button>
           </div>
